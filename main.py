@@ -224,6 +224,11 @@ def mainWindow():
             webbrowser.open_new(url)
         return "break"
 
+    # https://github.com/akhilesh-balaji/Textylic/blob/master/README.md
+    def openReadme(var=False):
+        webbrowser.open_new("https://github.com/akhilesh-balaji/Textylic/blob/master/README.md")
+        return "break"
+
     # List that holds all items that have accent color
     accentItems = []
 
@@ -345,7 +350,7 @@ def mainWindow():
     menu.menu.add_command(label = "Undo", command = notes.edit_undo, accelerator = "(Ctr+z)")
     menu.menu.add_command(label = "Redo", command = notes.edit_redo, accelerator = "(Ctr+y)")
     menu.menu.add_command(label = "Quit", command = windowdestroy, accelerator = "(Ctr+q)")
-    menu.menu.add_command(label = "Help/About")
+    menu.menu.add_command(label = "Help/About", command = openReadme)
 
     close_button = tkinter.Button(title_bar, text = "X", width = 5, bd = 0, height = 1, bg = "#E6B905", command = window.destroy, pady = 4, activebackground = "#E81123")
     close_button.grid(row = 0, column = 6, padx = 144, sticky = "E")
