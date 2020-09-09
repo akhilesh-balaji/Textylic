@@ -6,6 +6,7 @@ import webbrowser
 from tkinter import font
 from random import randint
 from tkinter import filedialog
+from tkinter import PhotoImage
 
 # Defining Window Properties
 root = tkinter.Tk()
@@ -42,7 +43,6 @@ def mainWindow():
             self.x = self.y = 0
 
         def showtip(self, text):
-            # time.sleep(0.75)
             "Display text in tooltip window"
             self.text = text
             if self.tipwindow or not self.text:
@@ -144,25 +144,53 @@ def mainWindow():
         
         return "break"
 
-    global bulletCheck
-    bulletCheck = False
-
     def bulletList():
-        global bulletCheck
-        bulletCheck = bulletCheck
-        if bulletCheck == False:
-            x = notes.selection_get()
-            bullete = "•  " + str(x)
-            notes.insert("sel.first", bullete)
-            notes.delete("sel.first", "sel.last")
-            bulletCheck = True
-        else:
-            selected = notes.selection_get()
-            selected = str(selected)
-            selected = selected.strip("•  ")
-            notes.insert("sel.first", selected)
-            notes.delete("sel.first", "sel.last")
-            bulletCheck = False
+        x = notes.selection_get()
+        current_tags = notes.tag_names("sel.first")
+
+        if '\n' not in x:
+            if "bullet" not in current_tags:
+                y = float(notes.index("sel.first"))
+                z = float(notes.index("sel.last"))
+                bullete = "\t•  " + str(x)
+                notes.delete(y, z)
+                notes.insert(y, bullete)
+                l = len(bullete)
+                l = notes.index(y + l)
+                notes.tag_add("bullet", y, l)
+            elif "bullet" in current_tags:
+                y = float(notes.index("sel.first"))
+                z = float(notes.index("sel.last"))
+                selected = notes.selection_get()
+                selected = str(selected)
+                selected = selected.replace("\t•  ", "")
+                notes.insert("sel.first", selected)
+                notes.delete("sel.first", "sel.last")
+                l = len(selected)
+                l = notes.index(l)
+                notes.tag_remove("bullet", y, l)
+        elif '\n' in x:
+            if "bullet" not in current_tags:
+                y = float(notes.index("sel.first"))
+                z = float(notes.index("sel.last"))
+                select = notes.selection_get()
+                bullete = select.replace("\n", "\n\t•  ")
+                bullete = "\t•  " + str(bullete)
+                notes.delete(str(y), str(z))
+                notes.insert(y, bullete)
+                l = len(bullete)
+                l = notes.index(y + l)
+                notes.tag_add("bullet", y, l)
+            elif "bullet" in current_tags:
+                y = float(notes.index("sel.first"))
+                z = float(notes.index("sel.last"))
+                selected = x.replace("\n\t•  ", "\n")
+                selected = selected.replace("\t•  ", "")
+                notes.insert("sel.first", selected)
+                notes.delete("sel.first", "sel.last")
+                l = len(selected)
+                l = notes.index(l)
+                notes.tag_remove("bullet", y, l)
         
         return "break"
 
@@ -268,14 +296,6 @@ def mainWindow():
         title_bar.configure(bg = "#59C0E7")
         window.update()
 
-    # Undo and Redo
-    def Undo(var=False):
-        notes.edit_undo()
-        return "break"
-    def Redo(var=False):
-        notes.edit_redo()
-        return "break"
-
     # Defining Title Bar Elements
     title_bar = tkinter.Frame(window, relief = "flat", bg = "#E6B905")
 
@@ -296,13 +316,21 @@ def mainWindow():
     CreateToolTip(openlink, "Open Selected Link")
     accentItems.append(openlink)
 
+    # Notes Text widget container
+    notesFrame = tkinter.Frame(window, relief = "flat", bg = "#333333", height = 200, width = 297)
+    notesFrame.grid(row = 1, column = 0, columnspan = 5)
+
+    # Main Text input
+    notes = tkinter.Text(notesFrame, undo = True, font = "Segoe_Print 11", bg = "#333333", padx = 5, pady = 10, bd = 0, fg = "white", insertbackground = "white", relief = "flat", selectbackground = "#616161", wrap = "word", height = 12.5, width = 36, tabs = ("0.5c", "3c", "5c"))
+    notes.grid(row = 0, column = 0, rowspan = 5, columnspan = 5)
+
     # Extra Menu
     menu = tkinter.Menubutton(title_bar, text = "⋮", width = 3, bd = 0, bg = "#E6B905", relief = "flat", pady = 4, activebackground = "#D1A804")
     menu.grid(row = 0, column = 3, padx = 0, sticky = "W")
     CreateToolTip(menu, "Other Options")
     accentItems.append(menu)
 
-    menu.menu = tkinter.Menu(menu, tearoff = 0, bd = 0, relief = "flat", font = "Segoe_UI 9", bg = "#333333", activeborderwidth = 0, activebackground = "#404040", fg = "white", activeforeground = "white", selectcolor = "white")
+    menu.menu = tkinter.Menu(menu, tearoff = 0, bd = 0, relief = "solid", font = "Segoe_UI 9", bg = "#333333", activeborderwidth = 0, activebackground = "#404040", fg = "white", activeforeground = "white", selectcolor = "white")
     menu["menu"] = menu.menu
 
     menu.menu.add_command(label = "Choose theme:")
@@ -312,24 +340,16 @@ def mainWindow():
     menu.menu.add_radiobutton(label = "Pink", command = accentpink)
     menu.menu.add_separator()
     menu.menu.add_command(label = "Open Note", command = openFile)
-    menu.menu.add_command(label = "Save Note As", command = saveNoteAs)
-    menu.menu.add_command(label = "Save Note", command = saveNote)
+    menu.menu.add_command(label = "Save Note", command = saveNote, accelerator = "(Ctr+s)")
     menu.menu.add_separator()
-    menu.menu.add_command(label = "Undo", command = Undo)
-    menu.menu.add_command(label = "Redo", command = Redo)
-    menu.menu.add_command(label = "Quit", command = windowdestroy)
-    menu.menu.add_command(label = "Help")
+    menu.menu.add_command(label = "Undo", command = notes.edit_undo, accelerator = "(Ctr+z)")
+    menu.menu.add_command(label = "Redo", command = notes.edit_redo, accelerator = "(Ctr+y)")
+    menu.menu.add_command(label = "Quit", command = windowdestroy, accelerator = "(Ctr+q)")
+    menu.menu.add_command(label = "Help/About")
 
-    close_button = tkinter.Button(title_bar, text = "X", width = 4, bd = 0, height = 1, bg = "#E6B905", command = window.destroy, pady = 4, activebackground = "#E81123")
-    close_button.grid(row = 0, column = 6, padx = 145, sticky = "E")
+    close_button = tkinter.Button(title_bar, text = "X", width = 5, bd = 0, height = 1, bg = "#E6B905", command = window.destroy, pady = 4, activebackground = "#E81123")
+    close_button.grid(row = 0, column = 6, padx = 144, sticky = "E")
     CreateToolTip(new, "New Note")
-
-    notesFrame = tkinter.Frame(window, relief = "flat", bg = "#333333", height = 200, width = 297)
-    notesFrame.grid(row = 1, column = 0, columnspan = 5)
-
-    # Main Text input
-    notes = tkinter.Text(notesFrame, font = "Segoe_Print 11", bg = "#333333", padx = 5, pady = 10, bd = 0, fg = "white", insertbackground = "white", relief = "flat", selectbackground = "#616161", wrap = "word", height = 12.5, width = 36)
-    notes.grid(row = 0, column = 0, rowspan = 5, columnspan = 5)
 
     # Bottom formatting bar
     borderFrame = tkinter.Frame(window, height = 0.5, width = 2000000, pady = 10)
@@ -385,8 +405,6 @@ def mainWindow():
     notes.bind('<Control-Key-s>', saveNote)
     notes.bind('<Control-Key-k>', link)
     notes.bind('<Control-Key-o>', openLink)
-    notes.bind('<Control-Key-z>', Undo)
-    notes.bind('<Control-Key-y>', Redo)
     notes.bind('<Control-slash>', strikethrough)
 
     # Autosave files
