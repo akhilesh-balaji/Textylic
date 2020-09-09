@@ -144,9 +144,12 @@ def mainWindow():
         
         return "break"
 
+    global bulletCheck
     bulletCheck = False
+
     def bulletList():
         global bulletCheck
+        bulletCheck = bulletCheck
         if bulletCheck == False:
             x = notes.selection_get()
             bullete = "•  " + str(x)
@@ -154,9 +157,11 @@ def mainWindow():
             notes.delete("sel.first", "sel.last")
             bulletCheck = True
         else:
-            y = notes.index("sel.first")
-            y = y + 2
-            notes.delete("sel.first", y)
+            selected = notes.selection_get()
+            selected = str(selected)
+            selected = selected.strip("•  ")
+            notes.insert("sel.first", selected)
+            notes.delete("sel.first", "sel.last")
             bulletCheck = False
         
         return "break"
