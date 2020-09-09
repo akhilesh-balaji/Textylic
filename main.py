@@ -15,7 +15,7 @@ def mainWindow():
     window.title("Notes window")
     window.attributes("-toolwindow", True)
     window.overrideredirect(1)
-    window.geometry("300x300+" + str(randint(10, 900)) + "+" + str(randint(10, 500)))
+    window.geometry("306x306+" + str(randint(10, 900)) + "+" + str(randint(10, 500)))
     window.config(bg = "#333333")
     window.wait_visibility(window)
     window.grid_columnconfigure(0, weight = 1)
@@ -42,12 +42,13 @@ def mainWindow():
             self.x = self.y = 0
 
         def showtip(self, text):
-            time.sleep(0.75)
+            # time.sleep(0.75)
             "Display text in tooltip window"
             self.text = text
             if self.tipwindow or not self.text:
                 return
             x, y, cx, cy = self.widget.bbox("insert")
+            cx = cx
             x = x + self.widget.winfo_rootx() + 27
             y = y + cy + self.widget.winfo_rooty() +17
             self.tipwindow = tw = tkinter.Toplevel(self.widget)
@@ -128,6 +129,42 @@ def mainWindow():
             notes.tag_add("underline", "sel.first", "sel.last")
         
         return "break"
+
+    def strikethrough(var=False):
+        strike_font  = font.Font(notes, notes.cget("font"))
+        strike_font.configure(overstrike=True)
+
+        notes.tag_configure("strikethrough", font=strike_font)
+        current_tags = notes.tag_names("sel.first")
+
+        if "strikethrough" in current_tags:
+            notes.tag_remove("strikethrough", "sel.first", "sel.last")
+        else:
+            notes.tag_add("strikethrough", "sel.first", "sel.last")
+        
+        return "break"
+
+    bulletCheck = False
+    def bulletList():
+        global bulletCheck
+        if bulletCheck == False:
+            x = notes.selection_get()
+            bullete = "•  " + str(x)
+            notes.insert("sel.first", bullete)
+            notes.delete("sel.first", "sel.last")
+            bulletCheck = True
+        else:
+            y = notes.index("sel.first")
+            y = y + 2
+            notes.delete("sel.first", y)
+            bulletCheck = False
+        
+        return "break"
+
+    def strikeButtonText(var=False):
+        f = font.Font(notes, notes.cget("font"))
+        f.configure(overstrike=True)
+        strikeThrough.configure(font=f)
 
     def link(var=False):
         global linked
@@ -279,14 +316,14 @@ def mainWindow():
     menu.menu.add_command(label = "Help")
 
     close_button = tkinter.Button(title_bar, text = "X", width = 4, bd = 0, height = 1, bg = "#E6B905", command = window.destroy, pady = 4, activebackground = "#E81123")
-    close_button.grid(row = 0, column = 6, padx = 140, sticky = "E")
+    close_button.grid(row = 0, column = 6, padx = 145, sticky = "E")
     CreateToolTip(new, "New Note")
 
     notesFrame = tkinter.Frame(window, relief = "flat", bg = "#333333", height = 200, width = 297)
     notesFrame.grid(row = 1, column = 0, columnspan = 5)
 
     # Main Text input
-    notes = tkinter.Text(notesFrame, font = "Segoe_Print 11", bg = "#333333", padx = 5, pady = 10, bd = 0, fg = "white", insertbackground = "white", relief = "flat", selectbackground = "#616161", wrap = "word", height = 12.7, width = 35)
+    notes = tkinter.Text(notesFrame, font = "Segoe_Print 11", bg = "#333333", padx = 5, pady = 10, bd = 0, fg = "white", insertbackground = "white", relief = "flat", selectbackground = "#616161", wrap = "word", height = 12.5, width = 36)
     notes.grid(row = 0, column = 0, rowspan = 5, columnspan = 5)
 
     # Bottom formatting bar
@@ -305,8 +342,15 @@ def mainWindow():
     underline = tkinter.Button(bottom_bar, text = "U̲", width = 3, bd = 0, height = 1, bg = "#333333", pady = 4, command = underliner, activebackground = "#D1A804", fg = "white", padx = 3)
     underline.grid(row = 0, column = 3, padx = 0, sticky = "W")
 
+    strikeThrough = tkinter.Button(bottom_bar, text = "ab", width = 3, bd = 0, height = 1, bg = "#333333", pady = 4, command = strikethrough, activebackground = "#D1A804", fg = "white", padx = 3)
+    strikeThrough.grid(row = 0, column = 4, padx = 0, sticky = "W")
+    strikeButtonText()
+
+    bullet = tkinter.Button(bottom_bar, text = "• —", width = 3, bd = 0, height = 1, bg = "#333333", pady = 4, command = bulletList, activebackground = "#D1A804", fg = "white", padx = 3)
+    bullet.grid(row = 0, column = 5, padx = 0, sticky = "W")
+
     code = tkinter.Button(bottom_bar, text = "</>", width = 4, bd = 0, height = 1, bg = "#333333", pady = 4, command = codify, activebackground = "#D1A804", fg = "white", padx = 3)
-    code.grid(row = 0, column = 4, padx = 0, sticky = "W")
+    code.grid(row = 0, column = 6, padx = 0, sticky = "W")
 
 
     # Positioning title bar and adding drag function
@@ -321,7 +365,7 @@ def mainWindow():
         xwin = xwin - startx
 
         def move_window(event):
-            window.geometry("300x300" + '+{0}+{1}'.format(event.x_root + xwin, event.y_root + ywin))
+            window.geometry("306x306" + '+{0}+{1}'.format(event.x_root + xwin, event.y_root + ywin))
             
         startx = event.x_root
         starty = event.y_root
@@ -338,6 +382,7 @@ def mainWindow():
     notes.bind('<Control-Key-o>', openLink)
     notes.bind('<Control-Key-z>', Undo)
     notes.bind('<Control-Key-y>', Redo)
+    notes.bind('<Control-slash>', strikethrough)
 
     # Autosave files
     # while True:
