@@ -7,12 +7,12 @@ Notes Window dissapears when you do Win + D, and only appears when action center
 
 Here are the various features in Textylic, and how to use them:
 
-Undo/Redo: These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
+𝗨𝗻𝗱𝗼/𝗥𝗲𝗱𝗼: These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
 
-New Window: This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
+𝗡𝗲𝘄 𝗪𝗶𝗻𝗱𝗼𝘄: This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
 
-Text formatting options: These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
+𝗧𝗲𝘅𝘁 𝗳𝗼𝗿𝗺𝗮𝘁𝘁𝗶𝗻𝗴 𝗼𝗽𝘁𝗶𝗼𝗻𝘀: These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
 
-Save Note, Open Note: You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
+𝗦𝗮𝘃𝗲 𝗻𝗼𝘁𝗲, 𝗢𝗽𝗲𝗻 𝗻𝗼𝘁𝗲: You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
 
-Links: You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
+𝗟𝗶𝗻𝗸𝘀: You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
