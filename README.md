@@ -5,14 +5,24 @@ In the future, you can expect to see features such as improved font rendering an
 As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
 Notes Window dissapears when you do Win + D, and only appears when action center or start menu are opened
 
-Here are the various features in Textylic, and how to use them:
+# Features
 
-𝗨𝗻𝗱𝗼/𝗥𝗲𝗱𝗼: These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
+**Undo/Redo**: These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
 
-𝗡𝗲𝘄 𝗪𝗶𝗻𝗱𝗼𝘄: This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
+**New Window**: This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
 
-𝗧𝗲𝘅𝘁 𝗳𝗼𝗿𝗺𝗮𝘁𝘁𝗶𝗻𝗴 𝗼𝗽𝘁𝗶𝗼𝗻𝘀: These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
+**Text formatting Options**: These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
 
-𝗦𝗮𝘃𝗲 𝗻𝗼𝘁𝗲, 𝗢𝗽𝗲𝗻 𝗻𝗼𝘁𝗲: You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
+**Saving and opening notes**: You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
 
-𝗟𝗶𝗻𝗸𝘀: You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
+**Links**: You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
+
+## Keyboard Shortcuts
+- **Ctrl + z**: Undo
+- **Ctlk + y**: Redo
+- **Ctrl + k**: Add a hyperlink to a selected object
+- **Ctrl + o**: Open the selected hyperlink in default webbrowser
+- **Ctrl + b**: Make selected text bold
+- **Ctrl + i**: Make selected text italic
+- **Ctrl + u**: Make selected text underlined
+- **Ctrl + q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
