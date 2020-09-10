@@ -224,7 +224,6 @@ def mainWindow():
             webbrowser.open_new(url)
         return "break"
 
-    # https://github.com/akhilesh-balaji/Textylic/blob/master/README.md
     def openReadme(var=False):
         webbrowser.open_new("https://github.com/akhilesh-balaji/Textylic/blob/master/README.md")
         return "break"
