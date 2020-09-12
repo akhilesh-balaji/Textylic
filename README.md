@@ -5,8 +5,8 @@ To access the notes window, simply open the .exe file. You can continue doing yo
 
 In the future, you can expect to see features such as improved font rendering and saving the formatting as well. Also, I am working on applying the formatting options first, and continue typing in the same style.
 
-As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
-Notes Window dissapears when you do Win + D, and only appears when action center or start menu are opened
+<!-- As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
+N/A -->
 
 ## Features
 
