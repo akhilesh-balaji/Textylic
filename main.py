@@ -1,4 +1,5 @@
 import tkinter
+import pygetwindow as gw
 import os
 import time
 import getpass
@@ -11,6 +12,7 @@ from tkinter import PhotoImage
 # Defining Window Properties
 root = tkinter.Tk()
 root.withdraw()
+
 def mainWindow():
     window = tkinter.Toplevel()
     window.title("Notes window")
@@ -446,6 +448,10 @@ def mainWindow():
         return "break"
 
     def saveNoteAs(var=False):
+        global noteFile
+        username = getpass.getuser()
+        if not os.path.exists("C:/Users/{}/Documents/Textylic".format(username)):
+            os.makedirs("C:/Users/{}/Documents/Textylic".format(username))
         username = getpass.getuser()
         noteFile = filedialog.asksaveasfilename(confirmoverwrite=False, defaultextension=".txtlyc", filetypes=(("Textylic file", "*.txtlyc"),), initialdir="C:/Users/{}/Documents/Textylic".format(username), title="Save your note:")
         if noteFile:
@@ -643,6 +649,27 @@ def mainWindow():
     close_button.bind('<Leave>', NormalImageClose)
     insertl.bind('<Enter>', hoverImageLink)
     insertl.bind('<Leave>', NormalImageLink)
+
+    def topOrNot():
+        windows = gw.getActiveWindow()
+        if windows is None:
+            pass
+        else:
+            if windows.isMaximized:
+                print("True")
+                window.withdraw()
+                window.attributes("-topmost", False)
+            elif not windows.isMaximized and windows.title != '':
+                print("True")
+                window.attributes("-topmost", False)
+            else:
+                print("False")
+                window.deiconify()
+                window.lift()
+                window.attributes("-topmost", True)
+
+        window.after(10, topOrNot)
+    window.after(10, topOrNot)
 
     # Update the window
     window.mainloop()

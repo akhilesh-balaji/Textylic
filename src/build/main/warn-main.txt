@@ -38,3 +38,4 @@ missing module named multiprocessing.AuthenticationError - imported by multiproc
 missing module named _posixsubprocess - imported by subprocess (optional), multiprocessing.util (delayed)
 missing module named multiprocessing.set_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
 missing module named multiprocessing.get_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named Quartz - imported by pygetwindow._pygetwindow_macos (top-level)

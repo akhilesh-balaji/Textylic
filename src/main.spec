@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\Akhilesh\\documents\\github\\apps\\textylic'],
+             pathex=['C:\\Users\\Akhilesh\\Documents\\GitHub\\Apps\\Textylic\\Textylic'],
              binaries=[],
              datas=[],
              hiddenimports=[],
