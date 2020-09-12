@@ -513,14 +513,11 @@ def mainWindow():
             pass
         else:
             if windows.isMaximized:
-                print("True")
                 window.withdraw()
                 window.attributes("-topmost", False)
             elif not windows.isMaximized and windows.title != '':
-                print("True")
                 window.attributes("-topmost", False)
             else:
-                print("False")
                 window.deiconify()
                 window.lift()
                 window.attributes("-topmost", True)
