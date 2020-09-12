@@ -457,6 +457,8 @@ def mainWindow():
         if noteFile:
             global saved
             saved = True
+            global openedFileName
+            openedFileName = noteFile
             noteFile = open(noteFile, "w")
             noteFile.write(notes.get(1.0, "end"))
             noteFile.close()
@@ -503,6 +505,34 @@ def mainWindow():
         title_bar.configure(bg = "#59C0E7")
         menu.configure(activebackground = "#59C0E7")
         window.update()
+
+    # Detecting TopOrNot
+    def topOrNot():
+        windows = gw.getActiveWindow()
+        if windows is None:
+            pass
+        else:
+            if windows.isMaximized:
+                print("True")
+                window.withdraw()
+                window.attributes("-topmost", False)
+            elif not windows.isMaximized and windows.title != '':
+                print("True")
+                window.attributes("-topmost", False)
+            else:
+                print("False")
+                window.deiconify()
+                window.lift()
+                window.attributes("-topmost", True)
+
+        window.after(10, topOrNot)
+
+    # Auto save
+    def autoSave():
+        global saved
+        if saved == True:
+            saveNote()
+        window.after(3000, autoSave)
 
     # Defining Title Bar Elements
     title_bar = tkinter.Frame(window, relief = "flat", bg = "#E6B905")
@@ -650,26 +680,8 @@ def mainWindow():
     insertl.bind('<Enter>', hoverImageLink)
     insertl.bind('<Leave>', NormalImageLink)
 
-    def topOrNot():
-        windows = gw.getActiveWindow()
-        if windows is None:
-            pass
-        else:
-            if windows.isMaximized:
-                print("True")
-                window.withdraw()
-                window.attributes("-topmost", False)
-            elif not windows.isMaximized and windows.title != '':
-                print("True")
-                window.attributes("-topmost", False)
-            else:
-                print("False")
-                window.deiconify()
-                window.lift()
-                window.attributes("-topmost", True)
-
-        window.after(10, topOrNot)
     window.after(10, topOrNot)
+    window.after(3000, autoSave)
 
     # Update the window
     window.mainloop()
