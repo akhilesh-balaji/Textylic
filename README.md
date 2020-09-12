@@ -10,15 +10,26 @@ N/A -->
 
 ## Features
 
-**Undo/Redo**: These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
+### Windows 7-esque desktop widget
+Remember those useful desktop widgets win windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximised windows, you could interact with them These were removed in Windows 10. But, this app mimicks their behaviour, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
 
-**New Window**: This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
+### Undo/Redo
+These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
 
-**Text formatting Options**: These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
+### New Window
+This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
 
-**Saving and opening notes**: You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
+### Text formatting Options
+These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
 
-**Links**: You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
+### Saving and opening notes
+You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
+
+### Links
+You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
+
+### Automatic Saving
+All you need to do is to save the dcuments once, for the first time, when you name it. After this, you don't need to worry about saving because of Auto saving!
 
 ## Keyboard Shortcuts
 - **Ctrl + z**: Undo
@@ -29,3 +40,4 @@ N/A -->
 - **Ctrl + i**: Make selected text italic
 - **Ctrl + u**: Make selected text underlined
 - **Ctrl + q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
+- **Ctrl + s**: Save the file
