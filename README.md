@@ -44,3 +44,7 @@ All you need to do is to save the dcuments once, for the first time, when you na
 - **Ctrl + u**: Make selected text underlined
 - **Ctrl + q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
 - **Ctrl + s**: Save the file
+
+## Requirements
+- Windows 10 version 1903 or higher
+- Windows 8 and below have not been tested, and are not supported.
