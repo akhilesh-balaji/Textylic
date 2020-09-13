@@ -35,7 +35,7 @@ You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard
 All you need to do is to save the documents once, for the first time, when you name it. After this, you don't need to worry about saving because of Auto saving!
 
 ## Keyboard Shortcuts
-- **Ctrl + z**: Undo
+- **Ctrl + Z**: Undo
 - **Ctlk + Y**: Redo
 - **Ctrl + K**: Add a hyperlink to a selected object
 - **Ctrl + O**: Open the selected hyperlink in default webbrowser
