@@ -4,7 +4,7 @@
 
 This is Textylic: The perfect note-taking app. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any third-party software such as rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
 
-To access the notes window, simply open the .exe file. You can save this to your desktop, or pin it to the start menu for easy access (installer coming soon!). You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, smimply minimize all windows, or use Win+D, like those windows 7 desktop widgets. 
+To access the notes window, simply open the .exe file. You can save this to your desktop, or pin it to the start menu for easy access (installer coming soon!). You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use Win+D, like those windows 7 desktop widgets. 
 
 In the future, you can expect to see features such as improved font rendering and saving the formatting as well. Also, I am working on applying the formatting options first, and continue typing in the same style.
 
@@ -32,7 +32,7 @@ You can access these in the extended menu. You can save a note with the keyboard
 You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
 
 ### Automatic Saving
-All you need to do is to save the dcuments once, for the first time, when you name it. After this, you don't need to worry about saving because of Auto saving!
+All you need to do is to save the documents once, for the first time, when you name it. After this, you don't need to worry about saving because of Auto saving!
 
 ## Keyboard Shortcuts
 - **Ctrl + z**: Undo
