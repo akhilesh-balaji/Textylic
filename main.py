@@ -433,6 +433,7 @@ def mainWindow():
 
     # File Dialog
     def openFile(var=False):
+        global saved
         username = getpass.getuser()
         if not os.path.exists("C:/Users/{}/Documents/Textylic".format(username)):
             os.makedirs("C:/Users/{}/Documents/Textylic".format(username))
@@ -445,6 +446,7 @@ def mainWindow():
         notes.delete("1.0", "end")
         notes.insert("end", read)
         noteFile.close()
+        saved = True
         return "break"
 
     def saveNoteAs(var=False):
@@ -465,11 +467,13 @@ def mainWindow():
         return "break"
 
     def saveNote(var=False):
+        global saved
         global openedFileName
         if openedFileName:
             noteFile = open(openedFileName, "w")
             noteFile.write(notes.get(1.0, "end"))
             noteFile.close()
+            saved = True
         else:
             saveNoteAs()
         return "break"
