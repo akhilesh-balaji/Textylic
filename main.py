@@ -566,7 +566,7 @@ def mainWindow():
     menu.grid(row = 0, column = 3, padx = 5, sticky = "W", pady = 5)
     accentItems.append(menu)
 
-    menu.menu = tkinter.Menu(menu, tearoff = 0, bd = 0, relief = "solid", font = "Segoe_UI 9", bg = "#333333", activeborderwidth = 0, activebackground = "#404040", fg = "white", activeforeground = "white", selectcolor = "white")
+    menu.menu = tkinter.Menu(menu, tearoff = 0, bd = 0, relief = "solid", font = "Segoe_UI 9", activeborderwidth = 0, activebackground = "#c4c4c4", activeforeground = "#000000", selectcolor = "black")
     menu["menu"] = menu.menu
 
     menu.menu.add_command(label = "Choose theme:")
