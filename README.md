@@ -1,4 +1,7 @@
 # Textylic
+
+![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/mockups/Mockup.png?raw=true)
+
 This is Textylic: The perfect note-taking app. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any third-party software such as rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
 
 To access the notes window, simply open the .exe file. You can save this to your desktop, or pin it to the start menu for easy access (installer coming soon!). You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, smimply minimize all windows, or use Win+D, like those windows 7 desktop widgets. 
