@@ -48,3 +48,6 @@ All you need to do is to save the dcuments once, for the first time, when you na
 ## Requirements
 - Windows 10 version 1903 or higher
 - Windows 8 and below have not been tested, and are not supported.
+
+## Screenshot
+![](https://i.ibb.co/LgpLjg1/Screenshot-2020-09-13-123231.png)
