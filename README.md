@@ -14,7 +14,7 @@ N/A -->
 ## Features
 
 ### Windows 7-esque desktop widget
-Remember those useful desktop widgets win windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximised windows, you could interact with them These were removed in Windows 10. But, this app mimicks their behaviour, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
+Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximised windows, you could interact with them These were removed in Windows 10. But, this app mimicks their behaviour, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
 
 ### Undo/Redo
 These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
@@ -36,15 +36,18 @@ All you need to do is to save the dcuments once, for the first time, when you na
 
 ## Keyboard Shortcuts
 - **Ctrl + z**: Undo
-- **Ctlk + y**: Redo
-- **Ctrl + k**: Add a hyperlink to a selected object
-- **Ctrl + o**: Open the selected hyperlink in default webbrowser
-- **Ctrl + b**: Make selected text bold
-- **Ctrl + i**: Make selected text italic
-- **Ctrl + u**: Make selected text underlined
-- **Ctrl + q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
-- **Ctrl + s**: Save the file
+- **Ctlk + Y**: Redo
+- **Ctrl + K**: Add a hyperlink to a selected object
+- **Ctrl + O**: Open the selected hyperlink in default webbrowser
+- **Ctrl + B**: Make selected text bold
+- **Ctrl + I**: Make selected text italic
+- **Ctrl + U**: Make selected text underlined
+- **Ctrl + Q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
+- **Ctrl + S**: Save the file
 
 ## Requirements
 - Windows 10 version 1903 or higher
 - Windows 8 and below have not been tested, and are not supported.
+
+## Screenshot
+![](https://i.ibb.co/LgpLjg1/Screenshot-2020-09-13-123231.png)
