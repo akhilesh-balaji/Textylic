@@ -11,6 +11,8 @@ In the future, you can expect to see features such as improved font rendering an
 <!-- As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
 N/A -->
 
+You can download from the github releases page: https://github.com/akhilesh-balaji/Textylic/releases
+
 ## Features
 
 ### Windows 7-esque desktop widget
