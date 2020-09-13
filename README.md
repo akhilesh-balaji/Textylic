@@ -36,14 +36,14 @@ All you need to do is to save the dcuments once, for the first time, when you na
 
 ## Keyboard Shortcuts
 - **Ctrl + z**: Undo
-- **Ctlk + y**: Redo
-- **Ctrl + k**: Add a hyperlink to a selected object
-- **Ctrl + o**: Open the selected hyperlink in default webbrowser
-- **Ctrl + b**: Make selected text bold
-- **Ctrl + i**: Make selected text italic
-- **Ctrl + u**: Make selected text underlined
-- **Ctrl + q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
-- **Ctrl + s**: Save the file
+- **Ctlk + Y**: Redo
+- **Ctrl + K**: Add a hyperlink to a selected object
+- **Ctrl + O**: Open the selected hyperlink in default webbrowser
+- **Ctrl + B**: Make selected text bold
+- **Ctrl + I**: Make selected text italic
+- **Ctrl + U**: Make selected text underlined
+- **Ctrl + Q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
+- **Ctrl + S**: Save the file
 
 ## Requirements
 - Windows 10 version 1903 or higher
