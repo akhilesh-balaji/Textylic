@@ -119,7 +119,7 @@ def mainWindow():
 
     def codify(var=False):
         notes.tag_configure("code", font="Consolas 11")
-        current_tags = notes.tag_names("sel.first")
+        current_tags = notes.tag_names("sel.first") 
 
         if "code" in current_tags:
             notes.tag_remove("code", "sel.first", "sel.last")
@@ -646,6 +646,8 @@ def mainWindow():
         starty = event.y_root
 
         title_bar.bind('<B1-Motion>', move_window)
+
+    # Keyboard Shortcuts
     title_bar.bind('<Button-1>', get_pos)
     notes.bind('<Control-Key-b>', bolder)
     notes.bind('<Control-Key-i>', italicizer)
@@ -656,6 +658,8 @@ def mainWindow():
     notes.bind('<Control-Key-k>', link)
     notes.bind('<Control-Key-o>', openLink)
     notes.bind('<Control-slash>', strikethrough)
+
+    # Hover Effects
     bold.bind('<Enter>', hoverImageBold)
     bold.bind('<Leave>', NormalImageBold)
     italic.bind('<Enter>', hoverImageItalic)
@@ -680,7 +684,8 @@ def mainWindow():
     close_button.bind('<Leave>', NormalImageClose)
     insertl.bind('<Enter>', hoverImageLink)
     insertl.bind('<Leave>', NormalImageLink)
-
+    
+    # Desktop Gadget and Autosave
     window.after(10, topOrNot)
     window.after(3000, autoSave)
 
