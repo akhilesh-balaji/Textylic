@@ -281,6 +281,29 @@ def mainWindow():
         webbrowser.open_new("https://github.com/akhilesh-balaji/Textylic/blob/master/README.md")
         return "break"
 
+    # Change Text Color
+    def setColor():
+        global pinky
+        global yellowy
+        global greeny
+        global bluey
+        if yellowy == True:
+            notes.tag_configure("emphColor", foreground="#E6B905")
+        elif pinky == True:
+            notes.tag_configure("emphColor", foreground="#EB8EC6")
+        elif greeny == True:
+            notes.tag_configure("emphColor", foreground="#65BA5A")
+        elif bluey == True:
+            notes.tag_configure("emphColor", foreground="#59C0E7")
+        current_tags = notes.tag_names("sel.first")
+
+        if "emphColor" in current_tags:
+            notes.tag_remove("emphColor", "sel.first", "sel.last")
+        else:
+            notes.tag_add("emphColor", "sel.first", "sel.last")
+        
+        return "break"
+
     # Getting images (normal) for the buttons:
     global newButtonImage
     newButtonImage = PhotoImage(file = "images/iconset/new.png")
@@ -318,6 +341,9 @@ def mainWindow():
     global insertlButtonImage
     insertlButtonImage = PhotoImage(file = "images/iconset/link.png")
 
+    global colorButtonImage
+    colorButtonImage = PhotoImage(file = "images/iconset/color.png")
+
     # Getting images (hover) for the buttons:
     global newButtonImageAfter
     newButtonImageAfter = PhotoImage(file = "images/iconset/new1.png")
@@ -354,6 +380,9 @@ def mainWindow():
 
     global insertlButtonImageAfter
     insertlButtonImageAfter = PhotoImage(file = "images/iconset/link1.png")
+
+    global colorButtonImageAfter
+    colorButtonImageAfter = PhotoImage(file = "images/iconset/color1.png")
 
     # Changing the image on hover
     def hoverImageBold(var=False):
@@ -428,6 +457,12 @@ def mainWindow():
     def NormalImageLink(var=False):
         insertl.configure(image = insertlButtonImage)
 
+    def hoverImageTsize(var=False):
+        colorText.configure(image = colorButtonImageAfter)
+
+    def NormalImageTsize(var=False):
+        colorText.configure(image = colorButtonImage)
+
     # List that holds all items that have accent color
     accentItems = []
 
@@ -482,31 +517,75 @@ def mainWindow():
         root.destroy()
 
     # Accent color functions
+    global pinky
+    global yellowy
+    global greeny
+    global bluey
+    pinky = False
+    yellowy = True
+    greeny = False
+    bluey = False
     def accentpink():
+        global pinky
+        global yellowy
+        global greeny
+        global bluey
+        pinky = True
+        yellowy = False
+        greeny = False
+        bluey = False
         for item in accentItems:
             item.configure(bg = "#EB8EC6", activebackground = "#EB8EC6")
         title_bar.configure(bg = "#EB8EC6")
         menu.configure(activebackground = "#EB8EC6")
+        notes.tag_configure("emphColor", foreground="#EB8EC6")
         window.update()
 
     def accentyellow():
+        global pinky
+        global yellowy
+        global greeny
+        global bluey
+        pinky = False
+        yellowy = True
+        greeny = False
+        bluey = False
         for item in accentItems:
             item.configure(bg = "#E6B905", activebackground = "#E6B905")
         title_bar.configure(bg = "#E6B905")
+        notes.tag_configure("emphColor", foreground="#E6B905")
         menu.configure(activebackground = "#E6B905")
         window.update()
 
     def accentgreen():
+        global pinky
+        global yellowy
+        global greeny
+        global bluey
+        pinky = False
+        yellowy = False
+        greeny = True
+        bluey = False
         for item in accentItems:
             item.configure(bg = "#65BA5A", activebackground = "#65BA5A")
         title_bar.configure(bg = "#65BA5A")
+        notes.tag_configure("emphColor", foreground="#65BA5A")
         menu.configure(activebackground = "#65BA5A")
         window.update()
 
     def accentblue():
+        global pinky
+        global yellowy
+        global greeny
+        global bluey
+        pinky = False
+        yellowy = False
+        greeny = False
+        bluey = True
         for item in accentItems:
             item.configure(bg = "#59C0E7", activebackground = "#59C0E7")
         title_bar.configure(bg = "#59C0E7")
+        notes.tag_configure("emphColor", foreground="#59C0E7")
         menu.configure(activebackground = "#59C0E7")
         window.update()
 
@@ -627,6 +706,9 @@ def mainWindow():
     insertl.image = insertlButtonImage
     insertl.grid(row = 0, column = 7, padx = 5, sticky = "W", pady = 5)
 
+    colorText = tkinter.Button(bottom_bar, image = colorButtonImage, bd = 0, bg = "#333333", pady = 4, command = setColor, activebackground = "#333333", fg = "white", padx = 3)
+    colorText.image = colorButtonImage
+    colorText.grid(row = 0, column = 8, padx = 5, sticky = "W", pady = 5)
 
     # Positioning title bar and adding drag function
     title_bar.grid(row = 0, column = 0, columnspan = 5, sticky = "W")
@@ -684,7 +766,9 @@ def mainWindow():
     close_button.bind('<Leave>', NormalImageClose)
     insertl.bind('<Enter>', hoverImageLink)
     insertl.bind('<Leave>', NormalImageLink)
-    
+    colorText.bind('<Enter>', hoverImageTsize)
+    colorText.bind('<Leave>', NormalImageTsize)
+
     # Desktop Gadget and Autosave
     window.after(10, topOrNot)
     window.after(3000, autoSave)
