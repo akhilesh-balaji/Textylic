@@ -52,4 +52,4 @@ All you need to do is to save the documents once, for the first time, when you n
 - Windows 8 and below have not been tested, and are not supported.
 
 ## Screenshot
-![](https://i.ibb.co/LgpLjg1/Screenshot-2020-09-13-123231.png)
+![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/screenshot.png?raw=true)
