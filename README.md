@@ -13,6 +13,8 @@ N/A -->
 
 You can download from the github releases page: https://github.com/akhilesh-balaji/Textylic/releases
 
+Upvote this product on ProductHunt: https://www.producthunt.com/posts/textylic
+
 ## Features
 
 ### Windows 7-esque desktop widget
