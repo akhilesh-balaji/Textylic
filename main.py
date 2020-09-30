@@ -4,6 +4,10 @@ import os
 import time
 import getpass
 import webbrowser
+import re
+import json
+import ttkwidgets.color
+import tkinter.ttk
 from tkinter import font
 from random import randint
 from tkinter import filedialog
@@ -64,16 +68,22 @@ def mainWindow():
             notes.tag_remove("bold", "sel.first", "sel.last")
         elif "italicBold" in current_tags:
             notes.tag_remove("italicBold", "sel.first", "sel.last")
+            notes.tag_add("italic", "sel.first", "sel.last")  
         elif "underBold" in current_tags:
             notes.tag_remove("underBold", "sel.first", "sel.last")
+            notes.tag_add("underline", "sel.first", "sel.last")  
         elif "strikeBold" in current_tags:
             notes.tag_remove("strikeBold", "sel.first", "sel.last")  
+            notes.tag_add("strikethrough", "sel.first", "sel.last")  
         else:
             if "italic" in current_tags:
+                notes.tag_remove("italic", "sel.first", "sel.last")  
                 notes.tag_add("italicBold", "sel.first", "sel.last")
             elif "underline" in current_tags:
+                notes.tag_remove("underline", "sel.first", "sel.last")  
                 notes.tag_add("underBold", "sel.first", "sel.last")
             elif "strikethrough" in current_tags:
+                notes.tag_remove("strikethrough", "sel.first", "sel.last")  
                 notes.tag_add("strikeBold", "sel.first", "sel.last")
             else:
                 notes.tag_add("bold", "sel.first", "sel.last")
@@ -102,16 +112,22 @@ def mainWindow():
             notes.tag_remove("italic", "sel.first", "sel.last")
         elif "boldItalic" in current_tags:
             notes.tag_remove("boldItalic", "sel.first", "sel.last")
+            notes.tag_add("bold", "sel.first", "sel.last")  
         elif "underItalic" in current_tags:
             notes.tag_remove("underItalic", "sel.first", "sel.last")
+            notes.tag_add("underline", "sel.first", "sel.last")  
         elif "strikeItalic" in current_tags:
             notes.tag_remove("strikeItalic", "sel.first", "sel.last") 
+            notes.tag_add("strikethrough", "sel.first", "sel.last")  
         else:
             if "bold" in current_tags:
+                notes.tag_remove("bold", "sel.first", "sel.last")  
                 notes.tag_add("boldItalic", "sel.first", "sel.last") 
             elif "underline" in current_tags:
+                notes.tag_remove("underline", "sel.first", "sel.last")  
                 notes.tag_add("underItalic", "sel.first", "sel.last")
             elif "strikethrough" in current_tags:
+                notes.tag_remove("strikethrough", "sel.first", "sel.last")  
                 notes.tag_add("strikeItalic", "sel.first", "sel.last")
             else:   
                 notes.tag_add("italic", "sel.first", "sel.last")
@@ -150,17 +166,23 @@ def mainWindow():
             notes.tag_remove("underline", "sel.first", "sel.last")
         elif "boldUnder" in current_tags:
             notes.tag_remove("boldUnder", "sel.first", "sel.last")
+            notes.tag_add("bold", "sel.first", "sel.last")
         elif "italicUnder" in current_tags:
             notes.tag_remove("italicUnder", "sel.first", "sel.last")
+            notes.tag_add("italic", "sel.first", "sel.last")
         elif "strikeUnder" in current_tags:
             notes.tag_remove("strikeUnder", "sel.first", "sel.last") 
+            notes.tag_add("strikethrough", "sel.first", "sel.last")
         else:
             if "bold" in current_tags:
-                notes.tag_add("boldUnder", "sel.first", "sel.last") 
+                notes.tag_add("boldUnder", "sel.first", "sel.last")
+                notes.tag_remove("bold", "sel.first", "sel.last")  
             elif "italic" in current_tags:
                 notes.tag_add("italicUnder", "sel.first", "sel.last")
+                notes.tag_remove("italic", "sel.first", "sel.last")  
             elif "strikethrough" in current_tags:
                 notes.tag_add("strikeUnder", "sel.first", "sel.last")
+                notes.tag_remove("strikethrough", "sel.first", "sel.last")  
             else:
                 notes.tag_add("underline", "sel.first", "sel.last")
         
@@ -184,18 +206,25 @@ def mainWindow():
 
         if "strikethrough" in current_tags:
             notes.tag_remove("strikethrough", "sel.first", "sel.last")
+            notes.tag_add("strikethrough", "sel.first", "sel.last")
         elif "boldStrike" in current_tags:
             notes.tag_remove("boldStrike", "sel.first", "sel.last")
+            notes.tag_add("bold", "sel.first", "sel.last")
         elif "italicStrike" in current_tags:
             notes.tag_remove("italicStrike", "sel.first", "sel.last")
+            notes.tag_add("italic", "sel.first", "sel.last")
         elif "underStrike" in current_tags:
             notes.tag_remove("underStrike", "sel.first", "sel.last") 
+            notes.tag_add("underline", "sel.first", "sel.last")
         else:
             if "bold" in current_tags:
+                notes.tag_remove("bold", "sel.first", "sel.last")  
                 notes.tag_add("boldStrike", "sel.first", "sel.last") 
             elif "italic" in current_tags:
+                notes.tag_remove("italic", "sel.first", "sel.last")  
                 notes.tag_add("italicStrike", "sel.first", "sel.last")
             elif "underline" in current_tags:
+                notes.tag_remove("underline", "sel.first", "sel.last")  
                 notes.tag_add("underStrike", "sel.first", "sel.last")
             else:
                 notes.tag_add("strikethrough", "sel.first", "sel.last")
@@ -269,18 +298,6 @@ def mainWindow():
             linked = True
         return "break"
 
-    def openLink(var=False):
-        global linked
-        if linked == True:
-            global url
-            url = notes.selection_get()
-            webbrowser.open_new(url)
-        return "break"
-
-    def openReadme(var=False):
-        webbrowser.open_new("https://github.com/akhilesh-balaji/Textylic/blob/master/README.md")
-        return "break"
-
     # Change Text Color
     def setColor():
         global pinky
@@ -302,6 +319,18 @@ def mainWindow():
         else:
             notes.tag_add("emphColor", "sel.first", "sel.last")
         
+        return "break"
+
+    def openLink(var=False):
+        global linked
+        if linked == True:
+            global url
+            url = notes.selection_get()
+            webbrowser.open_new(url)
+        return "break"
+
+    def openReadme(var=False):
+        webbrowser.open_new("https://github.com/akhilesh-balaji/Textylic/blob/master/README.md")
         return "break"
 
     # Getting images (normal) for the buttons:
@@ -466,6 +495,43 @@ def mainWindow():
     # List that holds all items that have accent color
     accentItems = []
 
+    # Get Tags
+    def getTags(start, end):
+        index = start
+        tagname = []
+        starttagindex = index
+        prevtag = notes.tag_names(index)
+
+        try:
+           tagname.append([starttagindex, "end", notes.tag_names(index)])
+        except:
+           tagname.append([starttagindex, "end", ("",)])
+
+        # def insertStingMiddle(string, word):
+        #     strOriginal = string
+        #     return string[:1] + word + strOriginal[1:]
+
+        while notes.compare(index, "<", end):
+            # print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
+            # print(tagname)
+            if notes.tag_names(index) != prevtag:
+                if len(notes.tag_names(index)) <= 0:
+                    starttagindex = index
+                    legnth = len(tagname)
+                    tagname[legnth - 1][1] = index
+                    tagname.append([starttagindex, "end", ("",)])
+
+                else:
+                    starttagindex = index
+                    legnth = len(tagname)
+                    tagname[legnth - 1][1] = index
+                    tagname.append([starttagindex, "end", notes.tag_names(index)])
+
+            prevtag = notes.tag_names(index)
+            index = notes.index(f"{index}+1c")
+    
+        return tagname
+
     # File Dialog
     def openFile(var=False):
         global saved
@@ -478,8 +544,99 @@ def mainWindow():
             openedFileName = noteFile
         noteFile = open(noteFile, "r")
         read = noteFile.read()
+
+        matchStyle = re.match(r".*<style>\n(.*)\n</style>", str(read), flags=re.DOTALL|re.MULTILINE)
+
+        read = re.sub('<style>.*</style>', '', read, flags=re.DOTALL|re.MULTILINE)
+        read = re.sub('<content>\n', '', read, flags=re.DOTALL|re.MULTILINE)
+        read = re.sub('\n</content>\n\n', '', read, flags=re.DOTALL|re.MULTILINE)
+
         notes.delete("1.0", "end")
-        notes.insert("end", read)
+        notes.insert("1.0", read)
+
+        if matchStyle:
+            # Bold fonts and tags
+            formatting = matchStyle.group(1)
+            formatting = eval(formatting)
+
+            bold_font  = font.Font(notes, notes.cget("font"))
+            bold_font.configure(weight="bold")
+
+            italicBold_font  = font.Font(notes, notes.cget("font"))
+            italicBold_font.configure(slant="italic", weight="bold")
+
+            underBold_font  = font.Font(notes, notes.cget("font"))
+            underBold_font.configure(underline=True, weight="bold")
+
+            strikeBold_font  = font.Font(notes, notes.cget("font"))
+            strikeBold_font.configure(overstrike=True, weight="bold")
+
+            notes.tag_configure("bold", font=bold_font)
+            notes.tag_configure("italicBold", font=italicBold_font)
+            notes.tag_configure("underBold", font=underBold_font) 
+            notes.tag_configure("strikeBold", font=strikeBold_font) 
+
+            # Italic fonts and tags
+            italic_font  = font.Font(notes, notes.cget("font"))
+            italic_font.configure(slant="italic")
+
+            boldItalic_font  = font.Font(notes, notes.cget("font"))
+            boldItalic_font.configure(slant="italic", weight="bold")
+
+            underItalic_font  = font.Font(notes, notes.cget("font"))
+            underItalic_font.configure(underline=True, slant="italic")
+
+            strikeItalic_font  = font.Font(notes, notes.cget("font"))
+            strikeItalic_font.configure(overstrike=True, slant="italic")
+
+            notes.tag_configure("italic", font=italic_font)
+            notes.tag_configure("boldItalic", font=boldItalic_font)
+            notes.tag_configure("underItalic", font=underItalic_font) 
+            notes.tag_configure("strikeItalic", font=strikeItalic_font) 
+
+            # Code font and tags
+            notes.tag_configure("code", font="Consolas 11")
+
+            # Underline font and tags
+            under_font  = font.Font(notes, notes.cget("font"))
+            under_font.configure(underline=True)
+
+            boldUnder_font  = font.Font(notes, notes.cget("font"))
+            boldUnder_font.configure(underline=True, weight="bold")
+
+            italicUnder_font  = font.Font(notes, notes.cget("font"))
+            italicUnder_font.configure(underline=True, slant="italic")
+
+            strikeUnder_font  = font.Font(notes, notes.cget("font"))
+            strikeUnder_font.configure(overstrike=True, underline=True)
+
+            notes.tag_configure("underline", font=under_font)
+            notes.tag_configure("boldUnder", font=boldUnder_font)
+            notes.tag_configure("italicUnder", font=italicUnder_font) 
+            notes.tag_configure("strikeUnder", font=strikeUnder_font)
+
+            # Link font
+            notes.tag_configure("link", font=under_font, foreground="#00AFEC")
+
+            # Text color
+            global pinky
+            global yellowy
+            global greeny
+            global bluey
+            if yellowy == True:
+                notes.tag_configure("emphColor", foreground="#E6B905")
+            elif pinky == True:
+                notes.tag_configure("emphColor", foreground="#EB8EC6")
+            elif greeny == True:
+                notes.tag_configure("emphColor", foreground="#65BA5A")
+            elif bluey == True:
+                notes.tag_configure("emphColor", foreground="#59C0E7")
+
+            # Apply formatting
+            for format in formatting:
+                for tag in format[2]:
+                    notes.tag_add(str(tag).strip("}{/.\\"), format[0], format[1])
+
         noteFile.close()
         saved = True
         return "break"
@@ -506,9 +663,11 @@ def mainWindow():
         global openedFileName
         if openedFileName:
             noteFile = open(openedFileName, "w")
-            noteFile.write(notes.get(1.0, "end"))
+            noteFile.write("<content>\n{}\n</content>\n\n".format(notes.get(1.0, "end")))
+            noteFile.write("<style>\n{}\n</style>".format(getTags("1.0", "end")))
             noteFile.close()
             saved = True
+            getTags("1.0", "end")
         else:
             saveNoteAs()
         return "break"
@@ -642,6 +801,7 @@ def mainWindow():
     # Main Text input
     notes = tkinter.Text(notesFrame, undo = True, font = "Segoe_Print 11", bg = "#333333", padx = 5, pady = 10, bd = 0, fg = "white", insertbackground = "white", relief = "flat", selectbackground = "#616161", wrap = "word", height = 12.5, width = 36, tabs = ("0.5c", "3c", "5c"))
     notes.grid(row = 0, column = 0, rowspan = 5, columnspan = 5)
+    notes.delete("1.0", "end")
 
     # Extra Menu
     menu = tkinter.Menubutton(title_bar, image = menuButtonImage, bd = 0, bg = "#E6B905", relief = "flat", pady = 4, activebackground = "#E6B905")
@@ -712,6 +872,7 @@ def mainWindow():
 
     # Positioning title bar and adding drag function
     title_bar.grid(row = 0, column = 0, columnspan = 5, sticky = "W")
+
     def get_pos(event):
         xwin = window.winfo_x()
         ywin = window.winfo_y()
@@ -772,7 +933,7 @@ def mainWindow():
     # Desktop Gadget and Autosave
     window.after(10, topOrNot)
     window.after(3000, autoSave)
-
+    
     # Update the window
     window.mainloop()
 
