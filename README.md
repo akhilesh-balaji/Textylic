@@ -6,7 +6,7 @@ This is Textylic: The perfect note-taking app. It supports various formatting op
 
 To use, simply download the .exe file from the releases page. Run it, and a shortcut on the start meny will be generated. You can use this to open the window. You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use Win+D, like those windows 7 desktop widgets. 
 
-In the future, you can expect to see features such as improved font rendering and saving the formatting as well. Also, I am working on applying the formatting options first, and continue typing in the same style.
+In the future, you can expect to see features such as improved font rendering. Also, I am working on applying the formatting options first, and continue typing in the same style.
 
 <!-- As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
 N/A -->
@@ -52,6 +52,16 @@ All you need to do is to save the documents once, for the first time, when you n
 ## Requirements
 - Windows 10 version 1903 or higher
 - Windows 8 and below have not been tested, and are not supported.
+
+## Roadmap of Features/Bugs:
+**Note:** If you have any features that are not on this list, or any bugs to report, please do not hesitate to create a new issue in the "Issues" tab above. The items which have a version number next to them are planned for that release number, the others will be updated soon. Stay tuned!
+
+- 🐞❓ Remove annoying spaces after opened file
+- 💡Add topmost window button
+- 💡Add "Clear Formatting" Button
+- 🦠 Fix Mcafee False Positive (All future releases will be after this has been cleared, as I cannot test without this being cleared)
+- 💡Fix bulleted list tabs (Word wraps don't indent, and were not intended to.)
+- 💡Add hover tooltips
 
 ## Screenshot
 ![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/screenshot.png?raw=true)
