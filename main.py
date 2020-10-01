@@ -5,8 +5,6 @@ import time
 import getpass
 import webbrowser
 import re
-import json
-import ttkwidgets.color
 import tkinter.ttk
 from tkinter import font
 from random import randint
@@ -535,10 +533,7 @@ def mainWindow():
     # File Dialog
     def openFile(var=False):
         global saved
-        username = getpass.getuser()
-        if not os.path.exists("C:/Users/{}/Documents/Textylic".format(username)):
-            os.makedirs("C:/Users/{}/Documents/Textylic".format(username))
-        noteFile = filedialog.askopenfilename(initialdir="C:/Users/{}/Documents/Textylic".format(username), title="Choose a note:", filetypes=(("Textylic file", "*.txtlyc"),))
+        noteFile = filedialog.askopenfilename(initialdir="./Notes", title="Choose a note:", filetypes=(("Textylic file", "*.txtlyc"),))
         if noteFile:
             global openedFileName
             openedFileName = noteFile
@@ -643,11 +638,7 @@ def mainWindow():
 
     def saveNoteAs(var=False):
         global noteFile
-        username = getpass.getuser()
-        if not os.path.exists("C:/Users/{}/Documents/Textylic".format(username)):
-            os.makedirs("C:/Users/{}/Documents/Textylic".format(username))
-        username = getpass.getuser()
-        noteFile = filedialog.asksaveasfilename(confirmoverwrite=False, defaultextension=".txtlyc", filetypes=(("Textylic file", "*.txtlyc"),), initialdir="C:/Users/{}/Documents/Textylic".format(username), title="Save your note:")
+        noteFile = filedialog.asksaveasfilename(confirmoverwrite=False, defaultextension=".txtlyc", filetypes=(("Textylic file", "*.txtlyc"),), initialdir="./Notes", title="Save your note:")
         if noteFile:
             global saved
             saved = True
