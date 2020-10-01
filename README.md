@@ -27,7 +27,7 @@ These are the single integral features of any text editor. They can be accessed 
 This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
 
 ### Text formatting Options
-These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style. **New**: Added option to color text
+These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
 
 ### Saving and opening notes
 You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
