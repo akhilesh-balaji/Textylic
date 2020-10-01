@@ -59,7 +59,6 @@ All you need to do is to save the documents once, for the first time, when you n
 - 🐞❓ Remove annoying spaces after opened file
 - 💡Add topmost window button
 - 💡Add "Clear Formatting" Button
-- 🦠 Fix Mcafee False Positive (All future releases will be after this has been cleared, as I cannot test without this being cleared)
 - 💡Fix bulleted list tabs (Word wraps don't indent, and were not intended to.)
 - 💡Add hover tooltips
 
