@@ -749,7 +749,12 @@ def mainWindow():
                 window.withdraw()
                 window.attributes("-topmost", False)
             elif not windows.isMaximized and windows.title != '':
-                window.attributes("-topmost", False)
+                if windows.title != 'Notes Window':
+                    window.attributes("-topmost", False)
+                else:
+                    window.deiconify()
+                    window.lift()
+                    window.attributes("-topmost", True)
             else:
                 window.deiconify()
                 window.lift()

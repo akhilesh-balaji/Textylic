@@ -58,10 +58,6 @@ All you need to do is to save the documents once, for the first time, when you n
 
 - 🐞Remove annoying spaces after opened file
 - 💡Add automatic quitting when only one app is left
-- 💡Add topmost window button
-- 💡Add "Clear Formatting" Button
-- 💡Fix bulleted list tabs (Word wraps don't indent, and were not intended to.)
-- 💡Add hover tooltips
 
 ## Screenshot
 ![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/screenshot.png?raw=true)
