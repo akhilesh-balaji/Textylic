@@ -56,7 +56,8 @@ All you need to do is to save the documents once, for the first time, when you n
 ## Roadmap of Features/Bugs:
 **Note:** If you have any features that are not on this list, or any bugs to report, please do not hesitate to create a new issue in the "Issues" tab above. The items which have a version number next to them are planned for that release number, the others will be updated soon. Stay tuned!
 
-- 🐞❓ Remove annoying spaces after opened file
+- 🐞Remove annoying spaces after opened file
+- 💡Add automatic quitting when only one app is left
 - 💡Add topmost window button
 - 💡Add "Clear Formatting" Button
 - 💡Fix bulleted list tabs (Word wraps don't indent, and were not intended to.)
