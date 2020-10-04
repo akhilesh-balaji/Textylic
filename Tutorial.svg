@@ -15,19 +15,33 @@
    inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    id="svg8"
    version="1.1"
-   viewBox="0 0 180.03006 191.57403"
-   height="191.57404mm"
-   width="180.03006mm">
+   viewBox="0 0 208.14151 208.14149"
+   height="208.14149mm"
+   width="208.14151mm">
   <defs
-     id="defs2" />
+     id="defs2">
+    <filter
+       height="1.1561487"
+       y="-0.078074358"
+       width="1.1561487"
+       x="-0.078074351"
+       id="filter1446"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur1448"
+         stdDeviation="5.8565542"
+         inkscape:collect="always" />
+    </filter>
+  </defs>
   <sodipodi:namedview
      showgrid="false"
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="449.16235"
-     inkscape:cx="415.77051"
-     inkscape:zoom="0.62890452"
+     inkscape:cy="417.45144"
+     inkscape:cx="-275.97731"
+     inkscape:zoom="0.53672406"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -47,10 +61,17 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(-176.25357,-5.9320148)"
+     transform="translate(-162.19784,-3.4202601)"
      id="layer1"
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
+    <rect
+       y="17.47599"
+       x="176.25357"
+       height="180.03004"
+       width="180.03006"
+       id="rect1331"
+       style="opacity:0.663768;fill:#000000;fill-opacity:1;stroke:none;stroke-width:13.863;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0;filter:url(#filter1446);stop-color:#000000" />
     <image
        id="image843"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdEAAAHRCAYAAAA1w4ObAAAABHNCSVQICAgIfAhkiAAAIABJREFU
@@ -257,56 +278,56 @@ AElFTkSuQmCC
        y="17.47599" />
     <text
        id="text851"
-       y="15.302532"
+       y="48.117531"
        x="180.60535"
-       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.818164"
+       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';fill:#ffffff;stroke-width:0.818164"
        xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';stroke-width:0.818164"
-         y="15.302532"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';fill:#ffffff;stroke-width:0.818164"
+         y="48.117531"
          x="180.60535"
          id="tspan849"
          sodipodi:role="line">1</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.818164"
+       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';fill:#ffffff;stroke-width:0.818164"
        x="200.18144"
-       y="15.302532"
+       y="48.117531"
        id="text855"><tspan
          sodipodi:role="line"
          id="tspan853"
          x="200.18144"
-         y="15.302532"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';stroke-width:0.818164">2</tspan></text>
+         y="48.117531"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';fill:#ffffff;stroke-width:0.818164">2</tspan></text>
     <text
        id="text859"
-       y="15.302532"
+       y="48.117531"
        x="219.32251"
-       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.818164"
+       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';fill:#ffffff;stroke-width:0.818164"
        xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';stroke-width:0.818164"
-         y="15.302532"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';fill:#ffffff;stroke-width:0.818164"
+         y="48.117531"
          x="219.32251"
          id="tspan857"
          sodipodi:role="line">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.818164"
+       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';fill:#ffffff;stroke-width:0.818164"
        x="236.94099"
-       y="15.302532"
+       y="48.117531"
        id="text863"><tspan
          sodipodi:role="line"
          id="tspan861"
          x="236.94099"
-         y="15.302532"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';stroke-width:0.818164">4</tspan></text>
+         y="48.117531"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';fill:#ffffff;stroke-width:0.818164">4</tspan></text>
     <text
        id="text867"
-       y="15.302532"
+       y="48.117531"
        x="338.51917"
-       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.818164"
+       style="font-size:13.0906px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';fill:#ffffff;stroke-width:0.818164"
        xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';stroke-width:0.818164"
-         y="15.302532"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Bold';fill:#ffffff;stroke-width:0.818164"
+         y="48.117531"
          x="338.51917"
          id="tspan865"
          sodipodi:role="line">5</tspan></text>
@@ -399,23 +420,23 @@ AElFTkSuQmCC
          id="tspan913"
          sodipodi:role="line">13</tspan></text>
     <text
-       id="text932"
-       y="35.786671"
-       x="-156.15115"
-       style="font-size:13.7242px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.857763"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763"
-         y="35.786671"
-         x="-156.15115"
-         id="tspan930"
-         sodipodi:role="line">1. New Button</tspan></text>
-    <text
-       transform="translate(-313.73223,-204.0201)"
        xml:space="preserve"
-       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
-       x="158.19165"
+       style="font-size:13.7242px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.857763"
+       x="-126.04338"
+       y="6.7610884"
+       id="text932"><tspan
+         sodipodi:role="line"
+         id="tspan930"
+         x="-126.04338"
+         y="6.7610884"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763">1. New Button</tspan></text>
+    <text
+       id="text1024"
        y="250.89789"
-       id="text1024"><tspan
+       x="158.19165"
+       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
+       xml:space="preserve"
+       transform="translate(-283.62445,-233.04569)"><tspan
          x="158.19165"
          y="250.89789"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">This button creates a new note in a seperate window. This way, </tspan></tspan><tspan
@@ -423,23 +444,23 @@ AElFTkSuQmCC
          y="259.89764"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">you can have multiple notes on your desktop!</tspan></tspan></text>
     <text
-       xml:space="preserve"
+       id="text1028"
+       y="55.455624"
+       x="-126.04338"
        style="font-size:13.7242px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.857763"
-       x="-156.15115"
-       y="84.481216"
-       id="text1028"><tspan
-         sodipodi:role="line"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763"
+         y="55.455624"
+         x="-126.04338"
          id="tspan1026"
-         x="-156.15115"
-         y="84.481216"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763">2. Save Button</tspan></text>
+         sodipodi:role="line">2. Save Button</tspan></text>
     <text
-       id="text1032"
-       y="250.89789"
-       x="158.19165"
-       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
+       transform="translate(-283.62445,-184.35114)"
        xml:space="preserve"
-       transform="translate(-313.73223,-155.32555)"><tspan
+       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
+       x="158.19165"
+       y="250.89789"
+       id="text1032"><tspan
          x="158.19165"
          y="250.89789"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">This is the button that saves your work.You can either use this </tspan></tspan><tspan
@@ -450,23 +471,23 @@ AElFTkSuQmCC
          y="268.89738"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">the first time, because of the Autosave feature.</tspan></tspan></text>
     <text
-       xml:space="preserve"
+       id="text1036"
+       y="111.6321"
+       x="-126.04338"
        style="font-size:13.7242px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.857763"
-       x="-156.15115"
-       y="140.65768"
-       id="text1036"><tspan
-         sodipodi:role="line"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763"
+         y="111.6321"
+         x="-126.04338"
          id="tspan1034"
-         x="-156.15115"
-         y="140.65768"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763">3. Open Link Button</tspan></text>
+         sodipodi:role="line">3. Open Link Button</tspan></text>
     <text
-       id="text1040"
-       y="250.89789"
-       x="158.19165"
-       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
+       transform="translate(-283.62445,-128.17469)"
        xml:space="preserve"
-       transform="translate(-313.73223,-99.149104)"><tspan
+       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
+       x="158.19165"
+       y="250.89789"
+       id="text1040"><tspan
          x="158.19165"
          y="250.89789"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">If you have a link selected,you can click this button to open this </tspan></tspan><tspan
@@ -477,23 +498,23 @@ AElFTkSuQmCC
          y="268.89738"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">a link in the bottom bar (See 12)</tspan></tspan></text>
     <text
-       id="text1044"
-       y="189.35223"
-       x="-156.15115"
-       style="font-size:13.7242px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.857763"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763"
-         y="189.35223"
-         x="-156.15115"
-         id="tspan1042"
-         sodipodi:role="line">4. Save Button</tspan></text>
-    <text
-       transform="translate(-313.73223,-50.454551)"
        xml:space="preserve"
-       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
-       x="158.19165"
+       style="font-size:13.7242px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';stroke-width:0.857763"
+       x="-126.04338"
+       y="160.32666"
+       id="text1044"><tspan
+         sodipodi:role="line"
+         id="tspan1042"
+         x="-126.04338"
+         y="160.32666"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Semi-Bold';stroke-width:0.857763">4. Save Button</tspan></text>
+    <text
+       id="text1048"
        y="250.89789"
-       id="text1048"><tspan
+       x="158.19165"
+       style="font-size:7.05556px;line-height:1.25;font-family:Noah;-inkscape-font-specification:'Noah, Normal';white-space:pre;inline-size:204.842;stroke-width:0.857762"
+       xml:space="preserve"
+       transform="translate(-283.62445,-79.480139)"><tspan
          x="158.19165"
          y="250.89789"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';stroke-width:0.857762">This is the button that saves your work.You can either use this </tspan></tspan><tspan
