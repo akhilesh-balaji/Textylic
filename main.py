@@ -559,12 +559,12 @@ def openFile(var=False):
 
     notes.delete("1.0", "end")
     notes.insert("end", read)
-    everyThingInNotes = notes.get("1.0", "end")
-    everyThingInNotesMatch = re.match(r"(.*)(\s*)$", '', everyThingInNotes, flags=re.DOTALL)
-    if everyThingInNotesMatch:
-        writeThis = everyThingInNotesMatch.group(1)
-        notes.delete("1.0", "end")
-        notes.insert("end", writeThis)
+    # read = notes.get("1.0", "end")
+    # everyThingInNotesMatch = re.match(r"(.*)(\s*)$", '', read, flags=re.DOTALL)
+    # if everyThingInNotesMatch:
+    #     read = everyThingInNotesMatch.group(1)
+    #     notes.delete("1.0", "end")
+    #     notes.insert("end", read)
 
     if matchStyle:
         # Bold fonts and tags
