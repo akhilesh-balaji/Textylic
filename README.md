@@ -11,6 +11,10 @@ You can download from the GitHub releases page: https://github.com/akhilesh-bala
 
 Upvote this product on ProductHunt: https://www.producthunt.com/posts/textylic
 
+Have a look at the reviews on Softpedia: https://www.softpedia.com/get/Office-tools/Other-Office-Tools/Textylic.shtml
+
+Upvote it on Steemhunt: https://steemhunt.com/@khalifaimaman/textylic-a-notes-widget-app-with-support-for-links-and-formatting
+
 ## Features
 
 ### Windows 7-esque desktop widget
