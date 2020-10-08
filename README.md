@@ -53,7 +53,7 @@ All you need to do is to save the documents once, for the first time, when you n
 
 ## Usage
 ### Installation
-These are the usage instructions for Textylic v1.3, the latest version.
+These are the usage instructions for Textylic v1.4, the latest version.
 1. Visit the releases page here: https://github.com/akhilesh-balaji/Textylic/releases
 2. Download TextylicSetup.exe
 3. Run the file, and keep clicking next. Once the installer finishes its work, you may delete the file
