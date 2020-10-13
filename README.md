@@ -4,7 +4,7 @@
 
 Small note to those who re publish is on their websites: **Please link back to the original repository on Github.**
 
-This is Textylic: The perfect note-taking app. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
+This is Textylic: The notes app for the 22nd century. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
 
 <!-- As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
 N/A -->
@@ -54,7 +54,7 @@ This is quite a handy tool if your computer suddenly crashed, and you have unsav
 
 ## Usage
 ### Installation
-These are the usage instructions for Textylic v1.3, the latest version.
+These are the usage instructions for Textylic v1.4, the latest version.
 1. Visit the releases page here: https://github.com/akhilesh-balaji/Textylic/releases
 2. Download TextylicSetup.exe
 3. Run the file, and keep clicking next. Once the installer finishes its work, you may delete the file
