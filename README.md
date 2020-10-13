@@ -23,33 +23,34 @@ Upvote it on Steemhunt: https://steemhunt.com/@khalifaimaman/textylic-a-notes-wi
 Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximized windows, you could interact with them These were removed in Windows 10. But, this app mimics their behavior, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
 
 ### Undo/Redo
-These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using "Ctrl + z" to undo, and "Ctrl + y" to redo.
+These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using <kbd>Ctrl + Z</kbd> to undo, and <kbd>Ctrl + Y</kbd> to redo.
 
 ### New Window
-This can be accessed by clicking the plus icon in the top toolbar, or using "Ctrl + n"
+Textylic has the ability to create multiples notes windows on the same desktop. This is a particularly useful feature when taking notes during meetings or class. They can also be organized by use of other features in the app such as colour coding. These individual notes windows don't interfere with each other in any way, and you can even edit the same note in two different windows at the same time!
+This can be accessed by clicking the plus icon in the top toolbar.
 
 ### Text formatting Options
-These can be found in the bottom toolbar. As of now, you have to select some text and apply the formatting options. I am still working on the option to apply it, and continue typing in the same style.
+Plaintext, at times, gets too boring, and it's hard to emphasize text. When a notes app doesn't support these, it means that you have to rely on online text to unicode formatting convertors. But fear not, for Textylic supports over 7 types of text formatting, with more coming soon!
 
-### Saving and opening notes
-You can access these in the extended menu. You can save a note with the keyboard shortcut "Ctrl + s"
+### Colour Themes
+Using colour themes, you can both customize the appearance of Textylic, and organize yourself by colour coding the notes. There are 4 colour options available as of now. This feature can also be combined with other features, such as naming and renaming your notes, to better organize your note-taking experience. After all, nothing's better than a splash of colour on your desktop!
 
 ### Links
-You can link piece of text by selecting it, and using "Ctrl + k" on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use "Ctrl + o", or the "Open selected link" option in the top toolbar.
+You can link piece of text by selecting it, and using <kbd>Ctrl + O</kbd> on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use <kbd>Ctrl + O</kbd>, or the "Open selected link" option in the top toolbar.
 
 ### Automatic Saving
-All you need to do is to save the documents once, for the first time, when you name it. After this, you don't need to worry about saving because of Auto saving!
+This is quite a handy tool if your computer suddenly crashed, and you have unsaved work. You only need to save a note once, to choose its location and name. Then, Textylic will automatically save it every half a second or so. It also saves you the trouble of hitting Ctrl + S every time you made a change, and wearing those keys down to the plastic underneath.
 
 ## Keyboard Shortcuts
-- **Ctrl + Z**: Undo
-- **Ctrl + Y**: Redo
-- **Ctrl + K**: Add a hyperlink to a selected object
-- **Ctrl + O**: Open the selected hyperlink in default web browser
-- **Ctrl + B**: Make selected text bold
-- **Ctrl + I**: Make selected text italic
-- **Ctrl + U**: Make selected text underlined
-- **Ctrl + Q**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
-- **Ctrl + S**: Save the file
+- **<kbd>Ctrl + Z</kbd>**: Undo
+- **<kbd>Ctrl + Y</kbd>**: Redo
+- **<kbd>Ctrl + K</kbd>**: Add a hyperlink to a selected object
+- **<kbd>Ctrl + O</kbd>**: Open the selected hyperlink in default web browser
+- **<kbd>Ctrl + B</kbd>**: Make selected text bold
+- **<kbd>Ctrl + I</kbd>**: Make selected text italic
+- **<kbd>Ctrl + U</kbd>**: Make selected text underlined
+- **<kbd>Ctrl + Q</kbd>**: Quit the program. Use this when you close the last notes window, or it will keep running in the background, and you need to end it using task manager.
+- **<kbd>Ctrl + S</kbd>**: Save the file
 
 ## Usage
 ### Installation
@@ -66,7 +67,7 @@ These are the usage instructions for Textylic v1.3, the latest version.
 This button creates a new note in a separate window. This way, you can have multiple notes on your desktop!
 
 #### 2. The **Save Note** Button
-This is the button that saves your work. You can either use this button,or the keyboard shortcut "Ctrl + S". You only need to do this the first time, because of the Autosave feature.
+This is the button that saves your work. You can either use this button,or the keyboard shortcut <kbd>Ctrl + S</kbd>. You only need to do this the first time, because of the Autosave feature.
 
 #### 3. The **Open Selected Link** Button
 If you have a link selected,you can click this button to open this link in the browser.This only works if you have tagged your text as a link in the bottom bar (See 12)
@@ -75,7 +76,7 @@ If you have a link selected,you can click this button to open this link in the b
 This button opens up the extended menu, with a few more features. One of the most prominent is the "Choose theme" option, which allows you to customize the interface. You can also find the Undo/Redo buttons here, though they can also be accessed through the keyboard shortcuts (see above). You can also get help and learn more about the app through the Help/About buttons.
 
 #### 5. The **Close Window** Button
-This is self-explanatory. If you click this button, it closes the window. Each window is a separate instance of the .exe file, so "Ctrl + Q" will do the same as this button.
+This is self-explanatory. If you click this button, it closes the window. Each window is a separate instance of the .exe file, so <kbd>Ctrl + Q</kbd> will do the same as this button.
 
 #### 6. The **Bold** Button
 This button makes the selected text bold.
@@ -98,8 +99,8 @@ This button makes the selected text look like code, by using a fixed-width font.
 #### 12. The **Hyperlink** Button
 This button makes the selected text a hyperlink. To open it, see 3.
 
-#### 13. The **Color** Button
-This button emphasizes the selected text by turning it the color of your chosen theme.
+#### 13. The **Colour** Button
+This button emphasizes the selected text by turning it the colour of your chosen theme.
 
 ## Requirements
 - Windows 10 version 1903 or higher
