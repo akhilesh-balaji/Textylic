@@ -2,7 +2,7 @@
 
 ![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/mockups/Mockup.png?raw=true)
 
-Small note to those who re publish is on their websites: **Please link back to the original repository on Github.**
+Small note to those who re publish is on their websites: **Please link back to the original repository on GitHub.**
 
 This is Textylic: The notes app for the 22nd century. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
 
@@ -20,7 +20,7 @@ Upvote it on Steemhunt: https://steemhunt.com/@khalifaimaman/textylic-a-notes-wi
 ## Features
 
 ### Windows 7-esque desktop widget
-Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximized windows, you could interact with them These were removed in Windows 10. But, this app mimics their behavior, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
+Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximized windows, you could interact with them These were removed in Windows 10. But, this app mimics their behaviour, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
 
 ### Undo/Redo
 These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using <kbd>Ctrl + Z</kbd> to undo, and <kbd>Ctrl + Y</kbd> to redo.
@@ -30,7 +30,7 @@ Textylic has the ability to create multiples notes windows on the same desktop. 
 This can be accessed by clicking the plus icon in the top toolbar.
 
 ### Text formatting Options
-Plaintext, at times, gets too boring, and it's hard to emphasize text. When a notes app doesn't support these, it means that you have to rely on online text to unicode formatting convertors. But fear not, for Textylic supports over 7 types of text formatting, with more coming soon!
+Plaintext, at times, gets too boring, and it's hard to emphasize text. When a notes app doesn't support these, it means that you have to rely on online text to Unicode formatting convertors. But fear not, for Textylic supports over 7 types of text formatting, with more coming soon!
 
 ### Colour Themes
 Using colour themes, you can both customize the appearance of Textylic, and organize yourself by colour coding the notes. There are 4 colour options available as of now. This feature can also be combined with other features, such as naming and renaming your notes, to better organize your note-taking experience. After all, nothing's better than a splash of colour on your desktop!

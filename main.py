@@ -1,3 +1,4 @@
+from os import name
 import tkinter
 import pygetwindow as gw
 import os
@@ -5,13 +6,17 @@ import time
 import getpass
 import webbrowser
 import re
+import binascii
+import glob
 import tkinter.ttk
 import subprocess
-from tkinter import font
+from tkinter import Variable, font
 from random import randint
 from tkinter import filedialog
 from tkinter import PhotoImage
 from string import ascii_uppercase
+from PIL import Image
+from datetime import datetime
 
 # Defining Window Properties
 root = tkinter.Tk()
@@ -36,24 +41,38 @@ window.grid_columnconfigure(6, weight = 0)
 global openedFileName
 openedFileName = False
 
+# The saved variable
 global saved
 saved = False
 
+# Wheather the selected text is a hyperlink or not
+linked = False
+
+# The list with all images, index, and name
+images = []
+
+# The drive in which the script is running
 def fetchDrivePath():
     for drive in ascii_uppercase:
         if os.path.exists(f"{drive}:\\Users"):
             return drive + ":\\"
     return ""
 
-drive = fetchDrivePath()
+winDrive = fetchDrivePath()
+
+# Creating a new window
 def createNewWindow(var=False):
     try: 
         subprocess.Popen(f"{os.path.dirname(os.path.realpath(__file__))}\\Textylic.exe", shell=True)
     except:
         subprocess.Popen(f"python {os.path.dirname(os.path.realpath(__file__))}\\main.py", shell=True)
 
-# Formatting Buttons
+# Opening the folder in which all the notes are stored
+def openNotesList():
+    subprocess.Popen(f"explorer {os.path.dirname(os.path.realpath(__file__))}\\Notes", shell=True)
 
+#* Formatting Buttons
+# Bold Button
 def bolder(var=False):
     bold_font  = font.Font(notes, notes.cget("font"))
     bold_font.configure(weight="bold")
@@ -98,6 +117,7 @@ def bolder(var=False):
             notes.tag_add("bold", "sel.first", "sel.last")
     return "break"
 
+# Italic button
 def italicizer(var=False):
     italic_font  = font.Font(notes, notes.cget("font"))
     italic_font.configure(slant="italic")
@@ -142,6 +162,7 @@ def italicizer(var=False):
             notes.tag_add("italic", "sel.first", "sel.last")
     return "break"
 
+# Code button
 def codify(var=False):
     notes.tag_configure("code", font="Consolas 11")
     current_tags = notes.tag_names("sel.first") 
@@ -152,6 +173,7 @@ def codify(var=False):
         notes.tag_add("code", "sel.first", "sel.last")
     return "break"
 
+# Underline button
 def underliner(var=False):
     under_font  = font.Font(notes, notes.cget("font"))
     under_font.configure(underline=True)
@@ -197,6 +219,7 @@ def underliner(var=False):
     
     return "break"
 
+# Strikethrough button
 def strikethrough(var=False):
     strike_font  = font.Font(notes, notes.cget("font"))
     strike_font.configure(overstrike=True)
@@ -240,6 +263,7 @@ def strikethrough(var=False):
     
     return "break"
 
+# Bulleted list button
 def bulletList():
     x = notes.selection_get()
     current_tags = notes.tag_names("sel.first")
@@ -290,6 +314,7 @@ def bulletList():
     
     return "break"
 
+# Link button
 def link(var=False):
     global linked
 
@@ -309,17 +334,17 @@ def link(var=False):
 
 # Change Text Color
 def setColor():
-    global pinky
-    global yellowy
-    global greeny
-    global bluey
-    if yellowy == True:
+    global pinkTheme
+    global yellowTheme
+    global greenTheme
+    global blueTheme
+    if yellowTheme == True:
         notes.tag_configure("emphColor", foreground="#E6B905")
-    elif pinky == True:
+    elif pinkTheme == True:
         notes.tag_configure("emphColor", foreground="#EB8EC6")
-    elif greeny == True:
+    elif greenTheme == True:
         notes.tag_configure("emphColor", foreground="#65BA5A")
-    elif bluey == True:
+    elif blueTheme == True:
         notes.tag_configure("emphColor", foreground="#59C0E7")
     current_tags = notes.tag_names("sel.first")
 
@@ -330,97 +355,79 @@ def setColor():
     
     return "break"
 
+# Open link button
 def openLink(var=False):
     global linked
     if linked == True:
-        global url
         url = notes.selection_get()
         webbrowser.open_new(url)
     return "break"
 
+# Open the README.md on GitHub
 def openReadme(var=False):
     webbrowser.open_new("https://github.com/akhilesh-balaji/Textylic/blob/master/README.md")
+    webbrowser.open_new("https://akhilesh-balaji.github.io/Textylic/")
     return "break"
 
+
+#* Image buttons
 # Getting images (normal) for the buttons:
-global newButtonImage
-newButtonImage = PhotoImage(file = "images/iconset/new.png")
+newButtonImage = PhotoImage(file = "res/images/iconset/new.png")
 
-global saveButtonImage
-saveButtonImage = PhotoImage(file = "images/iconset/save.png")
+saveButtonImage = PhotoImage(file = "res/images/iconset/save.png")
 
-global linkButtonImage
-linkButtonImage = PhotoImage(file = "images/iconset/open.png")
+linkButtonImage = PhotoImage(file = "res/images/iconset/open.png")
 
-global menuButtonImage
-menuButtonImage = PhotoImage(file = "images/iconset/menu.png")
+menuButtonImage = PhotoImage(file = "res/images/iconset/menu.png")
 
-global closeButtonImage
-closeButtonImage = PhotoImage(file = "images/iconset/close.png")
+closeButtonImage = PhotoImage(file = "res/images/iconset/close.png")
 
-global boldButtonImage
-boldButtonImage = PhotoImage(file = "images/iconset/bold.png")
+boldButtonImage = PhotoImage(file = "res/images/iconset/bold.png")
 
-global italicButtonImage
-italicButtonImage = PhotoImage(file = "images/iconset/italic.png")
+italicButtonImage = PhotoImage(file = "res/images/iconset/italic.png")
 
-global underButtonImage
-underButtonImage = PhotoImage(file = "images/iconset/underline.png")
+underButtonImage = PhotoImage(file = "res/images/iconset/underline.png")
 
-global strikeButtonImage
-strikeButtonImage = PhotoImage(file = "images/iconset/strikethrough.png")
+strikeButtonImage = PhotoImage(file = "res/images/iconset/strikethrough.png")
 
-global bulletButtonImage
-bulletButtonImage = PhotoImage(file = "images/iconset/bullet.png")
+bulletButtonImage = PhotoImage(file = "res/images/iconset/bullet.png")
 
-global codeButtonImage
-codeButtonImage = PhotoImage(file = "images/iconset/code.png")
+codeButtonImage = PhotoImage(file = "res/images/iconset/code.png")
 
-global insertlButtonImage
-insertlButtonImage = PhotoImage(file = "images/iconset/link.png")
+insertlButtonImage = PhotoImage(file = "res/images/iconset/link.png")
 
-global colorButtonImage
-colorButtonImage = PhotoImage(file = "images/iconset/color.png")
+colorButtonImage = PhotoImage(file = "res/images/iconset/color.png")
+
+photoButtonImage = PhotoImage(file = "res/images/iconset/photo.png")
 
 # Getting images (hover) for the buttons:
-global newButtonImageAfter
-newButtonImageAfter = PhotoImage(file = "images/iconset/new1.png")
+newButtonImageAfter = PhotoImage(file = "res/images/iconset/new1.png")
 
-global saveButtonImageAfter
-saveButtonImageAfter = PhotoImage(file = "images/iconset/save1.png")
+saveButtonImageAfter = PhotoImage(file = "res/images/iconset/save1.png")
 
-global linkButtonImageAfter
-linkButtonImageAfter = PhotoImage(file = "images/iconset/open1.png")
+linkButtonImageAfter = PhotoImage(file = "res/images/iconset/open1.png")
 
-global menuButtonImageAfter
-menuButtonImageAfter = PhotoImage(file = "images/iconset/menu1.png")
+menuButtonImageAfter = PhotoImage(file = "res/images/iconset/menu1.png")
 
-global closeButtonImageAfter
-closeButtonImageAfter = PhotoImage(file = "images/iconset/close1.png")
+closeButtonImageAfter = PhotoImage(file = "res/images/iconset/close1.png")
 
-global boldButtonImageAfter
-boldButtonImageAfter = PhotoImage(file = "images/iconset/bold1.png")
+boldButtonImageAfter = PhotoImage(file = "res/images/iconset/bold1.png")
 
-global italicButtonImageAfter
-italicButtonImageAfter = PhotoImage(file = "images/iconset/italic1.png")
+italicButtonImageAfter = PhotoImage(file = "res/images/iconset/italic1.png")
 
-global underButtonImageAfter
-underButtonImageAfter = PhotoImage(file = "images/iconset/underline1.png")
+underButtonImageAfter = PhotoImage(file = "res/images/iconset/underline1.png")
 
-global strikeButtonImageAfter
-strikeButtonImageAfter = PhotoImage(file = "images/iconset/strikethrough1.png")
+strikeButtonImageAfter = PhotoImage(file = "res/images/iconset/strikethrough1.png")
 
-global bulletButtonImageAfter
-bulletButtonImageAfter = PhotoImage(file = "images/iconset/bullet1.png")
+bulletButtonImageAfter = PhotoImage(file = "res/images/iconset/bullet1.png")
 
-global codeButtonImageAfter
-codeButtonImageAfter = PhotoImage(file = "images/iconset/code1.png")
+codeButtonImageAfter = PhotoImage(file = "res/images/iconset/code1.png")
 
-global insertlButtonImageAfter
-insertlButtonImageAfter = PhotoImage(file = "images/iconset/link1.png")
+insertlButtonImageAfter = PhotoImage(file = "res/images/iconset/link1.png")
 
-global colorButtonImageAfter
-colorButtonImageAfter = PhotoImage(file = "images/iconset/color1.png")
+colorButtonImageAfter = PhotoImage(file = "res/images/iconset/color1.png")
+
+photoButtonImageAfter = PhotoImage(file = "res/images/iconset/photo1.png")
 
 # Changing the image on hover
 def hoverImageBold(var=False):
@@ -501,10 +508,17 @@ def hoverImageTsize(var=False):
 def NormalImageTsize(var=False):
     colorText.configure(image = colorButtonImage)
 
+def hoverImagePhoto(var=False):
+    photoInsert.configure(image = photoButtonImageAfter)
+
+def NormalImagePhoto(var=False):
+    photoInsert.configure(image = photoButtonImage)
+
 # List that holds all items that have accent color
 accentItems = []
 
-# Get Tags
+#* Open/Save mechanism
+# Get Tags in the Text widget
 def getTags(start, end):
     index = start
     tagname = []
@@ -516,13 +530,9 @@ def getTags(start, end):
     except:
         tagname.append([starttagindex, "end", ("",)])
 
-    # def insertStingMiddle(string, word):
-    #     strOriginal = string
-    #     return string[:1] + word + strOriginal[1:]
-
     while notes.compare(index, "<", end):
-        # print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
-        # print(tagname)
+        #// print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
+        #// print(tagname)
         if notes.tag_names(index) != prevtag:
             if len(notes.tag_names(index)) <= 0:
                 starttagindex = index
@@ -541,9 +551,45 @@ def getTags(start, end):
 
     return tagname
 
+allImagesGroup = []
+imgNumberName = 0
+
+# Insert photo button
+def photoInserter():
+    global allImagesGroup
+    global saved
+    global images
+    global imgNumberName
+    global dateTimeNow
+    global openedFileName
+    global winDrive
+
+    dateTimeNow = str(datetime.now())
+    dateTimeNow = dateTimeNow.replace("-", "_")
+    dateTimeNow = dateTimeNow.replace(" ", "_")
+    dateTimeNow = dateTimeNow.replace(":", "")
+    dateTimeNow = dateTimeNow.replace(".", "")
+
+    imgNumberName = imgNumberName + 1
+
+    photo = filedialog.askopenfilename(initialdir=f"{winDrive}/Users/{getpass.getuser()}/Pictures", title="Choose an Image:", filetypes=(("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", "*.jpeg"),))
+    imgFile = Image.open(photo)
+    imgFile.thumbnail((280, 280))
+    imgFile.save(f"./res/cache_images_/{dateTimeNow}.png")
+
+    imgToInsert = PhotoImage(file = f"./res/cache_images_/{dateTimeNow}.png")
+    allImagesGroup.append(imgToInsert)
+    images.append([f"./res/cache_images_/{dateTimeNow}", notes.index("insert"), f"image{imgNumberName}"])
+    notes.image_create("insert", image=imgToInsert, name=f"image{imgNumberName}")
+    imgFile.close()
+    photo.close()
+
 # File Dialog
 def openFile(var=False):
     global saved
+    global images
+    global allImagesGroup
+
     noteFile = filedialog.askopenfilename(initialdir="./Notes", title="Choose a note:", filetypes=(("Textylic file", "*.txtlyc"),))
     if noteFile:
         global openedFileName
@@ -552,19 +598,14 @@ def openFile(var=False):
     read = noteFile.read()
 
     matchStyle = re.match(r".*<style>\n(.*)\n</style>", str(read), flags=re.DOTALL|re.MULTILINE)
+    matchImg = re.match(r".*<images>\n(.*)\n</images>", str(read), flags=re.DOTALL|re.MULTILINE)
 
-    read = re.sub('<style>.*</style>', '', read, flags=re.DOTALL|re.MULTILINE)
+    read = re.sub('<style>.*$', '', read, flags=re.DOTALL|re.MULTILINE)
     read = re.sub('<content>\n', '', read, flags=re.DOTALL|re.MULTILINE)
     read = re.sub('\n*</content>\n\n', '', read, flags=re.DOTALL|re.MULTILINE)
 
     notes.delete("1.0", "end")
     notes.insert("end", read)
-    # read = notes.get("1.0", "end")
-    # everyThingInNotesMatch = re.match(r"(.*)(\s*)$", '', read, flags=re.DOTALL)
-    # if everyThingInNotesMatch:
-    #     read = everyThingInNotesMatch.group(1)
-    #     notes.delete("1.0", "end")
-    #     notes.insert("end", read)
 
     if matchStyle:
         # Bold fonts and tags
@@ -631,30 +672,39 @@ def openFile(var=False):
         notes.tag_configure("link", font=under_font, foreground="#00AFEC")
 
         # Text color
-        global pinky
-        global yellowy
-        global greeny
-        global bluey
-        if yellowy == True:
+        global pinkTheme
+        global yellowTheme
+        global greenTheme
+        global blueTheme
+        if yellowTheme == True:
             notes.tag_configure("emphColor", foreground="#E6B905")
-        elif pinky == True:
+        elif pinkTheme == True:
             notes.tag_configure("emphColor", foreground="#EB8EC6")
-        elif greeny == True:
+        elif greenTheme == True:
             notes.tag_configure("emphColor", foreground="#65BA5A")
-        elif bluey == True:
+        elif blueTheme == True:
             notes.tag_configure("emphColor", foreground="#59C0E7")
 
         # Apply formatting
         for format in formatting:
             for tag in format[2]:
                 notes.tag_add(str(tag).strip("}{/.\\"), format[0], format[1])
+    if matchImg:
+        images = eval(matchImg.group(1))
+        allImagesGroup = []
+        for imageList in images:
+            imageToInsert = PhotoImage(file = f"{imageList[0]}.png")
+            #// notes.insert(f"{imageList[1]}-1c", "\n")
+            notes.image_create(imageList[1], image=imageToInsert, name=imageList[2])
+            allImagesGroup.append(imageToInsert)
+
+        print(images)
 
     noteFile.close()
     saved = True
     return "break"
-
+    
 def saveNoteAs(var=False):
-    global noteFile
     noteFile = filedialog.asksaveasfilename(confirmoverwrite=False, defaultextension=".txtlyc", filetypes=(("Textylic file", "*.txtlyc"),), initialdir="./Notes", title="Save your note:")
     if noteFile:
         global saved
@@ -666,13 +716,53 @@ def saveNoteAs(var=False):
         noteFile.close()
     return "break"
 
+deletedImages = []
+
+imageIndices = []
+
 def saveNote(var=False):
     global saved
     global openedFileName
+    global images
+    global deletedImages
+    global allImagesGroup
+    global imageIndices
+    global pinkTheme
+    global yellowTheme
+    global greenTheme
+    global blueTheme
+
+    for imgName in notes.image_names():
+        index = notes.index(str(imgName))
+
+        for image in images:
+            if image[2] in notes.image_names():
+                if image[2] == imgName:
+                    image[1] = index
+            else:
+                deletedImages.append(image)
+
+    for deletedImage in deletedImages:
+        try:
+            images.remove(deletedImage)
+        except:
+            pass
+
     if openedFileName:
         noteFile = open(openedFileName, "w")
         noteFile.write("<content>\n{}\n</content>\n\n".format(notes.get(1.0, "end")))
-        noteFile.write("<style>\n{}\n</style>".format(getTags("1.0", "end")))
+        noteFile.write("<style>\n{}\n</style>\n\n".format(getTags("1.0", "end")))
+        noteFile.write("<images>\n{}\n</images>".format(images))
+
+        if blueTheme == True:
+            noteFile.write("<colortheme>\naccentblue()\n</colortheme>")        
+        elif pinkTheme == True:
+            noteFile.write("<colortheme>\naccentpink()\n</colortheme>")
+        elif yellowTheme == True:
+            noteFile.write("<colortheme>\naccentyellow()\n</colortheme>")
+        elif greenTheme == True:
+            noteFile.write("<colortheme>\naccentgreen()\n</colortheme>")
+            
         noteFile.close()
         saved = True
         getTags("1.0", "end")
@@ -680,27 +770,67 @@ def saveNote(var=False):
         saveNoteAs()
     return "break"
 
+def clearCache():
+    imagesToBeSaved = []
+    pathToNotes = "./Notes"
+    pathToNotes = os.path.join(pathToNotes, '*.txtlyc')
+    pathToNotes = pathToNotes.replace("\\", "/")
+
+    pathToImages = "./res/cache_images_"
+    pathToImages = os.path.join(pathToImages, '*.*')
+    pathToImages = pathToImages.replace("\\", "/")
+    
+    for filename in glob.glob(pathToNotes):
+        formattedFileName = filename.replace("\\", "/")
+        noteFile = open(f"{formattedFileName}", "r")
+        readContent = noteFile.read()
+        matchImg = re.match(r".*<images>\n(.*)\n</images>", str(readContent), flags=re.DOTALL|re.MULTILINE)
+
+        if matchImg:
+            images = eval(matchImg.group(1))
+            for image in images:
+                imagesToBeSaved.append(f"{image[0]}.png")
+
+        noteFile.close()
+    
+    for imageFile in glob.glob(pathToImages):
+        imagesToBeSavedSet = set(imagesToBeSaved)
+        formattedImgFileName = imageFile.replace("\\", "/")
+        if formattedImgFileName not in imagesToBeSavedSet:
+            print(f"{formattedImgFileName} not in {imagesToBeSavedSet}")
+            os.remove(formattedImgFileName)
+
+# Auto save
+def autoSave():
+    global saved
+    if saved == True:
+        saveNote()
+    window.after(3000, autoSave)
+
+# Close the window
 def windowdestroy(var=False):
     root.destroy()
 
-# Accent color functions
-global pinky
-global yellowy
-global greeny
-global bluey
-pinky = False
-yellowy = True
-greeny = False
-bluey = False
+#* Accent colors
+global pinkTheme
+global yellowTheme
+global greenTheme
+global blueTheme
+pinkTheme = False
+yellowTheme = True
+greenTheme = False
+blueTheme = False
+
+# Pink accent color
 def accentpink():
-    global pinky
-    global yellowy
-    global greeny
-    global bluey
-    pinky = True
-    yellowy = False
-    greeny = False
-    bluey = False
+    global pinkTheme
+    global yellowTheme
+    global greenTheme
+    global blueTheme
+    pinkTheme = True
+    yellowTheme = False
+    greenTheme = False
+    blueTheme = False
     for item in accentItems:
         item.configure(bg = "#EB8EC6", activebackground = "#EB8EC6")
     title_bar.configure(bg = "#EB8EC6")
@@ -708,15 +838,16 @@ def accentpink():
     notes.tag_configure("emphColor", foreground="#EB8EC6")
     window.update()
 
+# Yellow accent color
 def accentyellow():
-    global pinky
-    global yellowy
-    global greeny
-    global bluey
-    pinky = False
-    yellowy = True
-    greeny = False
-    bluey = False
+    global pinkTheme
+    global yellowTheme
+    global greenTheme
+    global blueTheme
+    pinkTheme = False
+    yellowTheme = True
+    greenTheme = False
+    blueTheme = False
     for item in accentItems:
         item.configure(bg = "#E6B905", activebackground = "#E6B905")
     title_bar.configure(bg = "#E6B905")
@@ -724,15 +855,16 @@ def accentyellow():
     menu.configure(activebackground = "#E6B905")
     window.update()
 
+# Green accent color
 def accentgreen():
-    global pinky
-    global yellowy
-    global greeny
-    global bluey
-    pinky = False
-    yellowy = False
-    greeny = True
-    bluey = False
+    global pinkTheme
+    global yellowTheme
+    global greenTheme
+    global blueTheme
+    pinkTheme = False
+    yellowTheme = False
+    greenTheme = True
+    blueTheme = False
     for item in accentItems:
         item.configure(bg = "#65BA5A", activebackground = "#65BA5A")
     title_bar.configure(bg = "#65BA5A")
@@ -740,15 +872,16 @@ def accentgreen():
     menu.configure(activebackground = "#65BA5A")
     window.update()
 
+# Blue accent color
 def accentblue():
-    global pinky
-    global yellowy
-    global greeny
-    global bluey
-    pinky = False
-    yellowy = False
-    greeny = False
-    bluey = True
+    global pinkTheme
+    global yellowTheme
+    global greenTheme
+    global blueTheme
+    pinkTheme = False
+    yellowTheme = False
+    greenTheme = False
+    blueTheme = True
     for item in accentItems:
         item.configure(bg = "#59C0E7", activebackground = "#59C0E7")
     title_bar.configure(bg = "#59C0E7")
@@ -756,10 +889,9 @@ def accentblue():
     menu.configure(activebackground = "#59C0E7")
     window.update()
 
-# Detecting TopOrNot
+# Detecting wheather the window is topmost or not
 def topOrNot():
     windows = gw.getActiveWindow()
-    # print(f"The window's title is \"{windows.title}\" with exactly that many spaces.")
     if windows is None:
         window.deiconify()
         window.lift()
@@ -768,11 +900,11 @@ def topOrNot():
         if windows.isMaximized:
             window.lower()
             window.attributes("-topmost", False)
-        elif not windows.isMaximized and windows.title != '' and windows.title != "Notes window" and windows.title != "Choose a note:" and windows.title != "Save your note:" and windows.title != "tk":
+        elif not windows.isMaximized and windows.title != '' and windows.title != "Notes window" and windows.title != "Choose a note:" and windows.title != "Save your note:" and windows.title != "Choose an Image:" and windows.title != "tk":
             window.deiconify()
             window.attributes("-topmost", False)
             window.lower()
-        elif not windows.isMaximized and windows.title != '' and windows.title == "Notes window" or windows.title == "Choose a note:" or windows.title == "Save your note:":
+        elif not windows.isMaximized and windows.title != '' and windows.title == "Notes window" or windows.title == "Choose a note:" or windows.title == "Save your note:" or windows.title == "Choose an Image:":
             window.attributes("-topmost", False)       
         elif windows.title == "tk":
             window.deiconify()
@@ -785,13 +917,7 @@ def topOrNot():
 
     window.after(10, topOrNot)
 
-# Auto save
-def autoSave():
-    global saved
-    if saved == True:
-        saveNote()
-    window.after(3000, autoSave)
-
+#* Actually inserting the elements
 # Defining Title Bar Elements
 title_bar = tkinter.Frame(window, relief = "flat", bg = "#E6B905")
 
@@ -831,10 +957,15 @@ menu.image = menuButtonImage
 menu.grid(row = 0, column = 3, padx = 5, sticky = "W", pady = 5)
 accentItems.append(menu)
 
-segoe_font_two = font.Font()
-segoe_font_two.configure(family = "Segoe UI", size = 10)
+segoe_font_menu = font.Font()
+segoe_font_menu.configure(family = "Segoe UI", size = 10)
 
-menu.menu = tkinter.Menu(menu, tearoff = 0, bd = 0, relief = "solid", font = segoe_font_two, activeborderwidth = 0, activebackground = "#c4c4c4", activeforeground = "#000000", selectcolor = "black")
+menu.menu = tkinter.Menu(menu, tearoff = 0, bd = 0, relief = "solid", font = segoe_font_menu, activeborderwidth = 0, activebackground = "#c4c4c4", activeforeground = "#000000", selectcolor = "black")
+
+advancedMenu = tkinter.Menu(menu.menu, tearoff = 0, bd = 0, relief = "solid", font = segoe_font_menu, activeborderwidth = 0, activebackground = "#c4c4c4", activeforeground = "#000000", selectcolor = "black")
+advancedMenu.add_command(label = "Notes List", command = openNotesList)
+advancedMenu.add_command(label = "Clear Cache", command = clearCache)
+
 menu["menu"] = menu.menu
 
 menu.menu.add_command(label = "Choose theme:")
@@ -842,9 +973,12 @@ menu.menu.add_radiobutton(label = "Blue", command = accentblue)
 menu.menu.add_radiobutton(label = "Yellow", command = accentyellow)
 menu.menu.add_radiobutton(label = "Green", command = accentgreen)
 menu.menu.add_radiobutton(label = "Pink", command = accentpink)
+
 menu.menu.add_separator()
+
 menu.menu.add_command(label = "Open Note", command = openFile)
 menu.menu.add_command(label = "Save Note", command = saveNote, accelerator = "(Ctr+s)")
+menu.menu.add_cascade(label="More...", menu=advancedMenu)
 menu.menu.add_separator()
 menu.menu.add_command(label = "Undo", command = notes.edit_undo, accelerator = "(Ctr+z)")
 menu.menu.add_command(label = "Redo", command = notes.edit_redo, accelerator = "(Ctr+y)")
@@ -894,6 +1028,10 @@ insertl.grid(row = 0, column = 7, padx = 5, sticky = "W", pady = 5)
 colorText = tkinter.Button(bottom_bar, image = colorButtonImage, bd = 0, bg = "#333333", pady = 4, command = setColor, activebackground = "#333333", fg = "white", padx = 3)
 colorText.image = colorButtonImage
 colorText.grid(row = 0, column = 8, padx = 5, sticky = "W", pady = 5)
+
+photoInsert = tkinter.Button(bottom_bar, image = photoButtonImage, bd = 0, bg = "#333333", pady = 4, command = photoInserter, activebackground = "#333333", fg = "white", padx = 3)
+photoInsert.image = colorButtonImage
+photoInsert.grid(row = 0, column = 9, padx = 5, sticky = "W", pady = 5)
 
 # Positioning title bar and adding drag function
 title_bar.grid(row = 0, column = 0, columnspan = 5, sticky = "W")
@@ -954,6 +1092,8 @@ insertl.bind('<Enter>', hoverImageLink)
 insertl.bind('<Leave>', NormalImageLink)
 colorText.bind('<Enter>', hoverImageTsize)
 colorText.bind('<Leave>', NormalImageTsize)
+photoInsert.bind('<Enter>', hoverImagePhoto)
+photoInsert.bind('<Leave>', NormalImagePhoto)
 
 # Desktop Gadget and Autosave
 window.after(10, topOrNot)
