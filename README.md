@@ -1,6 +1,6 @@
 # Textylic
 
-![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/mockups/Mockup.png?raw=true)
+![](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/mockups/Mockup.png?raw=true)
 
 Small note to those who re publish is on their websites: **Please link back to the original repository on GitHub.**
 
@@ -113,4 +113,4 @@ This button emphasizes the selected text by turning it the colour of your chosen
 - 💡Add automatic quitting when only one app is left -->
 
 ## Screenshot
-![](https://github.com/akhilesh-balaji/Textylic/blob/master/images/screenshot.png?raw=true)
+![](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/screenshot.png?raw=true)
