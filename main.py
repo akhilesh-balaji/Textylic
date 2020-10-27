@@ -45,9 +45,6 @@ openedFileName = False
 global saved
 saved = False
 
-# Wheather the selected text is a hyperlink or not
-linked = False
-
 # The list with all images, index, and name
 images = []
 
@@ -316,8 +313,6 @@ def bulletList():
 
 # Link button
 def link(var=False):
-    global linked
-
     under_font  = font.Font(notes, notes.cget("font"))
     under_font.configure(underline=True)
 
@@ -326,10 +321,8 @@ def link(var=False):
 
     if "link" in current_tags:
         notes.tag_remove("link", "sel.first", "sel.last")
-        linked = False
     else:
         notes.tag_add("link", "sel.first", "sel.last")
-        linked = True
     return "break"
 
 # Change Text Color
@@ -357,8 +350,8 @@ def setColor():
 
 # Open link button
 def openLink(var=False):
-    global linked
-    if linked == True:
+    current_tags = notes.tag_names("sel.first")
+    if "link" in current_tags:
         url = notes.selection_get()
         webbrowser.open_new(url)
     return "break"
@@ -531,8 +524,8 @@ def getTags(start, end):
         tagname.append([starttagindex, "end", ("",)])
 
     while notes.compare(index, "<", end):
-        #// print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
-        #// print(tagname)
+        print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
+        print(tagname)
         if notes.tag_names(index) != prevtag:
             if len(notes.tag_names(index)) <= 0:
                 starttagindex = index
@@ -599,6 +592,7 @@ def openFile(var=False):
 
     matchStyle = re.match(r".*<style>\n(.*)\n</style>", str(read), flags=re.DOTALL|re.MULTILINE)
     matchImg = re.match(r".*<images>\n(.*)\n</images>", str(read), flags=re.DOTALL|re.MULTILINE)
+    matchTheme = re.match(r".*<colortheme>\n(.*)\n</colortheme>", str(read), flags=re.DOTALL|re.MULTILINE)
 
     read = re.sub('<style>.*$', '', read, flags=re.DOTALL|re.MULTILINE)
     read = re.sub('<content>\n', '', read, flags=re.DOTALL|re.MULTILINE)
@@ -694,11 +688,12 @@ def openFile(var=False):
         allImagesGroup = []
         for imageList in images:
             imageToInsert = PhotoImage(file = f"{imageList[0]}.png")
-            #// notes.insert(f"{imageList[1]}-1c", "\n")
+            notes.insert(f"{imageList[1]}-1c", "\n")
             notes.image_create(imageList[1], image=imageToInsert, name=imageList[2])
             allImagesGroup.append(imageToInsert)
 
-        print(images)
+    if matchTheme:
+        exec(matchTheme.group(1))
 
     noteFile.close()
     saved = True
@@ -752,7 +747,7 @@ def saveNote(var=False):
         noteFile = open(openedFileName, "w")
         noteFile.write("<content>\n{}\n</content>\n\n".format(notes.get(1.0, "end")))
         noteFile.write("<style>\n{}\n</style>\n\n".format(getTags("1.0", "end")))
-        noteFile.write("<images>\n{}\n</images>".format(images))
+        noteFile.write("<images>\n{}\n</images>\n\n".format(images))
 
         if blueTheme == True:
             noteFile.write("<colortheme>\naccentblue()\n</colortheme>")        
@@ -762,7 +757,7 @@ def saveNote(var=False):
             noteFile.write("<colortheme>\naccentyellow()\n</colortheme>")
         elif greenTheme == True:
             noteFile.write("<colortheme>\naccentgreen()\n</colortheme>")
-            
+
         noteFile.close()
         saved = True
         getTags("1.0", "end")
