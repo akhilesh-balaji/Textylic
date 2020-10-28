@@ -102,6 +102,9 @@ This button makes the selected text a hyperlink. To open it, see 3.
 #### 13. The **Colour** Button
 This button emphasizes the selected text by turning it the colour of your chosen theme.
 
+#### 14. The **Image** Button
+This button will insert a desired image in the position where you insertion cursor is. Clear the images that are not used using the "Clear Cache" option in the "More..." menu.
+
 ## Requirements
 - Windows 10 version 1903 or higher
 - Windows 8 and below have not been tested, and are not supported.
