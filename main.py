@@ -1,9 +1,7 @@
-from os import name
 import tkinter
 import pygetwindow as gw
 import os
 import time
-import getpass
 import webbrowser
 import re
 import binascii
@@ -524,8 +522,8 @@ def getTags(start, end):
         tagname.append([starttagindex, "end", ("",)])
 
     while notes.compare(index, "<", end):
-        print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
-        print(tagname)
+        # print("Tag for text at index %s is %s" %(index, notes.tag_names(index)))
+        # print(tagname)
         if notes.tag_names(index) != prevtag:
             if len(notes.tag_names(index)) <= 0:
                 starttagindex = index
@@ -555,7 +553,6 @@ def photoInserter():
     global imgNumberName
     global dateTimeNow
     global openedFileName
-    global winDrive
 
     dateTimeNow = str(datetime.now())
     dateTimeNow = dateTimeNow.replace("-", "_")
@@ -565,7 +562,7 @@ def photoInserter():
 
     imgNumberName = imgNumberName + 1
 
-    photo = filedialog.askopenfilename(initialdir=f"{winDrive}/Users/{getpass.getuser()}/Pictures", title="Choose an Image:", filetypes=(("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", "*.jpeg"),))
+    photo = filedialog.askopenfilename(initialdir=f"~/Pictures", title="Choose an Image:", filetypes=(("PNG", "*.png"), ("JPG", "*.jpg"), ("JPEG", "*.jpeg"),))
     imgFile = Image.open(photo)
     imgFile.thumbnail((280, 280))
     imgFile.save(f"./res/cache_images_/{dateTimeNow}.png")
