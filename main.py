@@ -66,6 +66,7 @@ def createNewWindow(var=False):
 def openNotesList():
     subprocess.Popen(f"explorer {os.path.dirname(os.path.realpath(__file__))}\\Notes", shell=True)
 
+
 #* Formatting Buttons
 # Bold Button
 def bolder(var=False):
