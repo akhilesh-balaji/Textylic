@@ -62,6 +62,7 @@ These are the usage instructions for Textylic v1.4, the latest version.
 
 ### Using the application
 <img src="https://raw.githubusercontent.com/akhilesh-balaji/Textylic/master/res/images/Tutorial.png" width="500px" height="auto"/>
+
 #### 1. The **New Note** Button
 This button creates a new note in a separate window. This way, you can have multiple notes on your desktop!
 
