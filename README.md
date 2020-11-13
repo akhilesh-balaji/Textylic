@@ -61,8 +61,7 @@ These are the usage instructions for Textylic v1.4, the latest version.
 4. Yay! You are set up and ready to go. You can find the application in the start menu. You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use Win+D, like those windows 7 desktop widgets. 
 
 ### Using the application
-![](https://github.com/akhilesh-balaji/Textylic/blob/master/Tutorial.png?raw=true)
-
+![](https://raw.githubusercontent.com/akhilesh-balaji/Textylic/master/res/images/Tutorial.png)
 #### 1. The **New Note** Button
 This button creates a new note in a separate window. This way, you can have multiple notes on your desktop!
 
