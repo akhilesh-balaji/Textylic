@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Binaries
-Releases/
+installer/
 *.exe
 
 # Distribution / packaging

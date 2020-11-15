@@ -21,7 +21,7 @@ DFA = 1
 Comp = 1
 [Graphics]
 Wizard image = <main>
-Header image = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\Textylic\res\images\logo\icon.png
+Header image = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\logo\icon.png
 Show Label = 1
 VisualStylesEnabled = 1
 [Files]
@@ -42,8 +42,8 @@ Reboot computer = 0
 Program = <InstallPath>\Textylic.exe
 ProgramArguments = 
 [Shortcuts]
-Allowtc = 0
-Shortcut path = <Company>\<AppName>
+Allowtc = 1
+Shortcut path = <AppName>
 [Serialoptions]
 Allows = 0
 Number = 1000
@@ -55,9 +55,9 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\Releases\Setup Installer\TextylicSetup.exe
-SetupIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\Textylic\res\images\logo\icon.ico
-UninstallIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\Textylic\res\images\logo\icon.ico
+File = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\installer\TextylicSetup.exe
+SetupIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\logo\icon.ico
+UninstallIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\logo\icon.ico
 CompressionMethod = 1
 CompressionLevel = 2
 [Updater]
@@ -75,7 +75,7 @@ Execdlls = 0
 [Languages]
 1
 [Files/Dirs]
-C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\Textylic\dist\Textylic\
+C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\dist\Textylic\
 N/A
 [Folder]
 [Licence_Begin]
@@ -756,7 +756,7 @@ Startmenu
 Textylic
 <InstallPath>\Textylic\Textylic.exe
 
-<InstallPath>\Textylic\images\logo\icon.ico
+<InstallPath>\Textylic\res\images\logo\icon.ico
 0
 [IFP_End]
 [Serials]
