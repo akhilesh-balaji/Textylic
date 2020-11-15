@@ -54,11 +54,11 @@ This is quite a handy tool if your computer suddenly crashed, and you have unsav
 
 ## Usage
 ### Installation
-These are the usage instructions for Textylic v1.4, the latest version.
+These are the usage instructions for Textylic v2.1, the latest version.
 1. Visit the releases page here: https://github.com/akhilesh-balaji/Textylic/releases
 2. Download TextylicSetup.exe
 3. Run the file, and keep clicking next. Once the installer finishes its work, you may delete the file
-4. Yay! You are set up and ready to go. You can find the application in the start menu. You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use Win+D, like those windows 7 desktop widgets. 
+4. Yay! You are set up and ready to go. You can find the application in the start menu. You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use <kbd>Win + D</kbd>, like those windows 7 desktop widgets. 
 
 ### Using the application
 <img src="https://raw.githubusercontent.com/akhilesh-balaji/Textylic/master/res/images/Tutorial.png" width="500px" height="auto"/>
