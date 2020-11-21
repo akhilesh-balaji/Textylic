@@ -16,6 +16,7 @@ from string import ascii_uppercase
 from PIL import Image
 from datetime import datetime
 
+
 # Defining Window Properties
 root = tkinter.Tk()
 root.withdraw()
@@ -46,6 +47,7 @@ saved = False
 # The list with all images, index, and name
 images = []
 
+
 # The drive in which the script is running
 def fetchDrivePath():
     for drive in ascii_uppercase:
@@ -55,12 +57,14 @@ def fetchDrivePath():
 
 winDrive = fetchDrivePath()
 
+
 # Creating a new window
 def createNewWindow(var=False):
     try: 
         subprocess.Popen(f"{os.path.dirname(os.path.realpath(__file__))}\\Textylic.exe", shell=True)
     except:
         subprocess.Popen(f"python {os.path.dirname(os.path.realpath(__file__))}\\main.py", shell=True)
+
 
 # Opening the folder in which all the notes are stored
 def openNotesList():
@@ -113,6 +117,7 @@ def bolder(var=False):
             notes.tag_add("bold", "sel.first", "sel.last")
     return "break"
 
+
 # Italic button
 def italicizer(var=False):
     italic_font  = font.Font(notes, notes.cget("font"))
@@ -158,6 +163,7 @@ def italicizer(var=False):
             notes.tag_add("italic", "sel.first", "sel.last")
     return "break"
 
+
 # Code button
 def codify(var=False):
     notes.tag_configure("code", font="Consolas 11")
@@ -168,6 +174,7 @@ def codify(var=False):
     else:
         notes.tag_add("code", "sel.first", "sel.last")
     return "break"
+
 
 # Underline button
 def underliner(var=False):
@@ -212,8 +219,8 @@ def underliner(var=False):
             notes.tag_remove("strikethrough", "sel.first", "sel.last")  
         else:
             notes.tag_add("underline", "sel.first", "sel.last")
-    
     return "break"
+
 
 # Strikethrough button
 def strikethrough(var=False):
@@ -259,6 +266,7 @@ def strikethrough(var=False):
     
     return "break"
 
+
 # Bulleted list button
 def bulletList():
     x = notes.selection_get()
@@ -294,7 +302,7 @@ def bulletList():
             bullete = "\t•  " + str(bullete)
             notes.delete(str(y), str(z))
             notes.insert(y, bullete)
-            l = len(bullete)
+            legnth = len(bullete)
             l = notes.index(y + l)
             notes.tag_add("bullet", y, l)
         elif "bullet" in current_tags:
@@ -307,10 +315,11 @@ def bulletList():
             l = len(selected)
             l = notes.index(l)
             notes.tag_remove("bullet", y, l)
-    
     return "break"
 
+
 # Link button
+
 def link(var=False):
     under_font  = font.Font(notes, notes.cget("font"))
     under_font.configure(underline=True)
@@ -323,6 +332,7 @@ def link(var=False):
     else:
         notes.tag_add("link", "sel.first", "sel.last")
     return "break"
+
 
 # Change Text Color
 def setColor():
@@ -347,6 +357,7 @@ def setColor():
     
     return "break"
 
+
 # Open link button
 def openLink(var=False):
     current_tags = notes.tag_names("sel.first")
@@ -354,6 +365,7 @@ def openLink(var=False):
         url = notes.selection_get()
         webbrowser.open_new(url)
     return "break"
+
 
 # Open the README.md on GitHub
 def openReadme(var=False):
@@ -421,93 +433,122 @@ colorButtonImageAfter = PhotoImage(file = "res/images/iconset/color1.png")
 
 photoButtonImageAfter = PhotoImage(file = "res/images/iconset/photo1.png")
 
+
 # Changing the image on hover
 def hoverImageBold(var=False):
     bold.configure(image = boldButtonImageAfter)
 
+
 def NormalImageBold(var=False):
     bold.configure(image = boldButtonImage)
+
 
 def hoverImageItalic(var=False):
     italic.configure(image = italicButtonImageAfter)
 
+
 def NormalImageItalic(var=False):
     italic.configure(image = italicButtonImage)
+
 
 def hoverImageUnder(var=False):
     underline.configure(image = underButtonImageAfter)
 
+
 def NormalImageUnder(var=False):
     underline.configure(image = underButtonImage)
+
 
 def hoverImageStrike(var=False):
     strikeThrough.configure(image = strikeButtonImageAfter)
 
+
 def NormalImageStrike(var=False):
     strikeThrough.configure(image = strikeButtonImage)
+
 
 def hoverImageBullet(var=False):
     bullet.configure(image = bulletButtonImageAfter)
 
+
 def NormalImageBullet(var=False):
     bullet.configure(image = bulletButtonImage)
+
 
 def hoverImageCode(var=False):
     code.configure(image = codeButtonImageAfter)
 
+
 def NormalImageCode(var=False):
     code.configure(image = codeButtonImage)
+
 
 def hoverImageNew(var=False):
     new.configure(image = newButtonImageAfter)
 
+
 def NormalImageNew(var=False):
     new.configure(image = newButtonImage)
+
 
 def hoverImageSave(var=False):
     save.configure(image = saveButtonImageAfter)
 
+
 def NormalImageSave(var=False):
     save.configure(image = saveButtonImage)
+
 
 def hoverImageOpen(var=False):
     openlink.configure(image = linkButtonImageAfter)
 
+
 def NormalImageOpen(var=False):
     openlink.configure(image = linkButtonImage)
+
 
 def hoverImageMenu(var=False):
     menu.configure(image = menuButtonImageAfter)
 
+
 def NormalImageMenu(var=False):
     menu.configure(image = menuButtonImage)
+
 
 def hoverImageClose(var=False):
     close_button.configure(image = closeButtonImageAfter)
 
+
 def NormalImageClose(var=False):
     close_button.configure(image = closeButtonImage)
+
 
 def hoverImageLink(var=False):
     insertl.configure(image = insertlButtonImageAfter)
 
+
 def NormalImageLink(var=False):
     insertl.configure(image = insertlButtonImage)
+
 
 def hoverImageTsize(var=False):
     colorText.configure(image = colorButtonImageAfter)
 
+
 def NormalImageTsize(var=False):
     colorText.configure(image = colorButtonImage)
 
+
 def hoverImagePhoto(var=False):
     photoInsert.configure(image = photoButtonImageAfter)
+
 
 def NormalImagePhoto(var=False):
     photoInsert.configure(image = photoButtonImage)
 
 # List that holds all items that have accent color
 accentItems = []
+
 
 #* Open/Save mechanism
 # Get Tags in the Text widget
@@ -545,6 +586,7 @@ def getTags(start, end):
 
 allImagesGroup = []
 imgNumberName = 0
+
 
 # Insert photo button
 def photoInserter():
@@ -697,6 +739,7 @@ def openFile(var=False):
     saved = True
     return "break"
     
+
 def saveNoteAs(var=False):
     noteFile = filedialog.asksaveasfilename(confirmoverwrite=False, defaultextension=".txtlyc", filetypes=(("Textylic file", "*.txtlyc"),), initialdir="./Notes", title="Save your note:")
     if noteFile:
@@ -712,6 +755,7 @@ def saveNoteAs(var=False):
 deletedImages = []
 
 imageIndices = []
+
 
 def saveNote(var=False):
     global saved
@@ -763,6 +807,7 @@ def saveNote(var=False):
         saveNoteAs()
     return "break"
 
+
 def clearCache():
     imagesToBeSaved = []
     pathToNotes = "./Notes"
@@ -793,12 +838,14 @@ def clearCache():
             print(f"{formattedImgFileName} not in {imagesToBeSavedSet}")
             os.remove(formattedImgFileName)
 
+
 # Auto save
 def autoSave():
     global saved
     if saved == True:
         saveNote()
     window.after(3000, autoSave)
+
 
 # Close the window
 def windowdestroy(var=False):
@@ -813,6 +860,7 @@ pinkTheme = False
 yellowTheme = True
 greenTheme = False
 blueTheme = False
+
 
 # Pink accent color
 def accentpink():
@@ -831,6 +879,7 @@ def accentpink():
     notes.tag_configure("emphColor", foreground="#EB8EC6")
     window.update()
 
+
 # Yellow accent color
 def accentyellow():
     global pinkTheme
@@ -847,6 +896,7 @@ def accentyellow():
     notes.tag_configure("emphColor", foreground="#E6B905")
     menu.configure(activebackground = "#E6B905")
     window.update()
+
 
 # Green accent color
 def accentgreen():
@@ -865,6 +915,7 @@ def accentgreen():
     menu.configure(activebackground = "#65BA5A")
     window.update()
 
+
 # Blue accent color
 def accentblue():
     global pinkTheme
@@ -881,6 +932,7 @@ def accentblue():
     notes.tag_configure("emphColor", foreground="#59C0E7")
     menu.configure(activebackground = "#59C0E7")
     window.update()
+
 
 # Detecting wheather the window is topmost or not
 def topOrNot():
@@ -1028,6 +1080,7 @@ photoInsert.grid(row = 0, column = 9, padx = 5, sticky = "W", pady = 5)
 
 # Positioning title bar and adding drag function
 title_bar.grid(row = 0, column = 0, columnspan = 5, sticky = "W")
+
 
 def get_pos(event):
     xwin = window.winfo_x()
