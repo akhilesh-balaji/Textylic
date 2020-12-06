@@ -1054,6 +1054,7 @@ def topOrNot():
     """
 
     # TODO: Refine this logic
+    # FIXME
     windows = gw.getActiveWindow()
 
     if windows is None:
