@@ -1,9 +1,11 @@
 import tkinter
+import tkinter.messagebox
 import pygetwindow as gw
 import os
 import webbrowser
 import re
 import glob
+import argparse
 import tkinter.ttk
 import subprocess
 from tkinter import font
@@ -14,6 +16,16 @@ from string import ascii_uppercase
 from PIL import Image
 from datetime import datetime
 
+
+# Argument Parser
+parser = argparse.ArgumentParser(description="Open a file")
+parser.add_argument(
+    "file",
+    default=None,
+    nargs="?",
+    help="Name of the file to load")
+
+args = parser.parse_args()
 
 # Defining Window Properties
 root = tkinter.Tk()
@@ -606,7 +618,12 @@ def NormalImagePhoto(_=False):
 
 
 def getTags(start, end) -> list:
-    """Get Tags (bold, italic, etc.) in the Text widget"""
+    """
+    Get the tags (bold, italic, etc.) and their indices in the Text widget.
+
+    It gets the tags for each character till the end, and stores the end index
+    when the tag changes.
+    """
 
     index = start
     tagname = []
@@ -644,7 +661,7 @@ def getTags(start, end) -> list:
 
 
 def photoInserter():
-    """`Insert photo` button function"""
+    """'Insert photo' button function"""
 
     global allImagesGroup
     global saved
@@ -690,20 +707,14 @@ def photoInserter():
     photo.close()
 
 
-def openFile(_=False):
-    """File Dialog"""
+def openFile(file: str):
+    """Open a file with the file dialog"""
 
     global saved
     global images
     global allImagesGroup
 
-    noteFile = filedialog.askopenfilename(
-        initialdir="./Notes",
-        title="Choose a note:",
-        filetypes=(
-            ("Textylic file",
-             "*.txtlyc"),
-        ))
+    noteFile = file
     if noteFile:
         global openedFileName
         openedFileName = noteFile
@@ -723,9 +734,9 @@ def openFile(_=False):
         str(read),
         flags=re.DOTALL | re.MULTILINE)
 
-    read = re.sub('<style>.*$', '', read, flags=re.DOTALL | re.MULTILINE)
-    read = re.sub('<content>\n', '', read, flags=re.DOTALL | re.MULTILINE)
-    read = re.sub('\n*</content>\n\n', '', read,
+    read = re.sub("<style>.*$", "", read, flags=re.DOTALL | re.MULTILINE)
+    read = re.sub("<content>\n", "", read, flags=re.DOTALL | re.MULTILINE)
+    read = re.sub("\n*</content>\n\n", "", read,
                   flags=re.DOTALL | re.MULTILINE)
 
     notes.delete("1.0", "end")
@@ -834,6 +845,19 @@ def openFile(_=False):
 
     noteFile.close()
     saved = True
+    # Messagebox
+    openedFileNameStrip = re.sub("C:/.*/", "", str(openedFileName))
+    tkinter.messagebox.showinfo(
+        " ", f"Successfully opened note \"{openedFileNameStrip}\"   ")
+    return "break"
+
+
+def openFileChoose(_=False):
+    """Open a file with the file dialog"""
+
+    openFile((filedialog.askopenfilename(initialdir="./Notes",
+                                         title="Choose a note:", filetypes=(
+                                             ("Textylic file", "*.txtlyc"),))))
     return "break"
 
 
@@ -855,6 +879,10 @@ def saveNoteAs(_=False):
         noteFile = open(noteFile, "w")
         noteFile.write(notes.get(1.0, "end"))
         noteFile.close()
+        # Messagebox
+        openedFileNameStrip = re.sub("C:/.*/", "", str(openedFileName))
+        tkinter.messagebox.showinfo(
+            " ", f"Successfully saved note as \"{openedFileNameStrip}\"   ")
     return "break"
 
 
@@ -967,7 +995,22 @@ def autoSave():
 def windowdestroy(_=False):
     """Close the window"""
 
-    root.destroy()
+    global openedFileName
+    if not openedFileName:
+        # Confirmbox
+        confirmSave = tkinter.messagebox.askyesnocancel(" ",
+                                                        "Do you want to save this note \
+                                               before you leave?   ",
+                                                        icon="warning",
+                                                        default="yes")
+        if confirmSave is True:
+            saveNoteAs()
+        elif confirmSave is False:
+            root.destroy()
+        else:
+            pass
+    else:
+        root.destroy()
 
 
 def accentpink():
@@ -1054,9 +1097,11 @@ def topOrNot():
     """
 
     # TODO: Refine this logic
-    # FIXME
+    # HELP WANTED
+
     windows = gw.getActiveWindow()
 
+    # Desktop Widget logic
     if windows is None:
         window.deiconify()
         window.lift()
@@ -1065,14 +1110,14 @@ def topOrNot():
         if windows.isMaximized:
             window.lower()
             window.attributes("-topmost", False)
-        elif (not windows.isMaximized and windows.title != '' and
+        elif (not windows.isMaximized and windows.title != "" and
                 windows.title != "Notes window" and windows.title !=
                 "Choose a note:" and windows.title != "Save your note:" and
                 windows.title != "Choose an Image:" and windows.title != "tk"):
             window.deiconify()
             window.attributes("-topmost", False)
             window.lower()
-        elif (not windows.isMaximized and windows.title != '' and
+        elif (not windows.isMaximized and windows.title != "" and
                 windows.title == "Notes window" or windows.title ==
                 "Choose a note:" or windows.title == "Save your note:" or
                 windows.title == "Choose an Image:"):
@@ -1229,6 +1274,7 @@ advancedMenu = tkinter.Menu(
     selectcolor="black")
 advancedMenu.add_command(label="Notes List", command=openNotesList)
 advancedMenu.add_command(label="Clear Cache", command=clearCache)
+# advancedMenu.add_command(label="Minimize to systray", command=minSysTray)
 
 menu["menu"] = menu.menu
 
@@ -1240,7 +1286,7 @@ menu.menu.add_radiobutton(label="Pink", command=accentpink)
 
 menu.menu.add_separator()
 
-menu.menu.add_command(label="Open Note", command=openFile)
+menu.menu.add_command(label="Open Note", command=openFileChoose)
 menu.menu.add_command(
     label="Save Note",
     command=saveNote,
@@ -1401,50 +1447,54 @@ photoInsert.grid(row=0, column=9, padx=5, sticky="W", pady=5)
 titleBar.grid(row=0, column=0, columnspan=5, sticky="W")
 
 # Keyboard Shortcuts
-titleBar.bind('<Button-1>', getPos)
-notes.bind('<Control-Key-b>', bolder)
-notes.bind('<Control-Key-i>', italicizer)
-notes.bind('<Control-Key-u>', underliner)
-notes.bind('<Control-Key-t>', codify)
-notes.bind('<Control-Key-q>', windowdestroy)
-notes.bind('<Control-Key-s>', saveNote)
-notes.bind('<Control-Key-k>', link)
-notes.bind('<Control-Key-o>', openLink)
-notes.bind('<Control-slash>', strikethrough)
+titleBar.bind("<Button-1>", getPos)
+notes.bind("<Control-Key-b>", bolder)
+notes.bind("<Control-Key-i>", italicizer)
+notes.bind("<Control-Key-u>", underliner)
+notes.bind("<Control-Key-t>", codify)
+notes.bind("<Control-Key-q>", windowdestroy)
+notes.bind("<Control-Key-s>", saveNote)
+notes.bind("<Control-Key-k>", link)
+notes.bind("<Control-Key-o>", openLink)
+notes.bind("<Control-slash>", strikethrough)
 
 # Hover Effects
-bold.bind('<Enter>', hoverImageBold)
-bold.bind('<Leave>', NormalImageBold)
-italic.bind('<Enter>', hoverImageItalic)
-italic.bind('<Leave>', NormalImageItalic)
-underline.bind('<Enter>', hoverImageUnder)
-underline.bind('<Leave>', NormalImageUnder)
-strikeThrough.bind('<Enter>', hoverImageStrike)
-strikeThrough.bind('<Leave>', NormalImageStrike)
-bullet.bind('<Enter>', hoverImageBullet)
-bullet.bind('<Leave>', NormalImageBullet)
-code.bind('<Enter>', hoverImageCode)
-code.bind('<Leave>', NormalImageCode)
-new.bind('<Enter>', hoverImageNew)
-new.bind('<Leave>', NormalImageNew)
-save.bind('<Enter>', hoverImageSave)
-save.bind('<Leave>', NormalImageSave)
-openlink.bind('<Enter>', hoverImageOpen)
-openlink.bind('<Leave>', NormalImageOpen)
-menu.bind('<Enter>', hoverImageMenu)
-menu.bind('<Leave>', NormalImageMenu)
-close_button.bind('<Enter>', hoverImageClose)
-close_button.bind('<Leave>', NormalImageClose)
-insertl.bind('<Enter>', hoverImageLink)
-insertl.bind('<Leave>', NormalImageLink)
-colorText.bind('<Enter>', hoverImageTsize)
-colorText.bind('<Leave>', NormalImageTsize)
-photoInsert.bind('<Enter>', hoverImagePhoto)
-photoInsert.bind('<Leave>', NormalImagePhoto)
+bold.bind("<Enter>", hoverImageBold)
+bold.bind("<Leave>", NormalImageBold)
+italic.bind("<Enter>", hoverImageItalic)
+italic.bind("<Leave>", NormalImageItalic)
+underline.bind("<Enter>", hoverImageUnder)
+underline.bind("<Leave>", NormalImageUnder)
+strikeThrough.bind("<Enter>", hoverImageStrike)
+strikeThrough.bind("<Leave>", NormalImageStrike)
+bullet.bind("<Enter>", hoverImageBullet)
+bullet.bind("<Leave>", NormalImageBullet)
+code.bind("<Enter>", hoverImageCode)
+code.bind("<Leave>", NormalImageCode)
+new.bind("<Enter>", hoverImageNew)
+new.bind("<Leave>", NormalImageNew)
+save.bind("<Enter>", hoverImageSave)
+save.bind("<Leave>", NormalImageSave)
+openlink.bind("<Enter>", hoverImageOpen)
+openlink.bind("<Leave>", NormalImageOpen)
+menu.bind("<Enter>", hoverImageMenu)
+menu.bind("<Leave>", NormalImageMenu)
+close_button.bind("<Enter>", hoverImageClose)
+close_button.bind("<Leave>", NormalImageClose)
+insertl.bind("<Enter>", hoverImageLink)
+insertl.bind("<Leave>", NormalImageLink)
+colorText.bind("<Enter>", hoverImageTsize)
+colorText.bind("<Leave>", NormalImageTsize)
+photoInsert.bind("<Enter>", hoverImagePhoto)
+photoInsert.bind("<Leave>", NormalImagePhoto)
 
 # Desktop Gadget and Autosave
 window.after(10, topOrNot)
 window.after(3000, autoSave)
+
+# Open a file
+if args.file is not None:
+    openFile(args.file)
 
 # Update the window
 window.mainloop()
