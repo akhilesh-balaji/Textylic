@@ -135,16 +135,10 @@ This button will insert a desired image in the position where you insertion curs
 **Note:** If you have any features that are not on this list, or any bugs to report, please do not hesitate to create a new issue in the "Issues" tab above. The items which have a version number next to them are planned for that release number, the others will be updated soon.
 
 | Feature                           | Progress | Notes                                                        |
-|:--------------------------------- |:--------:| ------------------------------------------------------------ |
-| Refine Desktop Widget             | 10%      | I made a few attempts at this, but they didn't work out well |
-| Spell Checker                     | 0%       | This is long-term                                            |
-| Open Note by clicking on the file | 0%       | Help Wanted                                                  |
-
-<!-- ## Roadmap of Features/Bugs:
-**Note:** If you have any features that are not on this list, or any bugs to report, please do not hesitate to create a new issue in the "Issues" tab above. The items which have a version number next to them are planned for that release number, the others will be updated soon. Stay tuned!
-
-- 🐞Remove annoying spaces after opened file
-- 💡Add automatic quitting when only one app is left -->
+|:----------------------------------|:--------:|--------------------------------------------------------------|
+| Refine Desktop Widget             |   10%    | I made a few attempts at this, but they didn't work out well |
+| Spell Checker                     |    0%    | This is long-term                                            |
+| Open Note by clicking on the file |    0%    | Help Wanted                                                  |
 
 ## Screenshot
 
