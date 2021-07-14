@@ -1008,10 +1008,6 @@ def windowdestroy(_=False):
 
     if (not openedFileName) and (not whitespaceStr(notes.get("1.0", "end"))):
         # Confirmbox
-        print("asking for prompt...")
-        print("\"", text := notes.get("1.0", "end"), "\"")
-        print(whitespaceStr(text))
-        print(whitespaceStr(" "))
         confirmSave = tkinter.messagebox.askyesnocancel("Confirmation",
                                                         "Do you want to save this note \
                                             before you leave?   ",
@@ -1024,7 +1020,6 @@ def windowdestroy(_=False):
         else:
             pass
     else:
-        print("not asking for prompt")
         root.destroy()
 
 
