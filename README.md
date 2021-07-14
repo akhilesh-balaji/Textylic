@@ -1,8 +1,8 @@
 # Textylic
 
-![](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/mockups/Mockup.png?raw=true)
+![Textylic: the notes app for the 22nd century](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/mockups/Mockup.png?raw=true)
 
-This is **Textylic**: The notes app for the 22nd century. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
+This is **Textylic**—the notes app for the 22nd century. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
 
 <!-- As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
 N/A -->
@@ -60,7 +60,7 @@ This is quite a handy tool if your computer suddenly crashed, and you have unsav
 
 These are the usage instructions for Textylic v2.1, the latest version.
 
-1. Visit the releases page here: https://github.com/akhilesh-balaji/Textylic/releases
+1. Visit the releases page [here](https://github.com/akhilesh-balaji/Textylic/releases)
 2. Download TextylicSetup.exe
 3. Run the file, and keep clicking next. Once the installer finishes its work, you may delete the file
 4. Yay! You are set up and ready to go. You can find the application in the start menu. You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use <kbd>Win + D</kbd>, like those Windows 7 desktop widgets.
@@ -142,4 +142,4 @@ This button will insert a desired image in the position where you insertion curs
 
 ## Screenshot
 
-![](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/screenshot.png?raw=true)
+![Screenshot](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/screenshot.png?raw=true)
