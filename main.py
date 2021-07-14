@@ -119,11 +119,17 @@ def fetchDrivePath() -> str:
 def createNewWindow(_=False):
     """Creating a new window"""
 
+    # Check whether the exe or the python script is being used
     try:
-        subprocess.Popen(
-            f"{os.path.dirname(os.path.realpath(__file__))}\\Textylic.exe",
+        exePath = f"{os.path.dirname(os.path.realpath(__file__))}" \
+            "\\Textylic.exe"
+        subprocess.check_call(
+            exePath,
             shell=True)
-    except BaseException:
+        subprocess.Popen(
+            exePath,
+            shell=True)
+    except subprocess.CalledProcessError:
         subprocess.Popen(
             f"python {os.path.dirname(os.path.realpath(__file__))}\\main.py",
             shell=True)
@@ -996,13 +1002,21 @@ def windowdestroy(_=False):
     """Close the window"""
 
     global openedFileName
-    if not openedFileName:
+
+    def whitespaceStr(strg, search=re.compile(r"[^\s]+").search):
+        return not bool(search(strg))
+
+    if (not openedFileName) and (not whitespaceStr(notes.get("1.0", "end"))):
         # Confirmbox
-        confirmSave = tkinter.messagebox.askyesnocancel(" ",
+        print("asking for prompt...")
+        print("\"", text := notes.get("1.0", "end"), "\"")
+        print(whitespaceStr(text))
+        print(whitespaceStr(" "))
+        confirmSave = tkinter.messagebox.askyesnocancel("Confirmation",
                                                         "Do you want to save this note \
-                                               before you leave?   ",
+                                            before you leave?   ",
                                                         icon="warning",
-                                                        default="yes")
+                                                        default="no")
         if confirmSave is True:
             saveNoteAs()
         elif confirmSave is False:
@@ -1010,6 +1024,7 @@ def windowdestroy(_=False):
         else:
             pass
     else:
+        print("not asking for prompt")
         root.destroy()
 
 

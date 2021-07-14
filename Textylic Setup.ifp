@@ -21,7 +21,7 @@ DFA = 1
 Comp = 1
 [Graphics]
 Wizard image = <main>
-Header image = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\logo\icon.png
+Header image = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\icons\icon.png
 Show Label = 1
 VisualStylesEnabled = 1
 [Files]
@@ -33,7 +33,7 @@ Website = https://
 Include uninstaller = 1
 Uninstaller filename = Uninstall Textylic
 UseCustomDisplayIcon = 1
-CustomDisplayIcon = <InstallPath>\res\images\logo\iconNoShadow.ico
+CustomDisplayIcon = <InstallPath>\res\images\icons\icon.ico
 [Licence]
 Licence dialog = 1
 [Finish]
@@ -56,8 +56,8 @@ PlaySound = 0
 Allow = 0
 [Build]
 File = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\installer\TextylicSetup.exe
-SetupIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\logo\icon.ico
-UninstallIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\logo\icon.ico
+SetupIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\icons\icon.ico
+UninstallIconPath = C:\Users\Akhilesh\Documents\GitHub\Apps\Textylic\res\images\icons\icon.ico
 CompressionMethod = 1
 CompressionLevel = 2
 [Updater]
@@ -756,7 +756,7 @@ Startmenu
 Textylic
 <InstallPath>\Textylic\Textylic.exe
 
-<InstallPath>\Textylic\res\images\logo\iconNoShadow.ico
+<InstallPath>\Textylic\res\images\icons\icon.ico
 0
 [IFP_End]
 [Serials]
