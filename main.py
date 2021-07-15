@@ -346,22 +346,22 @@ def strikethrough(_=False):
 def bulletList():
     """Bulleted list button function"""
 
-    x = notes.selection_get()
+    selection = notes.selection_get()
     current_tags = notes.tag_names("sel.first")
 
-    if '\n' not in x:
+    if "\n" not in selection:
         if "bullet" not in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
-            bullete = "\t•  " + str(x)
-            notes.delete(y, z)
-            notes.insert(y, bullete)
-            lenBulletString = len(bullete)
-            lenBulletString = notes.index(y + lenBulletString)
-            notes.tag_add("bullet", y, lenBulletString)
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
+            bulleted_str = "\t•  " + str(selection)
+            notes.delete(index_1, index_2)
+            notes.insert(index_1, bulleted_str)
+            lenBulletString = len(bulleted_str)
+            lenBulletString = notes.index(index_1 + lenBulletString)
+            notes.tag_add("bullet", index_1, lenBulletString)
         elif "bullet" in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
             selected = notes.selection_get()
             selected = str(selected)
             selected = selected.replace("\t•  ", "")
@@ -369,29 +369,29 @@ def bulletList():
             notes.delete("sel.first", "sel.last")
             lenBulletString = len(selected)
             lenBulletString = notes.index(lenBulletString)
-            notes.tag_remove("bullet", y, lenBulletString)
-    elif '\n' in x:
+            notes.tag_remove("bullet", index_1, lenBulletString)
+    elif "\n" in selection:
         if "bullet" not in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
             select = notes.selection_get()
-            bullete = select.replace("\n", "\n\t•  ")
-            bullete = "\t•  " + str(bullete)
-            notes.delete(str(y), str(z))
-            notes.insert(y, bullete)
-            lenBulletString = len(bullete)
-            lenBulletString = notes.index(y + lenBulletString)
-            notes.tag_add("bullet", y, lenBulletString)
+            bulleted_str = select.replace("\n", "\n\t•  ")
+            bulleted_str = "\t•  " + str(bulleted_str)
+            notes.delete(str(index_1), str(index_2))
+            notes.insert(index_1, bulleted_str)
+            lenBulletString = len(bulleted_str)
+            lenBulletString = notes.index(index_1 + lenBulletString)
+            notes.tag_add("bullet", index_1, lenBulletString)
         elif "bullet" in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
-            selected = x.replace("\n\t•  ", "\n")
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
+            selected = selection.replace("\n\t•  ", "\n")
             selected = selected.replace("\t•  ", "")
             notes.insert("sel.first", selected)
             notes.delete("sel.first", "sel.last")
             lenBulletString = len(selected)
             lenBulletString = notes.index(lenBulletString)
-            notes.tag_remove("bullet", y, lenBulletString)
+            notes.tag_remove("bullet", index_1, lenBulletString)
     return "break"
 
 
