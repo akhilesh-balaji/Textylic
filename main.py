@@ -8,6 +8,7 @@ import glob
 import argparse
 import tkinter.ttk
 import subprocess
+import ctypes
 from tkinter import font
 from random import randint
 from tkinter import filedialog
@@ -27,27 +28,35 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)
+except BaseException:
+    ctypes.windll.user32.SetProcessDPIAware()
+
 # Defining Window Properties
 root = tkinter.Tk()
 root.withdraw()
 
 window = tkinter.Toplevel()
-window.title("Notes window")
+window.title("Textylic")
 window.attributes("-toolwindow", True)
 window.overrideredirect(1)
-window.geometry("310x310+" + str(randint(10, 900)) +
-                "+" + str(randint(10, 500)))
+# // window.geometry("410x410+" + str(randint(10, 900)) +
+# //                 "+" + str(randint(10, 500)))
+# window.geometry("310x310+" + str(randint(10, 900)) +
+#                 "+" + str(randint(10, 500)))
+window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
 window.config(bg="#333333")
 window.wait_visibility(window)
 
 # Configuring grid
 window.grid_columnconfigure(0, weight=1)
 window.grid_columnconfigure(1, weight=1)
-window.grid_columnconfigure(2, weight=100000)
-window.grid_columnconfigure(3, weight=1000)
-window.grid_columnconfigure(4, weight=0)
-window.grid_columnconfigure(5, weight=0)
-window.grid_columnconfigure(6, weight=0)
+window.grid_columnconfigure(2, weight=1)
+window.grid_columnconfigure(3, weight=1)
+window.grid_columnconfigure(4, weight=1)
+window.grid_columnconfigure(5, weight=1)
+window.grid_columnconfigure(6, weight=1)
 
 openedFileName = False  # Getting opened file name
 
@@ -861,7 +870,7 @@ def openFile(file: str):
 def openFileChoose(_=False):
     """Open a file with the file dialog"""
 
-    openFile((filedialog.askopenfilename(initialdir="./Notes",
+    openFile((filedialog.askopenfilename(initialdir="./notes",
                                          title="Choose a note:", filetypes=(
                                              ("Textylic file", "*.txtlyc"),))))
     return "break"
@@ -875,7 +884,7 @@ def saveNoteAs(_=False):
         defaultextension=".txtlyc",
         filetypes=(
             ("Textylic file", "*.txtlyc"),),
-        initialdir="./Notes",
+        initialdir="./notes",
         title="Save your note:")
     if noteFile:
         global saved
@@ -1121,14 +1130,14 @@ def topOrNot():
             window.lower()
             window.attributes("-topmost", False)
         elif (not windows.isMaximized and windows.title != "" and
-                windows.title != "Notes window" and windows.title !=
+                windows.title != "Textylic" and windows.title !=
                 "Choose a note:" and windows.title != "Save your note:" and
                 windows.title != "Choose an Image:" and windows.title != "tk"):
             window.deiconify()
             window.attributes("-topmost", False)
             window.lower()
         elif (not windows.isMaximized and windows.title != "" and
-                windows.title == "Notes window" or windows.title ==
+                windows.title == "Textylic" or windows.title ==
                 "Choose a note:" or windows.title == "Save your note:" or
                 windows.title == "Choose an Image:"):
             window.attributes("-topmost", False)
@@ -1159,7 +1168,9 @@ def getPos(event):
         """Moving the window on mouse move"""
 
         window.geometry(
-            "310x310" + f'+{event.x_root + xwin}+{event.y_root + ywin}')
+            # "410x410" + f'+{event.x_root + xwin}+{event.y_root + ywin}')
+            # "310x310" + f'+{event.x_root + xwin}+{event.y_root + ywin}')
+            f'+{event.x_root + xwin}+{event.y_root + ywin}')
 
     startx = event.x_root
     starty = event.y_root
@@ -1172,6 +1183,9 @@ winDrive = fetchDrivePath()  # The windows directory letter
 # Defining Title Bar Elements
 titleBar = tkinter.Frame(window, relief="flat", bg="#E6B905")
 
+smallPaddingX = 7
+smallPaddingY = 5
+
 new = tkinter.Button(
     titleBar,
     image=newButtonImage,
@@ -1180,7 +1194,7 @@ new = tkinter.Button(
     command=createNewWindow,
     activebackground="#E6B905")
 new.image = newButtonImage
-new.grid(row=0, column=0, padx=5, sticky="W", pady=5)
+new.grid(row=0, column=0, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 new.image = newButtonImage
 accentItems.append(new)
 
@@ -1194,7 +1208,7 @@ save = tkinter.Button(
     activebackground="#E6B905",
     command=saveNote)
 save.image = saveButtonImage
-save.grid(row=0, column=1, padx=5, sticky="W", pady=5)
+save.grid(row=0, column=1, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(save)
 
 # Link opening button
@@ -1207,7 +1221,7 @@ openlink = tkinter.Button(
     command=openLink,
     activebackground="#E6B905")
 openLink.image = linkButtonImage
-openlink.grid(row=0, column=2, padx=5, sticky="W", pady=5)
+openlink.grid(row=0, column=2, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(openlink)
 
 # Notes Text widget container
@@ -1215,9 +1229,13 @@ notesFrame = tkinter.Frame(
     window,
     relief="flat",
     bg="#333333",
-    height=200,
-    width=297)
+    height=360,
+    # height=round(0.7 * window.winfo_reqheight()),
+    width=430)
 notesFrame.grid(row=1, column=0, columnspan=5)
+
+notesFrame.columnconfigure(0, weight=10)
+notesFrame.grid_propagate(False)
 
 # Main Text input
 notes = tkinter.Text(
@@ -1225,7 +1243,7 @@ notes = tkinter.Text(
     undo=True,
     font="Segoe_UI 11",
     bg="#333333",
-    padx=5,
+    padx=smallPaddingX,
     pady=10,
     bd=0,
     fg="white",
@@ -1242,6 +1260,9 @@ notes = tkinter.Text(
 notes.grid(row=0, column=0, rowspan=5, columnspan=5)
 notes.delete("1.0", "end")
 segoe_font = font.Font(notes, notes.cget("font"))
+window.update_idletasks()
+print(window.winfo_reqheight())
+# segoe_font.configure(family="Segoe UI", size=round(0.035 * window.winfo_reqheight()))
 segoe_font.configure(family="Segoe UI", size=11)
 notes.configure(font=segoe_font)
 
@@ -1255,10 +1276,11 @@ menu = tkinter.Menubutton(
     pady=4,
     activebackground="#E6B905")
 menu.image = menuButtonImage
-menu.grid(row=0, column=3, padx=5, sticky="W", pady=5)
+menu.grid(row=0, column=3, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(menu)
 
 segoe_font_menu = font.Font()
+# segoe_font_menu.configure(family="Segoe UI", size=round(0.032 * window.winfo_reqheight()))
 segoe_font_menu.configure(family="Segoe UI", size=10)
 
 menu.menu = tkinter.Menu(
@@ -1326,15 +1348,15 @@ close_button = tkinter.Button(
     pady=4,
     activebackground="#E6B905")
 close_button.image = closeButtonImage
-close_button.grid(row=0, column=6, padx=150, sticky="E")
+close_button.grid(row=0, column=6, sticky="E", padx=(225, 11))
 accentItems.append(close_button)
 
-# Bottom formatting bar
-borderFrame = tkinter.Frame(window, height=0.5, width=2000000, pady=10)
-borderFrame.grid(row=2, column=0, columnspan=10, sticky="W")
+# # Bottom formatting bar
+# borderFrame = tkinter.Frame(window, height=0.5, width=2000000, pady=10)
+# borderFrame.grid(row=2, column=0, columnspan=10, sticky="W")
 
-bottom_bar = tkinter.Frame(window, relief="flat", bg="#333333", pady=3)
-bottom_bar.grid(row=3, column=0, columnspan=5, rowspan=1, sticky="W")
+bottom_bar = tkinter.Frame(window, relief="flat", bg="#242424", pady=3)
+bottom_bar.grid(row=3, column=0, columnspan=10, rowspan=1, sticky="WE")
 
 bold = tkinter.Button(
     bottom_bar,
@@ -1347,7 +1369,7 @@ bold = tkinter.Button(
     fg="white",
     padx=3)
 bold.image = boldButtonImage
-bold.grid(row=0, column=1, padx=5, sticky="W", pady=5)
+bold.grid(row=0, column=1, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 italic = tkinter.Button(
     bottom_bar,
@@ -1360,7 +1382,7 @@ italic = tkinter.Button(
     fg="white",
     padx=3)
 italic.image = italicButtonImage
-italic.grid(row=0, column=2, padx=5, sticky="W", pady=5)
+italic.grid(row=0, column=2, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 underline = tkinter.Button(
     bottom_bar,
@@ -1373,7 +1395,7 @@ underline = tkinter.Button(
     fg="white",
     padx=3)
 underline.image = underButtonImage
-underline.grid(row=0, column=3, padx=5, sticky="W", pady=5)
+underline.grid(row=0, column=3, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 strikeThrough = tkinter.Button(
     bottom_bar,
@@ -1386,7 +1408,7 @@ strikeThrough = tkinter.Button(
     fg="white",
     padx=3)
 strikeThrough.image = strikeButtonImage
-strikeThrough.grid(row=0, column=4, padx=5, sticky="W", pady=5)
+strikeThrough.grid(row=0, column=4, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 bullet = tkinter.Button(
     bottom_bar,
@@ -1399,7 +1421,7 @@ bullet = tkinter.Button(
     fg="white",
     padx=3)
 bullet.image = bulletButtonImage
-bullet.grid(row=0, column=5, padx=5, sticky="W", pady=5)
+bullet.grid(row=0, column=5, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 code = tkinter.Button(
     bottom_bar,
@@ -1412,7 +1434,7 @@ code = tkinter.Button(
     fg="white",
     padx=3)
 code.image = codeButtonImage
-code.grid(row=0, column=6, padx=5, sticky="W", pady=5)
+code.grid(row=0, column=6, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 insertl = tkinter.Button(
     bottom_bar,
@@ -1425,7 +1447,7 @@ insertl = tkinter.Button(
     fg="white",
     padx=3)
 insertl.image = insertlButtonImage
-insertl.grid(row=0, column=7, padx=5, sticky="W", pady=5)
+insertl.grid(row=0, column=7, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 colorText = tkinter.Button(
     bottom_bar,
@@ -1438,7 +1460,7 @@ colorText = tkinter.Button(
     fg="white",
     padx=3)
 colorText.image = colorButtonImage
-colorText.grid(row=0, column=8, padx=5, sticky="W", pady=5)
+colorText.grid(row=0, column=8, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 photoInsert = tkinter.Button(
     bottom_bar,
@@ -1451,10 +1473,10 @@ photoInsert = tkinter.Button(
     fg="white",
     padx=3)
 photoInsert.image = colorButtonImage
-photoInsert.grid(row=0, column=9, padx=5, sticky="W", pady=5)
+photoInsert.grid(row=0, column=9, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 # Positioning title bar and adding drag function
-titleBar.grid(row=0, column=0, columnspan=5, sticky="W")
+titleBar.grid(row=0, column=0, columnspan=5, sticky="WE")
 
 # Keyboard Shortcuts
 titleBar.bind("<Button-1>", getPos)

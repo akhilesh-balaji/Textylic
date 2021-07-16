@@ -2,7 +2,7 @@
 
 ![Textylic: the notes app for the 22nd century](https://github.com/akhilesh-balaji/Textylic/blob/master/res/images/mockups/Mockup.png?raw=true)
 
-This is **Textylic**—the notes app for the 22nd century. It supports various formatting options including bold, italic, underline, code style, and strikethrough. The app also supports other formats such as bullet points, and linking. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
+This is **Textylic**—the notes app for the 22nd century. It supports various formatting options including **bold**, *italic*, <ins>underline</ins>, `code`, and ~~strikethrough~~. The app also supports other formats such as bullet points, and hyperlinks. You can also open links in your browser! You can customize the app by changing the theme, too! Unlike the native windows sticky notes app, this app stays on your desktop like a windows 7 widget, without the need to install any large and cumbersome software such as Rainmeter. This means that it won't interfere with your work by creating icons on the taskbar that you need to click on to open. Textylic also supports  multiple note windows, and scrolling. So, you are not limited to the default square window size.
 
 <!-- As of now, there are a few bugs. Here are a couple of the known bugs that I am working on fixing:
 N/A -->
@@ -13,34 +13,18 @@ Upvote this product on [ProductHunt](https://www.producthunt.com/posts/textylic)
 
 ## Features
 
-### Windows 7-esque desktop widget
+- **Windows 7-esque desktop widget**: Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximized windows, you could interact with them These were removed in Windows 10. But, this app mimics their behaviour, and has a modern notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
 
-Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximized windows, you could interact with them These were removed in Windows 10. But, this app mimics their behaviour, and has a modern, fluent design style notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
-
-### Undo/Redo
-
-These are the single integral features of any text editor. They can be accessed by clicking the extended menu and using the "Undo" and "Redo" options over there, or using <kbd>Ctrl + Z</kbd> to undo, and <kbd>Ctrl + Y</kbd> to redo.
-
-### New Window
-
-Textylic has the ability to create multiples notes windows on the same desktop. This is a particularly useful feature when taking notes during meetings or class. They can also be organized by use of other features in the app such as colour coding. These individual notes windows don't interfere with each other in any way, and you can even edit the same note in two different windows at the same time!
+- **New Window**: Textylic has the ability to create multiples notes windows on the same desktop. This is a particularly useful feature when taking notes during meetings or class. They can also be organized by use of other features in the app such as colour coding. These individual notes windows don't interfere with each other in any way, and you can even edit the same note in two different windows at the same time!
 This can be accessed by clicking the plus icon in the top toolbar.
 
-### Text formatting Options
+- **Text formatting Options**: Plaintext, at times, gets too boring, and it's hard to emphasize text. When a notes app doesn't support these, it means that you have to rely on online text to Unicode formatting convertors. But fear not, for Textylic supports over 7 types of text formatting, with more coming soon!
 
-Plaintext, at times, gets too boring, and it's hard to emphasize text. When a notes app doesn't support these, it means that you have to rely on online text to Unicode formatting convertors. But fear not, for Textylic supports over 7 types of text formatting, with more coming soon!
+- **Colour Themes**: Using colour themes, you can both customize the appearance of Textylic, and organize yourself by colour coding the notes. There are 4 colour options available as of now. This feature can also be combined with other features, such as naming and renaming your notes, to better organize your note-taking experience. After all, nothing's better than a splash of colour on your desktop!
 
-### Colour Themes
+- **Links**: You can link piece of text by selecting it, and using <kbd>Ctrl + O</kbd> on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use <kbd>Ctrl + O</kbd>, or the "Open selected link" option in the top toolbar.
 
-Using colour themes, you can both customize the appearance of Textylic, and organize yourself by colour coding the notes. There are 4 colour options available as of now. This feature can also be combined with other features, such as naming and renaming your notes, to better organize your note-taking experience. After all, nothing's better than a splash of colour on your desktop!
-
-### Links
-
-You can link piece of text by selecting it, and using <kbd>Ctrl + O</kbd> on the keyboard, or using the formatting toolbar icon. To open the link, select the link, and use <kbd>Ctrl + O</kbd>, or the "Open selected link" option in the top toolbar.
-
-### Automatic Saving
-
-This is quite a handy tool if your computer suddenly crashed, and you have unsaved work. You only need to save a note once, to choose its location and name. Then, Textylic will automatically save it every half a second or so. It also saves you the trouble of hitting Ctrl + S every time you made a change, and wearing those keys down to the plastic underneath.
+- **Automatic Saving**: This is quite a handy tool if your computer suddenly crashed, and you have unsaved work. You only need to save a note once, to choose its location and name. Then, Textylic will automatically save it every half a second or so. It also saves you the trouble of hitting Ctrl + S every time you made a change, and wearing those keys down to the plastic underneath.
 
 ## Keyboard Shortcuts
 
@@ -58,12 +42,17 @@ This is quite a handy tool if your computer suddenly crashed, and you have unsav
 
 ### Installation
 
-These are the usage instructions for Textylic v2.1, the latest version.
+#### Portable
 
-1. Visit the releases page [here](https://github.com/akhilesh-balaji/Textylic/releases)
-2. Download TextylicSetup.exe
-3. Run the file, and keep clicking next. Once the installer finishes its work, you may delete the file
-4. Yay! You are set up and ready to go. You can find the application in the start menu. You can continue doing your work, and the notes window will not appear on the taskbar. To get it back, minimize all windows, or use <kbd>Win + D</kbd>, like those Windows 7 desktop widgets.
+Download `textylic-portable-x64.zip` from the [releases page](https://github.com/akhilesh-balaji/Textylic/releases) and extract its contents to a safe place. Run `Textylic.exe`.
+
+#### Installer
+
+Download `textylic-setup-x64.exe` from the [releases page](https://github.com/akhilesh-balaji/Textylic/releases) and open the file, following the instructions.
+
+#### Running From Source
+
+Download the source code or clone this repository. Install `pygetwindow` and `pil` using python `pip`. Next, run `main.py`. This is the notes window.
 
 ### Using the application
 

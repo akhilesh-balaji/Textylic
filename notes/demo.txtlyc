@@ -1,0 +1,19 @@
+<content>
+This is what might be termed... "test" text. Ah, I see you understand. To business, then. This is some heavily formatted text.
+	•  Get it?
+	•  A bullet point.
+	•  See?
+
+</content>
+
+<style>
+[['1.0', '1.90', ()], ['1.90', '1.94', ('bold', 'italicUnder')], ['1.94', '1.95', ('',)], ['1.95', '1.97', ('italic',)], ['1.97', '1.98', ('',)], ['1.98', '1.102', ('boldItalic', 'emphColor')], ['1.102', '1.103', ('',)], ['1.103', '1.110', ('strikeBold',)], ['1.110', '1.111', ('',)], ['1.111', '1.120', ('code', 'emphColor')], ['1.120', '1.121', ('',)], ['1.121', '1.126', ('underline',)], ['1.126', '2.0', ('',)], ['2.0', '2.4', ('bullet',)], ['2.4', '2.7', ('bold', 'bullet')], ['2.7', '3.4', ('bullet',)], ['3.4', '3.19', ('emphColor', 'bullet')], ['3.19', 'end', ('bullet',)]]
+</style>
+
+<images>
+[]
+</images>
+
+<colortheme>
+accentblue()
+</colortheme>
