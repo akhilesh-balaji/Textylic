@@ -1110,7 +1110,7 @@ def accentblue():
 
 def topOrNot():
     """
-    Detects wheather the window should be shown or not.
+    Detects whether the window should be shown or not.
 
     Makes it act like a Desktop widget.
     """
@@ -1261,7 +1261,6 @@ notes.grid(row=0, column=0, rowspan=5, columnspan=5)
 notes.delete("1.0", "end")
 segoe_font = font.Font(notes, notes.cget("font"))
 window.update_idletasks()
-print(window.winfo_reqheight())
 # segoe_font.configure(family="Segoe UI", size=round(0.035 * window.winfo_reqheight()))
 segoe_font.configure(family="Segoe UI", size=11)
 notes.configure(font=segoe_font)
