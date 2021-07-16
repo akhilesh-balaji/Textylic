@@ -39,7 +39,7 @@ root.withdraw()
 
 window = tkinter.Toplevel()
 window.title("Textylic")
-window.attributes("-toolwindow", True)
+window.attributes("-toolwindow", True, "-alpha", "0.99")
 window.overrideredirect(1)
 # // window.geometry("410x410+" + str(randint(10, 900)) +
 # //                 "+" + str(randint(10, 500)))
@@ -705,7 +705,7 @@ def photoInserter():
              "*.jpeg"),
         ))
     imgFile = Image.open(photo)
-    imgFile.thumbnail((280, 280))
+    imgFile.thumbnail((410, 410))
     imgFile.save(f"./res/cache_images_/{dateTimeNow}.png")
 
     imgToInsert = PhotoImage(file=f"./res/cache_images_/{dateTimeNow}.png")
