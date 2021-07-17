@@ -47,6 +47,9 @@ window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
 window.config(bg="#333333")
 window.wait_visibility(window)
 
+icon = PhotoImage(file = "./res/images/icons/iconx32.png")
+root.iconphoto(True, icon)
+
 # Configuring grid
 window.grid_columnconfigure(0, weight=1)
 window.grid_columnconfigure(1, weight=1)
