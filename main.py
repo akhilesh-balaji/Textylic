@@ -29,6 +29,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+# Optimize for high DPI
 try:
     ctypes.windll.shcore.SetProcessDpiAwareness(2)
 except BaseException:
@@ -42,10 +43,6 @@ window = tkinter.Toplevel()
 window.title("Textylic")
 window.attributes("-toolwindow", True, "-alpha", "0.99")
 window.overrideredirect(1)
-# // window.geometry("410x410+" + str(randint(10, 900)) +
-# //                 "+" + str(randint(10, 500)))
-# window.geometry("310x310+" + str(randint(10, 900)) +
-#                 "+" + str(randint(10, 500)))
 window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
 window.config(bg="#333333")
 window.wait_visibility(window)
