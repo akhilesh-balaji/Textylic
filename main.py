@@ -1150,7 +1150,7 @@ def topOrNot():
             window.lift()
             window.attributes("-topmost", True)
 
-    window.after(10, topOrNot)
+    window.after(200, topOrNot)
 
 
 def getPos(event):
@@ -1520,7 +1520,7 @@ photoInsert.bind("<Enter>", hoverImagePhoto)
 photoInsert.bind("<Leave>", NormalImagePhoto)
 
 # Desktop Gadget and Autosave
-window.after(10, topOrNot)
+window.after(200, topOrNot)
 window.after(3000, autoSave)
 
 # Open a file
