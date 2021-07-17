@@ -1,3 +1,4 @@
+# flake8: noqa: W504
 import tkinter
 import tkinter.messagebox
 import pygetwindow as gw
@@ -424,6 +425,7 @@ def setColor():
     global yellowTheme
     global greenTheme
     global blueTheme
+
     if yellowTheme is True:
         notes.tag_configure("emphColor", foreground="#E6B905")
     elif pinkTheme is True:
@@ -1218,7 +1220,12 @@ openlink = tkinter.Button(
     command=openLink,
     activebackground="#E6B905")
 openLink.image = linkButtonImage
-openlink.grid(row=0, column=2, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+openlink.grid(
+    row=0,
+    column=2,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 accentItems.append(openlink)
 
 # Notes Text widget container
@@ -1378,7 +1385,12 @@ italic = tkinter.Button(
     fg="white",
     padx=3)
 italic.image = italicButtonImage
-italic.grid(row=0, column=2, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+italic.grid(
+    row=0,
+    column=2,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 underline = tkinter.Button(
     bottom_bar,
@@ -1391,7 +1403,12 @@ underline = tkinter.Button(
     fg="white",
     padx=3)
 underline.image = underButtonImage
-underline.grid(row=0, column=3, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+underline.grid(
+    row=0,
+    column=3,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 strikeThrough = tkinter.Button(
     bottom_bar,
@@ -1404,7 +1421,12 @@ strikeThrough = tkinter.Button(
     fg="white",
     padx=3)
 strikeThrough.image = strikeButtonImage
-strikeThrough.grid(row=0, column=4, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+strikeThrough.grid(
+    row=0,
+    column=4,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 bullet = tkinter.Button(
     bottom_bar,
@@ -1417,7 +1439,12 @@ bullet = tkinter.Button(
     fg="white",
     padx=3)
 bullet.image = bulletButtonImage
-bullet.grid(row=0, column=5, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+bullet.grid(
+    row=0,
+    column=5,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 code = tkinter.Button(
     bottom_bar,
@@ -1443,7 +1470,12 @@ insertl = tkinter.Button(
     fg="white",
     padx=3)
 insertl.image = insertlButtonImage
-insertl.grid(row=0, column=7, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+insertl.grid(
+    row=0,
+    column=7,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 colorText = tkinter.Button(
     bottom_bar,
@@ -1456,7 +1488,12 @@ colorText = tkinter.Button(
     fg="white",
     padx=3)
 colorText.image = colorButtonImage
-colorText.grid(row=0, column=8, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+colorText.grid(
+    row=0,
+    column=8,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 photoInsert = tkinter.Button(
     bottom_bar,
@@ -1469,7 +1506,12 @@ photoInsert = tkinter.Button(
     fg="white",
     padx=3)
 photoInsert.image = colorButtonImage
-photoInsert.grid(row=0, column=9, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
+photoInsert.grid(
+    row=0,
+    column=9,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 # Positioning title bar and adding drag function
 titleBar.grid(row=0, column=0, columnspan=5, sticky="WE")
