@@ -1,3 +1,4 @@
+# flake8: noqa: W504
 import tkinter
 import tkinter.messagebox
 import pygetwindow as gw
@@ -8,6 +9,7 @@ import glob
 import argparse
 import tkinter.ttk
 import subprocess
+import ctypes
 from tkinter import font
 from random import randint
 from tkinter import filedialog
@@ -27,27 +29,36 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+# Optimize for high DPI
+# try:
+#     ctypes.windll.shcore.SetProcessDpiAwareness(2)
+# except BaseException:
+#     ctypes.windll.user32.SetProcessDPIAware()
+
 # Defining Window Properties
 root = tkinter.Tk()
 root.withdraw()
 
 window = tkinter.Toplevel()
-window.title("Notes window")
-window.attributes("-toolwindow", True)
+window.title("Textylic")
+window.attributes("-toolwindow", True, "-alpha", "0.99")
 window.overrideredirect(1)
-window.geometry("310x310+" + str(randint(10, 900)) +
-                "+" + str(randint(10, 500)))
+window.geometry(f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}")
+# window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
 window.config(bg="#333333")
 window.wait_visibility(window)
+
+icon = PhotoImage(file = "./res/images/icons/iconx32.png")
+root.iconphoto(True, icon)
 
 # Configuring grid
 window.grid_columnconfigure(0, weight=1)
 window.grid_columnconfigure(1, weight=1)
-window.grid_columnconfigure(2, weight=100000)
-window.grid_columnconfigure(3, weight=1000)
-window.grid_columnconfigure(4, weight=0)
-window.grid_columnconfigure(5, weight=0)
-window.grid_columnconfigure(6, weight=0)
+window.grid_columnconfigure(2, weight=1)
+window.grid_columnconfigure(3, weight=1)
+window.grid_columnconfigure(4, weight=1)
+window.grid_columnconfigure(5, weight=1)
+window.grid_columnconfigure(6, weight=1)
 
 openedFileName = False  # Getting opened file name
 
@@ -66,38 +77,38 @@ greenTheme = False
 blueTheme = False
 
 # Getting images (normal) for the buttons:
-newButtonImage = PhotoImage(file="res/images/iconset/new.png")
-saveButtonImage = PhotoImage(file="res/images/iconset/save.png")
-linkButtonImage = PhotoImage(file="res/images/iconset/open.png")
-menuButtonImage = PhotoImage(file="res/images/iconset/menu.png")
-closeButtonImage = PhotoImage(file="res/images/iconset/close.png")
-boldButtonImage = PhotoImage(file="res/images/iconset/bold.png")
-italicButtonImage = PhotoImage(file="res/images/iconset/italic.png")
-underButtonImage = PhotoImage(file="res/images/iconset/underline.png")
-strikeButtonImage = PhotoImage(file="res/images/iconset/strikethrough.png")
-bulletButtonImage = PhotoImage(file="res/images/iconset/bullet.png")
-codeButtonImage = PhotoImage(file="res/images/iconset/code.png")
-insertlButtonImage = PhotoImage(file="res/images/iconset/link.png")
-colorButtonImage = PhotoImage(file="res/images/iconset/color.png")
-photoButtonImage = PhotoImage(file="res/images/iconset/photo.png")
+newButtonImage = PhotoImage(file="res/images/iconsetx20/new.png")
+saveButtonImage = PhotoImage(file="res/images/iconsetx20/save.png")
+linkButtonImage = PhotoImage(file="res/images/iconsetx20/open.png")
+menuButtonImage = PhotoImage(file="res/images/iconsetx20/menu.png")
+closeButtonImage = PhotoImage(file="res/images/iconsetx20/close.png")
+boldButtonImage = PhotoImage(file="res/images/iconsetx20/bold.png")
+italicButtonImage = PhotoImage(file="res/images/iconsetx20/italic.png")
+underButtonImage = PhotoImage(file="res/images/iconsetx20/underline.png")
+strikeButtonImage = PhotoImage(file="res/images/iconsetx20/strikethrough.png")
+bulletButtonImage = PhotoImage(file="res/images/iconsetx20/bullet.png")
+codeButtonImage = PhotoImage(file="res/images/iconsetx20/code.png")
+insertlButtonImage = PhotoImage(file="res/images/iconsetx20/link.png")
+colorButtonImage = PhotoImage(file="res/images/iconsetx20/color.png")
+photoButtonImage = PhotoImage(file="res/images/iconsetx20/photo.png")
 
 
 # Getting images (hover) for the buttons:
-newButtonImageAfter = PhotoImage(file="res/images/iconset/new1.png")
-saveButtonImageAfter = PhotoImage(file="res/images/iconset/save1.png")
-linkButtonImageAfter = PhotoImage(file="res/images/iconset/open1.png")
-menuButtonImageAfter = PhotoImage(file="res/images/iconset/menu1.png")
-closeButtonImageAfter = PhotoImage(file="res/images/iconset/close1.png")
-boldButtonImageAfter = PhotoImage(file="res/images/iconset/bold1.png")
-italicButtonImageAfter = PhotoImage(file="res/images/iconset/italic1.png")
-underButtonImageAfter = PhotoImage(file="res/images/iconset/underline1.png")
+newButtonImageAfter = PhotoImage(file="res/images/iconsetx20/new1.png")
+saveButtonImageAfter = PhotoImage(file="res/images/iconsetx20/save1.png")
+linkButtonImageAfter = PhotoImage(file="res/images/iconsetx20/open1.png")
+menuButtonImageAfter = PhotoImage(file="res/images/iconsetx20/menu1.png")
+closeButtonImageAfter = PhotoImage(file="res/images/iconsetx20/close1.png")
+boldButtonImageAfter = PhotoImage(file="res/images/iconsetx20/bold1.png")
+italicButtonImageAfter = PhotoImage(file="res/images/iconsetx20/italic1.png")
+underButtonImageAfter = PhotoImage(file="res/images/iconsetx20/underline1.png")
 strikeButtonImageAfter = PhotoImage(
-    file="res/images/iconset/strikethrough1.png")
-bulletButtonImageAfter = PhotoImage(file="res/images/iconset/bullet1.png")
-codeButtonImageAfter = PhotoImage(file="res/images/iconset/code1.png")
-insertlButtonImageAfter = PhotoImage(file="res/images/iconset/link1.png")
-colorButtonImageAfter = PhotoImage(file="res/images/iconset/color1.png")
-photoButtonImageAfter = PhotoImage(file="res/images/iconset/photo1.png")
+    file="res/images/iconsetx20/strikethrough1.png")
+bulletButtonImageAfter = PhotoImage(file="res/images/iconsetx20/bullet1.png")
+codeButtonImageAfter = PhotoImage(file="res/images/iconsetx20/code1.png")
+insertlButtonImageAfter = PhotoImage(file="res/images/iconsetx20/link1.png")
+colorButtonImageAfter = PhotoImage(file="res/images/iconsetx20/color1.png")
+photoButtonImageAfter = PhotoImage(file="res/images/iconsetx20/photo1.png")
 
 allImagesGroup = []  # Reference list with images in it
 imgNumberName = 0  # A variable used to name images in chronological order
@@ -119,11 +130,14 @@ def fetchDrivePath() -> str:
 def createNewWindow(_=False):
     """Creating a new window"""
 
-    try:
+    # Check whether the exe or the python script is being used
+    exePath = f"{os.path.dirname(os.path.realpath(__file__))}" \
+        "\\Textylic.exe"
+    if os.path.isfile(exePath):
         subprocess.Popen(
-            f"{os.path.dirname(os.path.realpath(__file__))}\\Textylic.exe",
+            exePath,
             shell=True)
-    except BaseException:
+    else:
         subprocess.Popen(
             f"python {os.path.dirname(os.path.realpath(__file__))}\\main.py",
             shell=True)
@@ -340,22 +354,22 @@ def strikethrough(_=False):
 def bulletList():
     """Bulleted list button function"""
 
-    x = notes.selection_get()
+    selection = notes.selection_get()
     current_tags = notes.tag_names("sel.first")
 
-    if '\n' not in x:
+    if "\n" not in selection:
         if "bullet" not in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
-            bullete = "\t•  " + str(x)
-            notes.delete(y, z)
-            notes.insert(y, bullete)
-            lenBulletString = len(bullete)
-            lenBulletString = notes.index(y + lenBulletString)
-            notes.tag_add("bullet", y, lenBulletString)
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
+            bulleted_str = "\t•  " + str(selection)
+            notes.delete(index_1, index_2)
+            notes.insert(index_1, bulleted_str)
+            lenBulletString = len(bulleted_str)
+            lenBulletString = notes.index(index_1 + lenBulletString)
+            notes.tag_add("bullet", index_1, lenBulletString)
         elif "bullet" in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
             selected = notes.selection_get()
             selected = str(selected)
             selected = selected.replace("\t•  ", "")
@@ -363,29 +377,29 @@ def bulletList():
             notes.delete("sel.first", "sel.last")
             lenBulletString = len(selected)
             lenBulletString = notes.index(lenBulletString)
-            notes.tag_remove("bullet", y, lenBulletString)
-    elif '\n' in x:
+            notes.tag_remove("bullet", index_1, lenBulletString)
+    elif "\n" in selection:
         if "bullet" not in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
             select = notes.selection_get()
-            bullete = select.replace("\n", "\n\t•  ")
-            bullete = "\t•  " + str(bullete)
-            notes.delete(str(y), str(z))
-            notes.insert(y, bullete)
-            lenBulletString = len(bullete)
-            lenBulletString = notes.index(y + lenBulletString)
-            notes.tag_add("bullet", y, lenBulletString)
+            bulleted_str = select.replace("\n", "\n\t•  ")
+            bulleted_str = "\t•  " + str(bulleted_str)
+            notes.delete(str(index_1), str(index_2))
+            notes.insert(index_1, bulleted_str)
+            lenBulletString = len(bulleted_str)
+            lenBulletString = notes.index(index_1 + lenBulletString)
+            notes.tag_add("bullet", index_1, lenBulletString)
         elif "bullet" in current_tags:
-            y = float(notes.index("sel.first"))
-            z = float(notes.index("sel.last"))
-            selected = x.replace("\n\t•  ", "\n")
+            index_1 = float(notes.index("sel.first"))
+            index_2 = float(notes.index("sel.last"))
+            selected = selection.replace("\n\t•  ", "\n")
             selected = selected.replace("\t•  ", "")
             notes.insert("sel.first", selected)
             notes.delete("sel.first", "sel.last")
             lenBulletString = len(selected)
             lenBulletString = notes.index(lenBulletString)
-            notes.tag_remove("bullet", y, lenBulletString)
+            notes.tag_remove("bullet", index_1, lenBulletString)
     return "break"
 
 
@@ -412,6 +426,7 @@ def setColor():
     global yellowTheme
     global greenTheme
     global blueTheme
+
     if yellowTheme is True:
         notes.tag_configure("emphColor", foreground="#E6B905")
     elif pinkTheme is True:
@@ -690,7 +705,7 @@ def photoInserter():
              "*.jpeg"),
         ))
     imgFile = Image.open(photo)
-    imgFile.thumbnail((280, 280))
+    imgFile.thumbnail((410, 410))
     imgFile.save(f"./res/cache_images_/{dateTimeNow}.png")
 
     imgToInsert = PhotoImage(file=f"./res/cache_images_/{dateTimeNow}.png")
@@ -855,7 +870,7 @@ def openFile(file: str):
 def openFileChoose(_=False):
     """Open a file with the file dialog"""
 
-    openFile((filedialog.askopenfilename(initialdir="./Notes",
+    openFile((filedialog.askopenfilename(initialdir="./notes",
                                          title="Choose a note:", filetypes=(
                                              ("Textylic file", "*.txtlyc"),))))
     return "break"
@@ -869,7 +884,7 @@ def saveNoteAs(_=False):
         defaultextension=".txtlyc",
         filetypes=(
             ("Textylic file", "*.txtlyc"),),
-        initialdir="./Notes",
+        initialdir="./notes",
         title="Save your note:")
     if noteFile:
         global saved
@@ -996,13 +1011,17 @@ def windowdestroy(_=False):
     """Close the window"""
 
     global openedFileName
-    if not openedFileName:
+
+    def whitespaceStr(strg, search=re.compile(r"[^\s]+").search):
+        return not bool(search(strg))
+
+    if (not openedFileName) and (not whitespaceStr(notes.get("1.0", "end"))):
         # Confirmbox
-        confirmSave = tkinter.messagebox.askyesnocancel(" ",
+        confirmSave = tkinter.messagebox.askyesnocancel("Confirmation",
                                                         "Do you want to save this note \
-                                               before you leave?   ",
+                                            before you leave?   ",
                                                         icon="warning",
-                                                        default="yes")
+                                                        default="no")
         if confirmSave is True:
             saveNoteAs()
         elif confirmSave is False:
@@ -1091,7 +1110,7 @@ def accentblue():
 
 def topOrNot():
     """
-    Detects wheather the window should be shown or not.
+    Detects whether the window should be shown or not.
 
     Makes it act like a Desktop widget.
     """
@@ -1111,14 +1130,14 @@ def topOrNot():
             window.lower()
             window.attributes("-topmost", False)
         elif (not windows.isMaximized and windows.title != "" and
-                windows.title != "Notes window" and windows.title !=
+                windows.title != "Textylic" and windows.title !=
                 "Choose a note:" and windows.title != "Save your note:" and
                 windows.title != "Choose an Image:" and windows.title != "tk"):
             window.deiconify()
             window.attributes("-topmost", False)
             window.lower()
         elif (not windows.isMaximized and windows.title != "" and
-                windows.title == "Notes window" or windows.title ==
+                windows.title == "Textylic" or windows.title ==
                 "Choose a note:" or windows.title == "Save your note:" or
                 windows.title == "Choose an Image:"):
             window.attributes("-topmost", False)
@@ -1131,7 +1150,7 @@ def topOrNot():
             window.lift()
             window.attributes("-topmost", True)
 
-    window.after(10, topOrNot)
+    window.after(200, topOrNot)
 
 
 def getPos(event):
@@ -1149,7 +1168,9 @@ def getPos(event):
         """Moving the window on mouse move"""
 
         window.geometry(
-            "310x310" + f'+{event.x_root + xwin}+{event.y_root + ywin}')
+            # "410x410" + f'+{event.x_root + xwin}+{event.y_root + ywin}')
+            # "310x310" + f'+{event.x_root + xwin}+{event.y_root + ywin}')
+            f'+{event.x_root + xwin}+{event.y_root + ywin}')
 
     startx = event.x_root
     starty = event.y_root
@@ -1162,6 +1183,10 @@ winDrive = fetchDrivePath()  # The windows directory letter
 # Defining Title Bar Elements
 titleBar = tkinter.Frame(window, relief="flat", bg="#E6B905")
 
+# smallPaddingX = 7
+smallPaddingX = 5
+smallPaddingY = 5
+
 new = tkinter.Button(
     titleBar,
     image=newButtonImage,
@@ -1170,7 +1195,7 @@ new = tkinter.Button(
     command=createNewWindow,
     activebackground="#E6B905")
 new.image = newButtonImage
-new.grid(row=0, column=0, padx=5, sticky="W", pady=5)
+new.grid(row=0, column=0, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 new.image = newButtonImage
 accentItems.append(new)
 
@@ -1184,7 +1209,7 @@ save = tkinter.Button(
     activebackground="#E6B905",
     command=saveNote)
 save.image = saveButtonImage
-save.grid(row=0, column=1, padx=5, sticky="W", pady=5)
+save.grid(row=0, column=1, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(save)
 
 # Link opening button
@@ -1197,7 +1222,12 @@ openlink = tkinter.Button(
     command=openLink,
     activebackground="#E6B905")
 openLink.image = linkButtonImage
-openlink.grid(row=0, column=2, padx=5, sticky="W", pady=5)
+openlink.grid(
+    row=0,
+    column=2,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 accentItems.append(openlink)
 
 # Notes Text widget container
@@ -1205,9 +1235,15 @@ notesFrame = tkinter.Frame(
     window,
     relief="flat",
     bg="#333333",
-    height=200,
-    width=297)
+    # height=360,
+    height=240,
+    # height=round(0.7 * window.winfo_reqheight()),
+    # width=430)
+    width=300)
 notesFrame.grid(row=1, column=0, columnspan=5)
+
+notesFrame.columnconfigure(0, weight=10)
+notesFrame.grid_propagate(False)
 
 # Main Text input
 notes = tkinter.Text(
@@ -1215,7 +1251,7 @@ notes = tkinter.Text(
     undo=True,
     font="Segoe_UI 11",
     bg="#333333",
-    padx=5,
+    padx=smallPaddingX,
     pady=10,
     bd=0,
     fg="white",
@@ -1232,6 +1268,8 @@ notes = tkinter.Text(
 notes.grid(row=0, column=0, rowspan=5, columnspan=5)
 notes.delete("1.0", "end")
 segoe_font = font.Font(notes, notes.cget("font"))
+window.update_idletasks()
+# segoe_font.configure(family="Segoe UI", size=round(0.035 * window.winfo_reqheight()))
 segoe_font.configure(family="Segoe UI", size=11)
 notes.configure(font=segoe_font)
 
@@ -1245,10 +1283,11 @@ menu = tkinter.Menubutton(
     pady=4,
     activebackground="#E6B905")
 menu.image = menuButtonImage
-menu.grid(row=0, column=3, padx=5, sticky="W", pady=5)
+menu.grid(row=0, column=3, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(menu)
 
 segoe_font_menu = font.Font()
+# segoe_font_menu.configure(family="Segoe UI", size=round(0.032 * window.winfo_reqheight()))
 segoe_font_menu.configure(family="Segoe UI", size=10)
 
 menu.menu = tkinter.Menu(
@@ -1316,15 +1355,16 @@ close_button = tkinter.Button(
     pady=4,
     activebackground="#E6B905")
 close_button.image = closeButtonImage
-close_button.grid(row=0, column=6, padx=150, sticky="E")
+# close_button.grid(row=0, column=6, sticky="E", padx=(225, 11))
+close_button.grid(row=0, column=6, sticky="E", padx=(150, 20))
 accentItems.append(close_button)
 
-# Bottom formatting bar
-borderFrame = tkinter.Frame(window, height=0.5, width=2000000, pady=10)
-borderFrame.grid(row=2, column=0, columnspan=10, sticky="W")
+# # Bottom formatting bar
+# borderFrame = tkinter.Frame(window, height=0.5, width=2000000, pady=10)
+# borderFrame.grid(row=2, column=0, columnspan=10, sticky="W")
 
-bottom_bar = tkinter.Frame(window, relief="flat", bg="#333333", pady=3)
-bottom_bar.grid(row=3, column=0, columnspan=5, rowspan=1, sticky="W")
+bottom_bar = tkinter.Frame(window, relief="flat", bg="#242424", pady=3)
+bottom_bar.grid(row=3, column=0, columnspan=10, rowspan=1, sticky="WE")
 
 bold = tkinter.Button(
     bottom_bar,
@@ -1337,7 +1377,7 @@ bold = tkinter.Button(
     fg="white",
     padx=3)
 bold.image = boldButtonImage
-bold.grid(row=0, column=1, padx=5, sticky="W", pady=5)
+bold.grid(row=0, column=1, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 italic = tkinter.Button(
     bottom_bar,
@@ -1350,7 +1390,12 @@ italic = tkinter.Button(
     fg="white",
     padx=3)
 italic.image = italicButtonImage
-italic.grid(row=0, column=2, padx=5, sticky="W", pady=5)
+italic.grid(
+    row=0,
+    column=2,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 underline = tkinter.Button(
     bottom_bar,
@@ -1363,7 +1408,12 @@ underline = tkinter.Button(
     fg="white",
     padx=3)
 underline.image = underButtonImage
-underline.grid(row=0, column=3, padx=5, sticky="W", pady=5)
+underline.grid(
+    row=0,
+    column=3,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 strikeThrough = tkinter.Button(
     bottom_bar,
@@ -1376,7 +1426,12 @@ strikeThrough = tkinter.Button(
     fg="white",
     padx=3)
 strikeThrough.image = strikeButtonImage
-strikeThrough.grid(row=0, column=4, padx=5, sticky="W", pady=5)
+strikeThrough.grid(
+    row=0,
+    column=4,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 bullet = tkinter.Button(
     bottom_bar,
@@ -1389,7 +1444,12 @@ bullet = tkinter.Button(
     fg="white",
     padx=3)
 bullet.image = bulletButtonImage
-bullet.grid(row=0, column=5, padx=5, sticky="W", pady=5)
+bullet.grid(
+    row=0,
+    column=5,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 code = tkinter.Button(
     bottom_bar,
@@ -1402,7 +1462,7 @@ code = tkinter.Button(
     fg="white",
     padx=3)
 code.image = codeButtonImage
-code.grid(row=0, column=6, padx=5, sticky="W", pady=5)
+code.grid(row=0, column=6, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 
 insertl = tkinter.Button(
     bottom_bar,
@@ -1415,7 +1475,12 @@ insertl = tkinter.Button(
     fg="white",
     padx=3)
 insertl.image = insertlButtonImage
-insertl.grid(row=0, column=7, padx=5, sticky="W", pady=5)
+insertl.grid(
+    row=0,
+    column=7,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 colorText = tkinter.Button(
     bottom_bar,
@@ -1428,7 +1493,12 @@ colorText = tkinter.Button(
     fg="white",
     padx=3)
 colorText.image = colorButtonImage
-colorText.grid(row=0, column=8, padx=5, sticky="W", pady=5)
+colorText.grid(
+    row=0,
+    column=8,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 photoInsert = tkinter.Button(
     bottom_bar,
@@ -1441,10 +1511,15 @@ photoInsert = tkinter.Button(
     fg="white",
     padx=3)
 photoInsert.image = colorButtonImage
-photoInsert.grid(row=0, column=9, padx=5, sticky="W", pady=5)
+photoInsert.grid(
+    row=0,
+    column=9,
+    padx=smallPaddingX,
+    sticky="W",
+    pady=smallPaddingY)
 
 # Positioning title bar and adding drag function
-titleBar.grid(row=0, column=0, columnspan=5, sticky="W")
+titleBar.grid(row=0, column=0, columnspan=5, sticky="WE")
 
 # Keyboard Shortcuts
 titleBar.bind("<Button-1>", getPos)
@@ -1489,7 +1564,7 @@ photoInsert.bind("<Enter>", hoverImagePhoto)
 photoInsert.bind("<Leave>", NormalImagePhoto)
 
 # Desktop Gadget and Autosave
-window.after(10, topOrNot)
+window.after(200, topOrNot)
 window.after(3000, autoSave)
 
 # Open a file
