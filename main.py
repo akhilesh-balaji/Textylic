@@ -30,10 +30,10 @@ parser.add_argument(
 args = parser.parse_args()
 
 # Optimize for high DPI
-try:
-    ctypes.windll.shcore.SetProcessDpiAwareness(2)
-except BaseException:
-    ctypes.windll.user32.SetProcessDPIAware()
+# try:
+#     ctypes.windll.shcore.SetProcessDpiAwareness(2)
+# except BaseException:
+#     ctypes.windll.user32.SetProcessDPIAware()
 
 # Defining Window Properties
 root = tkinter.Tk()
@@ -43,7 +43,8 @@ window = tkinter.Toplevel()
 window.title("Textylic")
 window.attributes("-toolwindow", True, "-alpha", "0.99")
 window.overrideredirect(1)
-window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
+window.geometry(f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}")
+# window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
 window.config(bg="#333333")
 window.wait_visibility(window)
 
@@ -76,38 +77,38 @@ greenTheme = False
 blueTheme = False
 
 # Getting images (normal) for the buttons:
-newButtonImage = PhotoImage(file="res/images/iconset/new.png")
-saveButtonImage = PhotoImage(file="res/images/iconset/save.png")
-linkButtonImage = PhotoImage(file="res/images/iconset/open.png")
-menuButtonImage = PhotoImage(file="res/images/iconset/menu.png")
-closeButtonImage = PhotoImage(file="res/images/iconset/close.png")
-boldButtonImage = PhotoImage(file="res/images/iconset/bold.png")
-italicButtonImage = PhotoImage(file="res/images/iconset/italic.png")
-underButtonImage = PhotoImage(file="res/images/iconset/underline.png")
-strikeButtonImage = PhotoImage(file="res/images/iconset/strikethrough.png")
-bulletButtonImage = PhotoImage(file="res/images/iconset/bullet.png")
-codeButtonImage = PhotoImage(file="res/images/iconset/code.png")
-insertlButtonImage = PhotoImage(file="res/images/iconset/link.png")
-colorButtonImage = PhotoImage(file="res/images/iconset/color.png")
-photoButtonImage = PhotoImage(file="res/images/iconset/photo.png")
+newButtonImage = PhotoImage(file="res/images/iconsetx20/new.png")
+saveButtonImage = PhotoImage(file="res/images/iconsetx20/save.png")
+linkButtonImage = PhotoImage(file="res/images/iconsetx20/open.png")
+menuButtonImage = PhotoImage(file="res/images/iconsetx20/menu.png")
+closeButtonImage = PhotoImage(file="res/images/iconsetx20/close.png")
+boldButtonImage = PhotoImage(file="res/images/iconsetx20/bold.png")
+italicButtonImage = PhotoImage(file="res/images/iconsetx20/italic.png")
+underButtonImage = PhotoImage(file="res/images/iconsetx20/underline.png")
+strikeButtonImage = PhotoImage(file="res/images/iconsetx20/strikethrough.png")
+bulletButtonImage = PhotoImage(file="res/images/iconsetx20/bullet.png")
+codeButtonImage = PhotoImage(file="res/images/iconsetx20/code.png")
+insertlButtonImage = PhotoImage(file="res/images/iconsetx20/link.png")
+colorButtonImage = PhotoImage(file="res/images/iconsetx20/color.png")
+photoButtonImage = PhotoImage(file="res/images/iconsetx20/photo.png")
 
 
 # Getting images (hover) for the buttons:
-newButtonImageAfter = PhotoImage(file="res/images/iconset/new1.png")
-saveButtonImageAfter = PhotoImage(file="res/images/iconset/save1.png")
-linkButtonImageAfter = PhotoImage(file="res/images/iconset/open1.png")
-menuButtonImageAfter = PhotoImage(file="res/images/iconset/menu1.png")
-closeButtonImageAfter = PhotoImage(file="res/images/iconset/close1.png")
-boldButtonImageAfter = PhotoImage(file="res/images/iconset/bold1.png")
-italicButtonImageAfter = PhotoImage(file="res/images/iconset/italic1.png")
-underButtonImageAfter = PhotoImage(file="res/images/iconset/underline1.png")
+newButtonImageAfter = PhotoImage(file="res/images/iconsetx20/new1.png")
+saveButtonImageAfter = PhotoImage(file="res/images/iconsetx20/save1.png")
+linkButtonImageAfter = PhotoImage(file="res/images/iconsetx20/open1.png")
+menuButtonImageAfter = PhotoImage(file="res/images/iconsetx20/menu1.png")
+closeButtonImageAfter = PhotoImage(file="res/images/iconsetx20/close1.png")
+boldButtonImageAfter = PhotoImage(file="res/images/iconsetx20/bold1.png")
+italicButtonImageAfter = PhotoImage(file="res/images/iconsetx20/italic1.png")
+underButtonImageAfter = PhotoImage(file="res/images/iconsetx20/underline1.png")
 strikeButtonImageAfter = PhotoImage(
-    file="res/images/iconset/strikethrough1.png")
-bulletButtonImageAfter = PhotoImage(file="res/images/iconset/bullet1.png")
-codeButtonImageAfter = PhotoImage(file="res/images/iconset/code1.png")
-insertlButtonImageAfter = PhotoImage(file="res/images/iconset/link1.png")
-colorButtonImageAfter = PhotoImage(file="res/images/iconset/color1.png")
-photoButtonImageAfter = PhotoImage(file="res/images/iconset/photo1.png")
+    file="res/images/iconsetx20/strikethrough1.png")
+bulletButtonImageAfter = PhotoImage(file="res/images/iconsetx20/bullet1.png")
+codeButtonImageAfter = PhotoImage(file="res/images/iconsetx20/code1.png")
+insertlButtonImageAfter = PhotoImage(file="res/images/iconsetx20/link1.png")
+colorButtonImageAfter = PhotoImage(file="res/images/iconsetx20/color1.png")
+photoButtonImageAfter = PhotoImage(file="res/images/iconsetx20/photo1.png")
 
 allImagesGroup = []  # Reference list with images in it
 imgNumberName = 0  # A variable used to name images in chronological order
@@ -1182,7 +1183,8 @@ winDrive = fetchDrivePath()  # The windows directory letter
 # Defining Title Bar Elements
 titleBar = tkinter.Frame(window, relief="flat", bg="#E6B905")
 
-smallPaddingX = 7
+# smallPaddingX = 7
+smallPaddingX = 5
 smallPaddingY = 5
 
 new = tkinter.Button(
@@ -1233,9 +1235,11 @@ notesFrame = tkinter.Frame(
     window,
     relief="flat",
     bg="#333333",
-    height=360,
+    # height=360,
+    height=240,
     # height=round(0.7 * window.winfo_reqheight()),
-    width=430)
+    # width=430)
+    width=300)
 notesFrame.grid(row=1, column=0, columnspan=5)
 
 notesFrame.columnconfigure(0, weight=10)
@@ -1351,7 +1355,8 @@ close_button = tkinter.Button(
     pady=4,
     activebackground="#E6B905")
 close_button.image = closeButtonImage
-close_button.grid(row=0, column=6, sticky="E", padx=(225, 11))
+# close_button.grid(row=0, column=6, sticky="E", padx=(225, 11))
+close_button.grid(row=0, column=6, sticky="E", padx=(150, 20))
 accentItems.append(close_button)
 
 # # Bottom formatting bar
