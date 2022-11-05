@@ -1119,10 +1119,10 @@ def accentyellow():
     greenTheme = False
     blueTheme = False
     for item in accentItems:
-        item.configure(bg="#E6B905", activebackground="#E6B905")
-    titleBar.configure(bg="#E6B905")
-    notes.tag_configure("emphColor", foreground="#E6B905")
-    menu.configure(activebackground="#E6B905")
+        item.configure(bg="#fbc02d", activebackground="#fbc02d")
+    titleBar.configure(bg="#fbc02d")
+    notes.tag_configure("emphColor", foreground="#fbc02d")
+    menu.configure(activebackground="#fbc02d")
     window.update()
 
 
@@ -1157,10 +1157,10 @@ def accentblue():
     greenTheme = False
     blueTheme = True
     for item in accentItems:
-        item.configure(bg="#59C0E7", activebackground="#59C0E7")
-    titleBar.configure(bg="#59C0E7")
-    notes.tag_configure("emphColor", foreground="#59C0E7")
-    menu.configure(activebackground="#59C0E7")
+        item.configure(bg="#2292ff", activebackground="#2292ff")
+    titleBar.configure(bg="#2292ff")
+    notes.tag_configure("emphColor", foreground="#2292ff")
+    menu.configure(activebackground="#2292ff")
     window.update()
 
 
