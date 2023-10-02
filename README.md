@@ -10,6 +10,13 @@ You can download from the [GitHub releases page](https://github.com/akhilesh-bal
 
 Upvote this product on [ProductHunt](https://www.producthunt.com/posts/textylic)
 
+## Table of Contents
+- [Textylic](#textylic)
+- [Features](#features)
+- [Usage](#usage)
+- [Requirements](#requirements)
+- [Screenshot](#screenshot)
+
 ## Features
 
 - **Windows 7-esque desktop widget**: Remember those useful desktop widgets in windows 7? These were interactive features in the desktop that didn't interfere with your work by showing up in the taskbar. Instead, they stayed on the desktop, and if you minimized all the maximized windows, you could interact with them These were removed in Windows 10. But, this app mimics their behaviour, and has a modern notes window that stays on the desktop. This has a lot of features extended from the default windows 10 sticky notes app, and some completely new ones, too!
@@ -39,7 +46,35 @@ Download `textylic-setup-x64.exe` from the [releases page](https://github.com/ak
 
 #### Running From Source
 
-Download the source code or clone this repository. Install `pygetwindow` and `pil` using python `pip`. Next, run `main.py`. This is the notes window.
+**Windows Instructions:**  
+To run from source, you will need to have Python installed.  
+You can download Python here: `https://www.python.org/downloads/`  
+
+Open a terminal window.  
+You can use Windows Powershell  
+
+Clone the repository.  
+  `git clone https://github.com/paulj003/Textylic.git`
+This can instead be done through an IDE or text editor.  
+
+Navigate to the location where the repository is.  
+`cd Textylic`
+
+Install the packages pygetwindow and Pillow.  
+  `pip install pygetwindow`  
+  `pip install Pillow`  
+
+Run main.py  
+  If you are in the right location you can run it with this command:
+  `python ./main.py`  
+
+The notes window should appear.  
+
+**MacOS Instructions:**  
+Not available.  
+
+**Linux Instructions:**  
+Not available.  
 
 ## Requirements
 
@@ -52,3 +87,7 @@ Download the source code or clone this repository. Install `pygetwindow` and `pi
 ## Screenshot
 
 ![Screenshot](./screenshot.png)
+
+## License
+
+This project uses the AGPL-3.0 license.
