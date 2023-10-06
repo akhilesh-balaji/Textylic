@@ -1,4 +1,3 @@
-# flake8: noqa: W504
 import tkinter
 import tkinter.messagebox
 import pygetwindow as gw
@@ -29,6 +28,62 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+
+# Optimization for high DPI
+def Get_HWND_DPI(window_handle):
+    """
+    Detecting high DPI displays and avoid the need
+    to set Windows compatibility flags
+    """
+
+    if os.name == "nt":
+        from ctypes import windll, pointer, wintypes
+        try:
+            windll.shcore.SetProcessDpiAwareness(1)
+        except BaseException:
+            pass
+
+        DPI100pc = 96  # DPI 96 is 100% scaling
+        DPI_type = 0
+        winH = wintypes.HWND(window_handle)
+        monitorhandle = windll.user32.MonitorFromWindow(
+            winH, wintypes.DWORD(2))
+        X = wintypes.UINT()
+        Y = wintypes.UINT()
+        try:
+            windll.shcore.GetDpiForMonitor(
+                monitorhandle, DPI_type, pointer(X), pointer(Y))
+            return X.value, Y.value, (X.value + Y.value) / (2 * DPI100pc)
+        except Exception:
+            return 96, 96, 1  # Assume standard Windows DPI & scaling
+    else:
+        return None, None, 1
+
+
+def TkGeometryScale(s, cvtfunc):
+    """
+    Scaling the window geomtry
+    """
+
+    patt = r"(?P<W>\d+)x(?P<H>\d+)\+(?P<X>\d+)\+(?P<Y>\d+)"
+    R = re.compile(patt).search(s)
+    G = str(cvtfunc(R.group("W"))) + "x"
+    G += str(cvtfunc(R.group("H"))) + "+"
+    G += str(cvtfunc(R.group("X"))) + "+"
+    G += str(cvtfunc(R.group("Y")))
+    return G
+
+
+def MakeTkDPIAware(TKGUI):
+    """
+    Makes Tkinter DPI aware
+    """
+    TKGUI.DPI_X, TKGUI.DPI_Y, TKGUI.DPI_scaling = Get_HWND_DPI(
+        TKGUI.winfo_id())
+    TKGUI.TkScale = lambda v: int(float(v) * TKGUI.DPI_scaling)
+    TKGUI.TkGeometryScale = lambda s: TkGeometryScale(s, TKGUI.TkScale)
+
+
 # Optimize for high DPI
 # try:
 #     ctypes.windll.shcore.SetProcessDpiAwareness(2)
@@ -41,14 +96,15 @@ root.withdraw()
 
 window = tkinter.Toplevel()
 window.title("Textylic")
+MakeTkDPIAware(window)
 window.attributes("-toolwindow", True, "-alpha", "0.99")
 window.overrideredirect(1)
-window.geometry(f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}")
-# window.geometry(f"450x450+{str(randint(10, 900))}+{str(randint(10, 500))}")
-window.config(bg="#333333")
+window.geometry(window.TkGeometryScale(
+    f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}"))
+window.config(bg="#040412")
 window.wait_visibility(window)
 
-icon = PhotoImage(file = "./res/images/icons/iconx32.png")
+icon = PhotoImage(file="./res/images/icons/iconx32.png")
 root.iconphoto(True, icon)
 
 # Configuring grid
@@ -72,43 +128,43 @@ global yellowTheme
 global greenTheme
 global blueTheme
 pinkTheme = False
-yellowTheme = True
+yellowTheme = False
 greenTheme = False
-blueTheme = False
+blueTheme = True
 
 # Getting images (normal) for the buttons:
-newButtonImage = PhotoImage(file="res/images/iconsetx20/new.png")
-saveButtonImage = PhotoImage(file="res/images/iconsetx20/save.png")
-linkButtonImage = PhotoImage(file="res/images/iconsetx20/open.png")
-menuButtonImage = PhotoImage(file="res/images/iconsetx20/menu.png")
-closeButtonImage = PhotoImage(file="res/images/iconsetx20/close.png")
-boldButtonImage = PhotoImage(file="res/images/iconsetx20/bold.png")
-italicButtonImage = PhotoImage(file="res/images/iconsetx20/italic.png")
-underButtonImage = PhotoImage(file="res/images/iconsetx20/underline.png")
-strikeButtonImage = PhotoImage(file="res/images/iconsetx20/strikethrough.png")
-bulletButtonImage = PhotoImage(file="res/images/iconsetx20/bullet.png")
-codeButtonImage = PhotoImage(file="res/images/iconsetx20/code.png")
-insertlButtonImage = PhotoImage(file="res/images/iconsetx20/link.png")
-colorButtonImage = PhotoImage(file="res/images/iconsetx20/color.png")
-photoButtonImage = PhotoImage(file="res/images/iconsetx20/photo.png")
+newButtonImage = PhotoImage(file="res/images/iconset/new.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+saveButtonImage = PhotoImage(file="res/images/iconset/save.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+linkButtonImage = PhotoImage(file="res/images/iconset/open.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+menuButtonImage = PhotoImage(file="res/images/iconset/menu.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+closeButtonImage = PhotoImage(file="res/images/iconset/close.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+boldButtonImage = PhotoImage(file="res/images/iconset/bold.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+italicButtonImage = PhotoImage(file="res/images/iconset/italic.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+underButtonImage = PhotoImage(file="res/images/iconset/underline.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+strikeButtonImage = PhotoImage(file="res/images/iconset/strikethrough.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+bulletButtonImage = PhotoImage(file="res/images/iconset/bullet.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+codeButtonImage = PhotoImage(file="res/images/iconset/code.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+insertlButtonImage = PhotoImage(file="res/images/iconset/link.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+colorButtonImage = PhotoImage(file="res/images/iconset/color.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+photoButtonImage = PhotoImage(file="res/images/iconset/photo.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
 
 
 # Getting images (hover) for the buttons:
-newButtonImageAfter = PhotoImage(file="res/images/iconsetx20/new1.png")
-saveButtonImageAfter = PhotoImage(file="res/images/iconsetx20/save1.png")
-linkButtonImageAfter = PhotoImage(file="res/images/iconsetx20/open1.png")
-menuButtonImageAfter = PhotoImage(file="res/images/iconsetx20/menu1.png")
-closeButtonImageAfter = PhotoImage(file="res/images/iconsetx20/close1.png")
-boldButtonImageAfter = PhotoImage(file="res/images/iconsetx20/bold1.png")
-italicButtonImageAfter = PhotoImage(file="res/images/iconsetx20/italic1.png")
-underButtonImageAfter = PhotoImage(file="res/images/iconsetx20/underline1.png")
+newButtonImageAfter = PhotoImage(file="res/images/iconset/new1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+saveButtonImageAfter = PhotoImage(file="res/images/iconset/save1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+linkButtonImageAfter = PhotoImage(file="res/images/iconset/open1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+menuButtonImageAfter = PhotoImage(file="res/images/iconset/menu1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+closeButtonImageAfter = PhotoImage(file="res/images/iconset/close1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+boldButtonImageAfter = PhotoImage(file="res/images/iconset/bold1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+italicButtonImageAfter = PhotoImage(file="res/images/iconset/italic1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+underButtonImageAfter = PhotoImage(file="res/images/iconset/underline1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
 strikeButtonImageAfter = PhotoImage(
-    file="res/images/iconsetx20/strikethrough1.png")
-bulletButtonImageAfter = PhotoImage(file="res/images/iconsetx20/bullet1.png")
-codeButtonImageAfter = PhotoImage(file="res/images/iconsetx20/code1.png")
-insertlButtonImageAfter = PhotoImage(file="res/images/iconsetx20/link1.png")
-colorButtonImageAfter = PhotoImage(file="res/images/iconsetx20/color1.png")
-photoButtonImageAfter = PhotoImage(file="res/images/iconsetx20/photo1.png")
+    file="res/images/iconset/strikethrough1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+bulletButtonImageAfter = PhotoImage(file="res/images/iconset/bullet1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+codeButtonImageAfter = PhotoImage(file="res/images/iconset/code1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+insertlButtonImageAfter = PhotoImage(file="res/images/iconset/link1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+colorButtonImageAfter = PhotoImage(file="res/images/iconset/color1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
+photoButtonImageAfter = PhotoImage(file="res/images/iconset/photo1.png").zoom(int(window.winfo_width() * 0.07)).subsample(30)
 
 allImagesGroup = []  # Reference list with images in it
 imgNumberName = 0  # A variable used to name images in chronological order
@@ -705,7 +761,7 @@ def photoInserter():
              "*.jpeg"),
         ))
     imgFile = Image.open(photo)
-    imgFile.thumbnail((410, 410))
+    imgFile.thumbnail((window.TkScale(280), window.TkScale(280)))
     imgFile.save(f"./res/cache_images_/{dateTimeNow}.png")
 
     imgToInsert = PhotoImage(file=f"./res/cache_images_/{dateTimeNow}.png")
@@ -827,13 +883,13 @@ def openFile(file: str):
         global greenTheme
         global blueTheme
         if yellowTheme is True:
-            notes.tag_configure("emphColor", foreground="#E6B905")
+            notes.tag_configure("emphColor", foreground="#fbc02d")
         elif pinkTheme is True:
             notes.tag_configure("emphColor", foreground="#EB8EC6")
         elif greenTheme is True:
             notes.tag_configure("emphColor", foreground="#65BA5A")
         elif blueTheme is True:
-            notes.tag_configure("emphColor", foreground="#59C0E7")
+            notes.tag_configure("emphColor", foreground="#2292ff")
 
         for format in formatting:
             # Apply formatting
@@ -1063,10 +1119,10 @@ def accentyellow():
     greenTheme = False
     blueTheme = False
     for item in accentItems:
-        item.configure(bg="#E6B905", activebackground="#E6B905")
-    titleBar.configure(bg="#E6B905")
-    notes.tag_configure("emphColor", foreground="#E6B905")
-    menu.configure(activebackground="#E6B905")
+        item.configure(bg="#fbc02d", activebackground="#fbc02d")
+    titleBar.configure(bg="#fbc02d")
+    notes.tag_configure("emphColor", foreground="#fbc02d")
+    menu.configure(activebackground="#fbc02d")
     window.update()
 
 
@@ -1101,10 +1157,10 @@ def accentblue():
     greenTheme = False
     blueTheme = True
     for item in accentItems:
-        item.configure(bg="#59C0E7", activebackground="#59C0E7")
-    titleBar.configure(bg="#59C0E7")
-    notes.tag_configure("emphColor", foreground="#59C0E7")
-    menu.configure(activebackground="#59C0E7")
+        item.configure(bg="#2292ff", activebackground="#2292ff")
+    titleBar.configure(bg="#2292ff")
+    notes.tag_configure("emphColor", foreground="#2292ff")
+    menu.configure(activebackground="#2292ff")
     window.update()
 
 
@@ -1181,19 +1237,19 @@ def getPos(event):
 winDrive = fetchDrivePath()  # The windows directory letter
 
 # Defining Title Bar Elements
-titleBar = tkinter.Frame(window, relief="flat", bg="#E6B905")
+titleBar = tkinter.Frame(window, relief="flat", bg="#2292ff")
 
 # smallPaddingX = 7
-smallPaddingX = 5
-smallPaddingY = 5
+smallPaddingX = window.TkScale(5)
+smallPaddingY = window.TkScale(4)
 
 new = tkinter.Button(
     titleBar,
     image=newButtonImage,
     bd=0,
-    bg="#E6B905",
+    bg="#2292ff",
     command=createNewWindow,
-    activebackground="#E6B905")
+    activebackground="#2292ff")
 new.image = newButtonImage
 new.grid(row=0, column=0, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 new.image = newButtonImage
@@ -1204,9 +1260,9 @@ save = tkinter.Button(
     titleBar,
     image=saveButtonImage,
     bd=0,
-    bg="#E6B905",
+    bg="#2292ff",
     pady=4,
-    activebackground="#E6B905",
+    activebackground="#2292ff",
     command=saveNote)
 save.image = saveButtonImage
 save.grid(row=0, column=1, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
@@ -1217,10 +1273,10 @@ openlink = tkinter.Button(
     titleBar,
     image=linkButtonImage,
     bd=0,
-    bg="#E6B905",
+    bg="#2292ff",
     pady=4,
     command=openLink,
-    activebackground="#E6B905")
+    activebackground="#2292ff")
 openLink.image = linkButtonImage
 openlink.grid(
     row=0,
@@ -1234,12 +1290,9 @@ accentItems.append(openlink)
 notesFrame = tkinter.Frame(
     window,
     relief="flat",
-    bg="#333333",
-    # height=360,
-    height=240,
-    # height=round(0.7 * window.winfo_reqheight()),
-    # width=430)
-    width=300)
+    bg="#040412",
+    height=window.TkScale(244),
+    width=window.TkScale(320))
 notesFrame.grid(row=1, column=0, columnspan=5)
 
 notesFrame.columnconfigure(0, weight=10)
@@ -1249,18 +1302,18 @@ notesFrame.grid_propagate(False)
 notes = tkinter.Text(
     notesFrame,
     undo=True,
-    font="Segoe_UI 11",
-    bg="#333333",
+    font="Arial 11",
+    bg="#040412",
     padx=smallPaddingX,
     pady=10,
     bd=0,
     fg="white",
     insertbackground="white",
     relief="flat",
-    selectbackground="#616161",
+    selectbackground="#30324c",
     wrap="word",
     height=10.5,
-    width=36,
+    width=39,
     tabs=(
         "0.5c",
         "3c",
@@ -1269,8 +1322,7 @@ notes.grid(row=0, column=0, rowspan=5, columnspan=5)
 notes.delete("1.0", "end")
 segoe_font = font.Font(notes, notes.cget("font"))
 window.update_idletasks()
-# segoe_font.configure(family="Segoe UI", size=round(0.035 * window.winfo_reqheight()))
-segoe_font.configure(family="Segoe UI", size=11)
+segoe_font.configure(family="Arial", size=window.TkScale(11))
 notes.configure(font=segoe_font)
 
 # Extra Menu
@@ -1278,17 +1330,16 @@ menu = tkinter.Menubutton(
     titleBar,
     image=menuButtonImage,
     bd=0,
-    bg="#E6B905",
+    bg="#2292ff",
     relief="flat",
     pady=4,
-    activebackground="#E6B905")
+    activebackground="#2292ff")
 menu.image = menuButtonImage
 menu.grid(row=0, column=3, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(menu)
 
 segoe_font_menu = font.Font()
-# segoe_font_menu.configure(family="Segoe UI", size=round(0.032 * window.winfo_reqheight()))
-segoe_font_menu.configure(family="Segoe UI", size=10)
+segoe_font_menu.configure(family="Arial", size=window.TkScale(10))
 
 menu.menu = tkinter.Menu(
     menu,
@@ -1350,30 +1401,33 @@ close_button = tkinter.Button(
     titleBar,
     image=closeButtonImage,
     bd=0,
-    bg="#E6B905",
+    bg="#2292ff",
     command=windowdestroy,
     pady=4,
-    activebackground="#E6B905")
+    activebackground="#2292ff")
 close_button.image = closeButtonImage
-# close_button.grid(row=0, column=6, sticky="E", padx=(225, 11))
-close_button.grid(row=0, column=6, sticky="E", padx=(150, 20))
+close_button.grid(
+    row=0,
+    column=6,
+    sticky="E",
+    padx=(
+        window.TkScale(150),
+        window.TkScale(20)))
 accentItems.append(close_button)
 
 # # Bottom formatting bar
-# borderFrame = tkinter.Frame(window, height=0.5, width=2000000, pady=10)
-# borderFrame.grid(row=2, column=0, columnspan=10, sticky="W")
 
-bottom_bar = tkinter.Frame(window, relief="flat", bg="#242424", pady=3)
+bottom_bar = tkinter.Frame(window, relief="flat", bg="#181926", pady=3)
 bottom_bar.grid(row=3, column=0, columnspan=10, rowspan=1, sticky="WE")
 
 bold = tkinter.Button(
     bottom_bar,
     image=boldButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     command=bolder,
     pady=4,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 bold.image = boldButtonImage
@@ -1383,10 +1437,10 @@ italic = tkinter.Button(
     bottom_bar,
     image=italicButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     command=italicizer,
     pady=4,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 italic.image = italicButtonImage
@@ -1401,10 +1455,10 @@ underline = tkinter.Button(
     bottom_bar,
     image=underButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     command=underliner,
     pady=4,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 underline.image = underButtonImage
@@ -1419,10 +1473,10 @@ strikeThrough = tkinter.Button(
     bottom_bar,
     image=strikeButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     pady=4,
     command=strikethrough,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 strikeThrough.image = strikeButtonImage
@@ -1437,10 +1491,10 @@ bullet = tkinter.Button(
     bottom_bar,
     image=bulletButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     pady=4,
     command=bulletList,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 bullet.image = bulletButtonImage
@@ -1455,10 +1509,10 @@ code = tkinter.Button(
     bottom_bar,
     image=codeButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     pady=4,
     command=codify,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 code.image = codeButtonImage
@@ -1468,10 +1522,10 @@ insertl = tkinter.Button(
     bottom_bar,
     image=insertlButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     pady=4,
     command=link,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 insertl.image = insertlButtonImage
@@ -1486,10 +1540,10 @@ colorText = tkinter.Button(
     bottom_bar,
     image=colorButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     pady=4,
     command=setColor,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 colorText.image = colorButtonImage
@@ -1504,10 +1558,10 @@ photoInsert = tkinter.Button(
     bottom_bar,
     image=photoButtonImage,
     bd=0,
-    bg="#333333",
+    bg="#181926",
     pady=4,
     command=photoInserter,
-    activebackground="#333333",
+    activebackground="#181926",
     fg="white",
     padx=3)
 photoInsert.image = colorButtonImage
