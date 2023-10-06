@@ -43,7 +43,7 @@ Download the source code or clone this repository. Install `pygetwindow` and `pi
 
 ## Requirements
 
-- A Windows machine, running Windows 7 or higher. *Note: Only Windows 10 has been tested.*
+- A Windows machine, running Windows 7 or higher. *Note: Only Windows 11 has been tested.*
 
 **Note:** If you have any features that are not on this list, or any bugs to report, please create a new issue in the "Issues" tab above. The items which have a version number next to them are planned for that release number, the others will be updated soon.
 
