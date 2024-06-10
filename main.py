@@ -9,6 +9,8 @@ import argparse
 import tkinter.ttk
 import subprocess
 import ctypes
+import win32gui
+import win32con
 from tkinter import font
 from random import randint
 from tkinter import filedialog
@@ -16,6 +18,7 @@ from tkinter import PhotoImage
 from string import ascii_uppercase
 from PIL import Image
 from datetime import datetime
+from pywinauto import Desktop
 
 
 # Argument Parser
@@ -119,6 +122,21 @@ window.grid_columnconfigure(6, weight=1)
 openedFileName = False  # Getting opened file name
 
 saved = False  # The saved variable
+
+global window_is_focused
+window_is_focused = None
+psapi = ctypes.WinDLL('Psapi.dll')
+kernel32 = ctypes.WinDLL('kernel32.dll')
+user32 = ctypes.WinDLL('user32.dll')
+
+# Constants for window positions and flags
+SWP_NOMOVE = 0x0002
+SWP_NOSIZE = 0x0001
+SWP_NOACTIVATE = 0x0010
+HWND_TOPMOST = -1
+PROCESS_QUERY_INFORMATION = 0x0400
+PROCESS_VM_READ = 0x0010
+MAX_PATH = 260
 
 images = []  # The list with all images, index, and name
 
@@ -1164,50 +1182,91 @@ def accentblue():
     window.update()
 
 
-def topOrNot():
-    """
-    Detects whether the window should be shown or not.
+# Function to get the handle of the window
+def get_hwnd(window):
+    return ctypes.windll.user32.GetParent(window.winfo_id())
 
-    Makes it act like a Desktop widget.
-    """
+# Function to get the window class name of a window
+def get_window_class_name(hwnd):
+    buffer = ctypes.create_unicode_buffer(256)
+    user32.GetClassNameW(hwnd, buffer, 256)
+    return buffer.value
 
-    # TODO: Refine this logic
-    # HELP WANTED
+# Function to get the executable name of a window
+def get_executable_name(hwnd):
+    pid = ctypes.wintypes.DWORD()
+    user32.GetWindowThreadProcessId(hwnd, ctypes.byref(pid))
+    process_handle = kernel32.OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, False, pid.value)
+    exe_name = ctypes.create_unicode_buffer(MAX_PATH)
+    psapi.GetModuleFileNameExW(process_handle, None, exe_name, MAX_PATH)
+    kernel32.CloseHandle(process_handle)
+    return exe_name.value
 
-    windows = gw.getActiveWindow()
+# Function to get the window title (name) of a window
+def get_window_title(hwnd):
+    length = user32.GetWindowTextLengthW(hwnd)
+    buffer = ctypes.create_unicode_buffer(length + 1)
+    user32.GetWindowTextW(hwnd, buffer, length + 1)
+    return buffer.value
 
-    # Desktop Widget logic
-    if windows is None:
-        window.deiconify()
-        window.lift()
-        window.attributes("-topmost", True)
-    else:
-        if windows.isMaximized:
-            window.lower()
-            window.attributes("-topmost", False)
-        elif (not windows.isMaximized and windows.title != "" and
-                windows.title != "Textylic" and windows.title !=
-                "Choose a note:" and windows.title != "Save your note:" and
-                windows.title != "Choose an Image:" and windows.title != "tk"):
-            window.deiconify()
-            window.attributes("-topmost", False)
-            window.lower()
-        elif (not windows.isMaximized and windows.title != "" and
-                windows.title == "Textylic" or windows.title ==
-                "Choose a note:" or windows.title == "Save your note:" or
-                windows.title == "Choose an Image:"):
-            window.attributes("-topmost", False)
-        elif windows.title == "tk":
-            window.deiconify()
-            window.lift()
-            window.attributes("-topmost", True)
+def is_topmost(hwnd):
+    ex_style = win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE)
+    return bool(ex_style & win32con.WS_EX_TOPMOST)
+
+def is_child_window(child_hwnd, parent_hwnd):
+    if child_hwnd == 0 or parent_hwnd == 0:
+        return False
+    if get_executable_name(child_hwnd) == get_executable_name(parent_hwnd):
+        return True
+    return False
+
+def is_window_at_bottom(window_title):
+    all_windows = Desktop(backend="uia").windows()
+    for win in reversed(all_windows):
+        if win.window_text() == "" or win.window_text() == "Program Manager":
+            continue
+        if win.window_text() == window_title:
+            return True
         else:
-            window.deiconify()
-            window.lift()
-            window.attributes("-topmost", True)
+            return False
+    return False
 
-    window.after(200, topOrNot)
+# Function to get the Z-order of a window
+def get_z_order(hwnd):
+    hwnd_top = user32.GetForegroundWindow()
+    if get_window_title(hwnd_top) == "" and get_executable_name(hwnd_top) == "C:\\Windows\\explorer.exe" and get_window_class_name(hwnd_top) != 'Shell_TrayWnd':
+        if is_topmost(hwnd):
+            return 'donothing'
+        else:
+            return 'forcetop'
+    elif is_child_window(hwnd_top, hwnd):
+        return 'donothing'
+    elif hwnd == hwnd_top:
+        return 'top'
+    elif is_window_at_bottom(get_window_title(hwnd)):
+        return 'bottom'
+    else:
+        return 'other'
 
+# Function to periodically check and set the window to the bottom
+def check_and_set_window_to_top_or_bottom():
+    hwnd = get_hwnd(window)
+    z_order = get_z_order(hwnd)
+    
+    if z_order != 'donothing':
+        if z_order == 'forcetop':
+            win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_TOPMOST)
+            win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_NOACTIVATE)
+        elif window_is_focused == True and z_order != 'top':
+            # Setting the window to the top
+            ctypes.windll.user32.SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE)
+        elif window_is_focused == False and z_order != 'bottom':
+            # Setting the window to the bottom
+            ctypes.windll.user32.SetWindowPos(hwnd, 1, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE)
+            # Setting the desktop as the foreground window
+            hwnd_desktop = ctypes.windll.user32.GetDesktopWindow()
+            ctypes.windll.user32.SetForegroundWindow(hwnd_desktop)
+    window.after(100, check_and_set_window_to_top_or_bottom)
 
 def getPos(event):
     """Get the position of the window"""
@@ -1617,8 +1676,20 @@ colorText.bind("<Leave>", NormalImageTsize)
 photoInsert.bind("<Enter>", hoverImagePhoto)
 photoInsert.bind("<Leave>", NormalImagePhoto)
 
+def on_focus_out(event):
+    global window_is_focused
+    window_is_focused = False
+
+def on_focus_in(event):
+    global window_is_focused
+    window_is_focused = True
+
+# Bind the focus events
+window.bind("<FocusIn>", on_focus_in)
+window.bind("<FocusOut>", on_focus_out)
+
 # Desktop Gadget and Autosave
-window.after(200, topOrNot)
+window.after(50, check_and_set_window_to_top_or_bottom)
 window.after(3000, autoSave)
 
 # Open a file
@@ -1626,4 +1697,5 @@ if args.file is not None:
     openFile(args.file)
 
 # Update the window
-window.mainloop()
+window.deiconify()
+root.mainloop()
