@@ -1,6 +1,9 @@
 import tkinter
 import tkinter.messagebox
-import pygetwindow as gw
+try:
+    import pygetwindow as gw
+except:
+    pass
 import os
 import webbrowser
 import re
@@ -9,8 +12,11 @@ import argparse
 import tkinter.ttk
 import subprocess
 import ctypes
-import win32gui
-import win32con
+try:
+    import win32gui
+    import win32con
+except:
+    pass
 from tkinter import font
 from random import randint
 from tkinter import filedialog
@@ -18,7 +24,10 @@ from tkinter import PhotoImage
 from string import ascii_uppercase
 from PIL import Image
 from datetime import datetime
-from pywinauto import Desktop
+try:
+    from pywinauto import Desktop
+except:
+    pass
 
 
 # Argument Parser
@@ -99,11 +108,12 @@ root.withdraw()
 
 window = tkinter.Toplevel()
 window.title("Textylic")
-MakeTkDPIAware(window)
-window.attributes("-toolwindow", True, "-alpha", "0.99")
-window.overrideredirect(1)
-window.geometry(window.TkGeometryScale(
-    f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}"))
+# MakeTkDPIAware(window)
+window.attributes("-topmost", True, "-alpha", "0.99")
+# window.overrideredirect(1)
+# window.geometry(window.TkGeometryScale(
+#     f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}"))
+window.geometry(f"310x310+{str(randint(10, 900))}+{str(randint(10, 500))}")
 window.config(bg="#040412")
 window.wait_visibility(window)
 
@@ -123,20 +133,23 @@ openedFileName = False  # Getting opened file name
 
 saved = False  # The saved variable
 
-global window_is_focused
-window_is_focused = None
-psapi = ctypes.WinDLL('Psapi.dll')
-kernel32 = ctypes.WinDLL('kernel32.dll')
-user32 = ctypes.WinDLL('user32.dll')
+try:
+    global window_is_focused
+    window_is_focused = None
+    psapi = ctypes.WinDLL('Psapi.dll')
+    kernel32 = ctypes.WinDLL('kernel32.dll')
+    user32 = ctypes.WinDLL('user32.dll')
 
-# Constants for window positions and flags
-SWP_NOMOVE = 0x0002
-SWP_NOSIZE = 0x0001
-SWP_NOACTIVATE = 0x0010
-HWND_TOPMOST = -1
-PROCESS_QUERY_INFORMATION = 0x0400
-PROCESS_VM_READ = 0x0010
-MAX_PATH = 260
+    # Constants for window positions and flags
+    SWP_NOMOVE = 0x0002
+    SWP_NOSIZE = 0x0001
+    SWP_NOACTIVATE = 0x0010
+    HWND_TOPMOST = -1
+    PROCESS_QUERY_INFORMATION = 0x0400
+    PROCESS_VM_READ = 0x0010
+    MAX_PATH = 260
+except:
+    pass
 
 images = []  # The list with all images, index, and name
 
@@ -779,7 +792,7 @@ def photoInserter():
              "*.jpeg"),
         ))
     imgFile = Image.open(photo)
-    imgFile.thumbnail((window.TkScale(280), window.TkScale(280)))
+    imgFile.thumbnail((280, 280))
     imgFile.save(f"./res/cache_images_/{dateTimeNow}.png")
 
     imgToInsert = PhotoImage(file=f"./res/cache_images_/{dateTimeNow}.png")
@@ -1250,22 +1263,25 @@ def get_z_order(hwnd):
 
 # Function to periodically check and set the window to the bottom
 def check_and_set_window_to_top_or_bottom():
-    hwnd = get_hwnd(window)
-    z_order = get_z_order(hwnd)
-    
-    if z_order != 'donothing':
-        if z_order == 'forcetop':
-            win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_TOPMOST)
-            win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_NOACTIVATE)
-        elif window_is_focused == True and z_order != 'top':
-            # Setting the window to the top
-            ctypes.windll.user32.SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE)
-        elif window_is_focused == False and z_order != 'bottom':
-            # Setting the window to the bottom
-            ctypes.windll.user32.SetWindowPos(hwnd, 1, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE)
-            # Setting the desktop as the foreground window
-            hwnd_desktop = ctypes.windll.user32.GetDesktopWindow()
-            ctypes.windll.user32.SetForegroundWindow(hwnd_desktop)
+    try:
+        hwnd = get_hwnd(window)
+        z_order = get_z_order(hwnd)
+        
+        if z_order != 'donothing':
+            if z_order == 'forcetop':
+                win32gui.SetWindowLong(hwnd, win32con.GWL_EXSTYLE, win32gui.GetWindowLong(hwnd, win32con.GWL_EXSTYLE) | win32con.WS_EX_TOPMOST)
+                win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_NOACTIVATE)
+            elif window_is_focused == True and z_order != 'top':
+                # Setting the window to the top
+                ctypes.windll.user32.SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE)
+            elif window_is_focused == False and z_order != 'bottom':
+                # Setting the window to the bottom
+                ctypes.windll.user32.SetWindowPos(hwnd, 1, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE)
+                # Setting the desktop as the foreground window
+                hwnd_desktop = ctypes.windll.user32.GetDesktopWindow()
+                ctypes.windll.user32.SetForegroundWindow(hwnd_desktop)
+    except:
+        pass
     window.after(100, check_and_set_window_to_top_or_bottom)
 
 def getPos(event):
@@ -1299,8 +1315,8 @@ winDrive = fetchDrivePath()  # The windows directory letter
 titleBar = tkinter.Frame(window, relief="flat", bg="#2292ff")
 
 # smallPaddingX = 7
-smallPaddingX = window.TkScale(5)
-smallPaddingY = window.TkScale(4)
+smallPaddingX = 5
+smallPaddingY = 4
 
 new = tkinter.Button(
     titleBar,
@@ -1350,8 +1366,8 @@ notesFrame = tkinter.Frame(
     window,
     relief="flat",
     bg="#040412",
-    height=window.TkScale(244),
-    width=window.TkScale(320))
+    height=244,
+    width=320)
 notesFrame.grid(row=1, column=0, columnspan=5)
 
 notesFrame.columnconfigure(0, weight=10)
@@ -1381,7 +1397,7 @@ notes.grid(row=0, column=0, rowspan=5, columnspan=5)
 notes.delete("1.0", "end")
 segoe_font = font.Font(notes, notes.cget("font"))
 window.update_idletasks()
-segoe_font.configure(family="Arial", size=window.TkScale(11))
+segoe_font.configure(family="Arial", size=11)
 notes.configure(font=segoe_font)
 
 # Extra Menu
@@ -1398,7 +1414,7 @@ menu.grid(row=0, column=3, padx=smallPaddingX, sticky="W", pady=smallPaddingY)
 accentItems.append(menu)
 
 segoe_font_menu = font.Font()
-segoe_font_menu.configure(family="Arial", size=window.TkScale(10))
+segoe_font_menu.configure(family="Arial", size=10)
 
 menu.menu = tkinter.Menu(
     menu,
@@ -1470,8 +1486,8 @@ close_button.grid(
     column=6,
     sticky="E",
     padx=(
-        window.TkScale(150),
-        window.TkScale(20)))
+        150,
+        20))
 accentItems.append(close_button)
 
 # # Bottom formatting bar
